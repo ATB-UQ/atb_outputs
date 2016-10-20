@@ -136,30 +136,23 @@ def graph_img(data, return_pos: bool = False, pos: Optional[Any] = None) -> Unio
     if molecule_graph is not None:
         io = StringIO()
 
-        pos, _ = graph_draw(
+        pos = graph_draw(
             molecule_graph,
             pos=pos,
-            **dict(
-                list(dict(
-                    vertex_text=molecule_graph.vertex_properties['type'],
-                    vertex_font_size=10.0,
-                    output=io,
-                    fmt='svg',
-                    output_size=tuple([100 * ceil(sqrt(len(data.atoms)))]*2),
-                    vertex_fill_color=molecule_graph.vertex_properties['equivalence_class'],
-                ).items())
-                +
-                list((
-                    dict(
-                        vertex_shape=molecule_graph.vertex_properties['shape'],
-                    )
-                    if USE_DIFFERENT_ELEMENT_SHAPES
-                    else dict()
-                ).items())
+            vertex_text=molecule_graph.vertex_properties['type'],
+            vertex_font_size=10.0,
+            output=io,
+            fmt='svg',
+            output_size=tuple([100 * ceil(sqrt(len(data.atoms)))]*2),
+            vertex_fill_color=molecule_graph.vertex_properties['equivalence_class'],
+            **(
+                dict(vertex_shape=molecule_graph.vertex_properties['shape'])
+                if USE_DIFFERENT_ELEMENT_SHAPES
+                else {}
             )
         )
 
-        if not retun_pos:
+        if not return_pos:
             return io.getvalue()
         else:
             return (io.getvalue(), pos)
