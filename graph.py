@@ -3,6 +3,7 @@ from io import StringIO, BytesIO
 from numpy import linspace, random
 from colorsys import hsv_to_rgb
 from math import sqrt, ceil
+from typing import Optional, Any, Union, Tuple
 
 USE_NEIGHBOUR_VALENCES = True
 
@@ -119,7 +120,7 @@ def graph(data, vertex_text=None, decorate_graph=True):
 
     return g
 
-def graph_img(data):
+def graph_img(data, return_pos: bool = False, pos: Optional[Any] = None) -> Union[None, str, Tuple[str, Any]]:
     try:
         from graph_tool.draw import graph_draw
     except ImportError as e:
@@ -135,8 +136,9 @@ def graph_img(data):
     if molecule_graph is not None:
         io = StringIO()
 
-        graph_draw(
+        pos, _ = graph_draw(
             molecule_graph,
+            pos=pos,
             **dict(
                 list(dict(
                     vertex_text=molecule_graph.vertex_properties['type'],
@@ -157,7 +159,10 @@ def graph_img(data):
             )
         )
 
-        return io.getvalue()
+        if not retun_pos:
+            return io.getvalue()
+        else:
+            return (io.getvalue(), pos)
     else:
         return None
 

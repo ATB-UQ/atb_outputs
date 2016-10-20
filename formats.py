@@ -58,7 +58,10 @@ def template_yml(mol_data: MolData) -> Output_File:
     }
     return YML.add_yml_comments(yaml.dump(mol_data))
 
-def graph(mol_data: MolData) -> Output_Files:
+def graph(mol_data: MolData, **kwargs: Dict[Any, Any]) -> Output_Files:
+    return_pos = 'return_pos' in kwargs and bool(kwargs['return_pos'])
+    pos = 'pos' in kwargs and bool(kwargs['pos'])
+
     return list(filter(
         lambda k_v: bool(k_v[1]),
         [
@@ -66,6 +69,7 @@ def graph(mol_data: MolData) -> Output_Files:
                 'svg',
                 molecule_graph.graph_img(
                     mol_data,
+                    return_pos=return_pos,
                 ),
             ),
             (
