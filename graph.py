@@ -120,7 +120,7 @@ def graph(data, vertex_text=None, decorate_graph=True):
 
     return g
 
-def graph_img(data, return_pos: bool = False, pos: Optional[Any] = None) -> Union[None, str, Tuple[str, Any]]:
+def graph_img(data, molecule_graph: Optional[Any] = None, return_pos: bool = False, pos: Optional[Any] = None) -> Union[None, str, Tuple[str, Any, Any]]:
     try:
         from graph_tool.draw import graph_draw
     except ImportError as e:
@@ -131,12 +131,13 @@ def graph_img(data, return_pos: bool = False, pos: Optional[Any] = None) -> Unio
             stderr.write('Package graph_tool could not be imported. Error was: {0}'.format(e))
             return None
 
-    molecule_graph = graph(data, vertex_text='element_equivalence')
+    if molecule_graph is None:
+        molecule_graph = graph(data, vertex_text='element_equivalence')
 
     if molecule_graph is not None:
         io = StringIO()
 
-        pos = graph_draw(
+        output_pos = graph_draw(
             molecule_graph,
             pos=pos,
             vertex_text=molecule_graph.vertex_properties['type'],
@@ -155,7 +156,7 @@ def graph_img(data, return_pos: bool = False, pos: Optional[Any] = None) -> Unio
         if not return_pos:
             return io.getvalue()
         else:
-            return (io.getvalue(), pos)
+            return (io.getvalue(), molecule_graph, output_pos)
     else:
         return None
 
