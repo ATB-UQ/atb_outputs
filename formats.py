@@ -78,6 +78,9 @@ def graph(mol_data: MolData) -> Output_Files:
     ))
 
 def lgf(mol_data) -> Output_Files:
-    return [
-        ('lgf', LGF.graph(mol_data)),
-    ]
+    try:
+        return [
+            ('lgf', LGF.graph(mol_data)),
+        ]
+    except AssertionError:
+        return []
