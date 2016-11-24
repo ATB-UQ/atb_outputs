@@ -142,9 +142,10 @@ def graph_img(data, molecule_graph: Optional[Any] = None, return_pos: bool = Fal
             pos=pos,
             vertex_text=molecule_graph.vertex_properties['type'],
             vertex_font_size=10.0,
+            vertex_size=35.0,
             output=io,
             fmt='svg',
-            output_size=tuple([100 * ceil(sqrt(len(data.atoms)))]*2),
+            output_size=tuple([150 * ceil(sqrt(len(data.atoms)))]*2),
             vertex_fill_color=molecule_graph.vertex_properties['equivalence_class'],
             **(
                 dict(vertex_shape=molecule_graph.vertex_properties['shape'])
