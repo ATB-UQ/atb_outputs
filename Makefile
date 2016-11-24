@@ -7,5 +7,5 @@ errors:
 .PHONY: errors
 
 mypy: $(PYTHON_BIN_DIR)/mypy
-	MYPYPATH=$(PYTHONPATH) $(PYTHON_BIN_DIR)/mypy format.py
+	MYPYPATH=$(PYTHONPATH) $(PYTHON_BIN_DIR)/mypy formats.py mol_data.py
 .PHONY: mypy
