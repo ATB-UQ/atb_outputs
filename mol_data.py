@@ -1,6 +1,7 @@
 from sys import stderr
 from copy import deepcopy
 from math import sqrt
+from typing import Optional
 
 from atb_outputs.helpers.types_helpers import Logger, Optional, Any, List, Dict, Atom, Tuple, Ring, Coordinate
 from atb_outputs.helpers.dijkstra import shortestPath
@@ -9,15 +10,18 @@ class MolDataFailure(Exception):
     pass
 
 class MolData(object):
-    def __init__(self, pdbStr, log=None):
+    def __init__(self, pdb_str: str, log: Optional[Logger] = None, build_ring: bool = True) -> None:
         self.atoms      = {}
         self.bonds     = []
         self.equivalenceGroups = {}
-        self._readPDB(pdbStr)
-        self.rings = build_rings(self, log)
+        self._readPDB(pdb_str)
+
+        if build_ring:
+            self.rings = build_rings(self, log)
+
         self.united_hydrogens = []
 
-    def unite_atoms(self):
+    def unite_atoms(self) -> None:
         self.united_hydrogens = []
         for atom in list(self.atoms.values()):
             connected_hydrogens = [a_id for a_id in atom["conn"] if self.atoms[a_id]["type"] == "H"]
@@ -31,40 +35,40 @@ class MolData(object):
                 self.atoms[atom_id]["uindex"] = len(united_atoms)
         self._unite_bonds()
 
-    def _unite_bonds(self):
+    def _unite_bonds(self) -> None:
         for bond in self.bonds:
             if any([a in self.united_hydrogens for a in bond["atoms"]]):
                 continue
             else:
                 bond["united"] = True
 
-    def get_id(self,index):
+    def get_id(self, index: int) -> int:
         '''return id of the atom with specified index number'''
         return [k for (k,v) in list(self.atoms.items()) if v['index'] == index][0]
 
-    def __getitem__(self, atomid):
-        '''return an atom with atomid. '''
-        assert type(atomid) == int, 'Atom identifiers are integers'
+    def __getitem__(self, atom_id: int) -> Atom:
+        '''return an atom with atom_id. '''
+        assert type(atom_id) == int, 'Atom identifiers are integers'
         try:
-            return self.atoms[atomid]
+            return self.atoms[atom_id]
         except:
-            raise Exception('atom with id number %d not found.' % atomid)
+            raise Exception('atom with id number %d not found.' % atom_id)
 
-    def _addBondData(self, atm1, atm2):
+    def _addBondData(self, atm1: int, atm2: int) -> None:
         if atm1 == atm2:
             return
         if set([atm1, atm2]) in [set(b["atoms"]) for b in self.bonds]:
             return
         self.bonds.append({"atoms":[int(atm1),int(atm2)]})
 
-    def _readPDB(self, string):
+    def _readPDB(self, pdb_str: str) -> None:
         '''Read lines of PDB files'''
-        assert type(string) == str
+        assert type(pdb_str) == str
 
         pdbDict = {}
-        for line in string.splitlines():
+        for line in pdb_str.splitlines():
             #lines with atom coordinates
-            if line.startswith("ATOM") |line.startswith('HETATM'):
+            if line.startswith("ATOM") or line.startswith('HETATM'):
                 #split line for different fields
                 #it = line.split()
                 #in case of some fields are missing, read according to pdb standard
@@ -142,14 +146,6 @@ class MolData(object):
         for (atom_id, atom) in self.atoms.items():
             atom['id'] = atom_id
 
-ACCEPTED_PLANAR_VALENCE_PER_ATOM_TYPE = {
-    'C': [3],
-    'N': [2, 3], # For pyridine
-    'O': [2],
-    'S': [2],
-    }
-PLANAR_DISTANCE_TOL = 0.025
-
 def build_rings(data: MolData, log: Optional[Logger] = None) -> Dict[int, Ring]:
 
     def _is_ring_in_all_rings(ring: Any, all_rings: List[Any]) -> bool:
@@ -178,6 +174,14 @@ def build_rings(data: MolData, log: Optional[Logger] = None) -> Dict[int, Ring]:
                 all_rings[ring_count] = ring_dict
                 ring_count += 1
     return all_rings
+
+ACCEPTED_PLANAR_VALENCE_PER_ATOM_TYPE = {
+    'C': [3],
+    'N': [2, 3], # For pyridine
+    'O': [2],
+    'S': [2],
+    }
+PLANAR_DISTANCE_TOL = 0.025
 
 def is_ring_aromatic(data: MolData, ring: Ring, log: Logger) -> bool:
     return has_ring_planar_geometry(data, ring, log) and has_ring_planar_valences(data, ring, log)
