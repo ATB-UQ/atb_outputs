@@ -6,5 +6,3 @@ Atom = Dict[str, Any]
 Ring = Dict[str, Any]
 
 Coordinate = List[float]
-
-MolData = Any

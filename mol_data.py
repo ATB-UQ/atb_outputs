@@ -1,5 +1,6 @@
 from sys import stderr
 
+from atb_outputs.helpers.types_helpers import Atom, Ring, Coordinate
 from atb_outputs.build_rings import build_rings
 
 class MolDataFailure(Exception):

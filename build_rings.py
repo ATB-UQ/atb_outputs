@@ -1,7 +1,8 @@
 from copy import deepcopy
 from math import sqrt
 
-from atb_outputs.helpers.types_helpers import MolData, Logger, Optional, Any, List, Dict, Atom, Tuple, Ring, Coordinate
+from atb_outputs.helpers.types_helpers import Logger, Optional, Any, List, Dict, Atom, Tuple, Ring, Coordinate
+from atb_outputs.mol_data import MolData
 from atb_outputs.helpers.dijkstra import shortestPath
 
 ACCEPTED_PLANAR_VALENCE_PER_ATOM_TYPE = {
