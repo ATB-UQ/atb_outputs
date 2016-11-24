@@ -60,19 +60,19 @@ def graph(data, vertex_text=None, decorate_graph=True):
         equivalence_class_permutation = dict(
             list(zip(
                 range_unique_equivalence_classes,
-                random.permutation(range_unique_equivalence_classes),
+                random.permutation(range_unique_equivalence_classes), # pylint: disable=no-member
             )),
         )
 
         unique_elements = set([atom['type'] for atom in list(data.atoms.values())])
         symbol_index_for_element = dict(
             list(map(
-                lambda n_element: (n_element[1], n_element[0] % 15), # THere are only 15 different symbols
+                lambda n_element: (n_element[1], n_element[0] % 15), # There are only 15 different symbols
                 enumerate(unique_elements),
             )),
         )
 
-        hues = linspace(
+        hues = linspace( # pylint: disable=no-member
             0.0,
             1.0,
             len(
@@ -88,7 +88,7 @@ def graph(data, vertex_text=None, decorate_graph=True):
         ))
 
         # Shuffle the colours around the graph
-        colours = random.permutation(colours).tolist()
+        colours = random.permutation(colours).tolist() # pylint: disable=no-member
 
     if vertex_text == 'element_valence':
         vertex_text_fct = lambda atom_index, atom: '{element}{valence}'.format(
