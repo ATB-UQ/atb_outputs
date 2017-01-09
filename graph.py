@@ -3,7 +3,7 @@ from io import StringIO, BytesIO
 from numpy import linspace, random
 from colorsys import hsv_to_rgb
 from math import sqrt, ceil
-from typing import Optional, Any, Union, Tuple
+from typing import Optional, Any, Union, Tuple, Dict
 
 USE_NEIGHBOUR_VALENCES = True
 
@@ -13,7 +13,7 @@ OPAQUE = 1.0
 
 RAISE_IF_MISSING_GRAPH_TOOL = False
 
-def graph(data, vertex_text=None, decorate_graph=True):
+def graph(data, vertex_text=None, decorate_graph=True, use_random_colors: bool = True, shuffle_equivalence_classes: bool = True):
     try:
         from graph_tool.all import Graph
     except ImportError as e:
@@ -60,7 +60,7 @@ def graph(data, vertex_text=None, decorate_graph=True):
         equivalence_class_permutation = dict(
             list(zip(
                 range_unique_equivalence_classes,
-                random.permutation(range_unique_equivalence_classes), # pylint: disable=no-member
+                (random.permutation(range_unique_equivalence_classes) if shuffle_equivalence_classes else range_unique_equivalence_classes), # pylint: disable=no-member
             )),
         )
 
@@ -88,7 +88,7 @@ def graph(data, vertex_text=None, decorate_graph=True):
         ))
 
         # Shuffle the colours around the graph
-        colours = random.permutation(colours).tolist() # pylint: disable=no-member
+        colours = (random.permutation(colours).tolist() if use_random_colors else colours) # pylint: disable=no-member
 
     if vertex_text == 'element_valence':
         vertex_text_fct = lambda atom_index, atom: '{element}{valence}'.format(
@@ -110,7 +110,7 @@ def graph(data, vertex_text=None, decorate_graph=True):
         vertices[atom_index] = v
 
         if decorate_graph:
-            vertex_equivalence_classes[v] = colours[unique_equivalence_classes[atom_index]] + [OPAQUE]
+            vertex_equivalence_classes[v] = colours[unique_equivalence_classes[atom_index]] + (OPAQUE,)
             if USE_DIFFERENT_ELEMENT_SHAPES:
                 #vertex_shapes[v] = symbol_index_for_element[atom['type']]
                 pass
@@ -120,7 +120,7 @@ def graph(data, vertex_text=None, decorate_graph=True):
 
     return g
 
-def graph_img(data, molecule_graph: Optional[Any] = None, return_pos: bool = False, pos: Optional[Any] = None) -> Union[None, str, Tuple[str, Any, Any]]:
+def graph_img(data, molecule_graph: Optional[Any] = None, return_pos: bool = False, pos: Optional[Any] = None, **kwargs: Dict[str, Any]) -> Union[None, str, Tuple[str, Any, Any]]:
     try:
         from graph_tool.draw import graph_draw
     except ImportError as e:
@@ -132,7 +132,7 @@ def graph_img(data, molecule_graph: Optional[Any] = None, return_pos: bool = Fal
             return None
 
     if molecule_graph is None:
-        molecule_graph = graph(data, vertex_text='element_equivalence')
+        molecule_graph = graph(data, vertex_text='element_equivalence', **kwargs)
 
     if molecule_graph is not None:
         io = StringIO()
