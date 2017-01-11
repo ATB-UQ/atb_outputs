@@ -88,7 +88,15 @@ def graph(data, vertex_text=None, decorate_graph=True, use_random_colors: bool =
         ))
 
         # Shuffle the colours around the graph
-        colours = (random.permutation(colours).tolist() if use_random_colors else colours) # pylint: disable=no-member
+        colours = (
+            [
+                # Numpy cast all tuples to lists; needs to be reverted
+                tuple(colour)
+                for colour in random.permutation(colours).tolist()
+            ]
+            if use_random_colors
+            else colours
+        )
 
     if vertex_text == 'element_valence':
         vertex_text_fct = lambda atom_index, atom: '{element}{valence}'.format(
