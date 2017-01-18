@@ -3,7 +3,7 @@ from copy import deepcopy
 import yaml
 import pickle as pickle_module
 
-from atb_outputs.types import MolData, Dict, Any, Output_File, Output_Files
+from atb_outputs.helpers.types_helpers import MolData, Dict, Any, Output_File, Output_Files
 import atb_outputs.pdb as PDB
 import atb_outputs.yml as YML
 import atb_outputs.lgf as LGF
