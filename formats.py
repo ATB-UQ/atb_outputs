@@ -8,6 +8,14 @@ import atb_outputs.pdb as PDB
 import atb_outputs.yml as YML
 import atb_outputs.lgf as LGF
 import atb_outputs.graph as molecule_graph
+import atb_outputs.lammps as LAMMPS
+
+
+# This import creates an unfortunate circular dependency, but eventually
+# the functions in algorithm.atb._outputs.output_helpers should be
+# moved here to the atb_outputs module, which will make things neater
+from algorithm.atb._outputs.output_helpers import atb_header
+
 
 def pdb(mol_data: MolData, optimized: bool = True, united: bool = False, use_rnme: bool = True) -> Output_File:
     '''return a new pdb string reflecting changes of atom order and numbering'''
@@ -86,3 +94,20 @@ def lgf(mol_data) -> Output_Files:
         ]
     except AssertionError:
         return []
+
+def lammps(mol_data: MolData, optimized: bool, united: bool) -> Output_Files:
+    header_buffer = StringIO() # IO buffer stores the output string
+
+    # Generate the ATB header
+    atb_header(mol_data,
+               header_buffer,
+               LAMMPS.filename(mol_data.var["rnme"], united, optimized),
+               united,
+               comment_delimiter = "#")
+    header = header_buffer.getvalue()
+
+    return [(
+        'lt',
+        LAMMPS.moltemplate(mol_data_dict(mol_data), optimized, united, header)
+            )]
+

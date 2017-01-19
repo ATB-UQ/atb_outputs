@@ -1,0 +1,3 @@
+[submodule "ATB_LAMMPS"]
+	path = atb_lammps
+	url = ssh://git@scmb-gitlab.biosci.uq.edu.au:2023/uqtlee10/ATB_LAMMPS.git
