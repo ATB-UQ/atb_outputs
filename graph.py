@@ -108,6 +108,11 @@ def graph(data, vertex_text=None, decorate_graph=True, use_random_colors: bool =
             element=atom['type'],
             equivalence=unique_equivalence_classes[atom_index],
         )
+    elif vertex_text == 'name_equivalence':
+        vertex_text_fct = lambda atom_index, atom: '{symbol}({equivalence})'.format(
+            symbol=atom['symbol'],
+            equivalence=unique_equivalence_classes[atom_index],
+        )
     else:
         raise Exception('Unvalid vertex_text')
 
@@ -140,7 +145,7 @@ def graph_img(data, molecule_graph: Optional[Any] = None, return_pos: bool = Fal
             return None
 
     if molecule_graph is None:
-        molecule_graph = graph(data, vertex_text='element_equivalence', **kwargs)
+        molecule_graph = graph(data, **kwargs)
 
     if molecule_graph is not None:
         io = StringIO()
@@ -169,7 +174,7 @@ def graph_img(data, molecule_graph: Optional[Any] = None, return_pos: bool = Fal
     else:
         return None
 
-def graph_gt(data):
+def graph_gt(data, **kwargs):
     molecule_graph = graph(data, vertex_text='element_valence', decorate_graph=False)
 
     if molecule_graph is not None:
