@@ -109,7 +109,9 @@ def graph(data, vertex_text=None, decorate_graph=True, use_random_colors: bool =
             equivalence=unique_equivalence_classes[atom_index],
         )
     elif vertex_text == 'name_equivalence':
-        vertex_text_fct = lambda atom_index, atom: '{symbol}({equivalence})'.format(
+        vertex_format_str = '{symbol} ({equivalence})'
+
+        vertex_text_fct = lambda atom_index, atom: vertex_format_str.format(
             symbol=atom['symbol'],
             equivalence=unique_equivalence_classes[atom_index],
         )
@@ -155,7 +157,7 @@ def graph_img(data, molecule_graph: Optional[Any] = None, return_pos: bool = Fal
             pos=pos,
             vertex_text=molecule_graph.vertex_properties['type'],
             vertex_font_size=10.0,
-            vertex_size=35.0,
+            vertex_size=50.0,
             output=io,
             fmt='svg',
             output_size=tuple([150 * ceil(sqrt(len(data.atoms)))]*2),
