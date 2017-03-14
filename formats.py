@@ -58,6 +58,8 @@ def template_yml(mol_data: MolData) -> Output_File:
     }
     return YML.add_yml_comments(yaml.dump(mol_data))
 
+STORE_GRAPH_GT = False
+
 def graph(mol_data: MolData, **kwargs: Dict[str, Any]) -> Output_Files:
     return list(filter(
         lambda k_v: bool(k_v[1]),
@@ -69,14 +71,22 @@ def graph(mol_data: MolData, **kwargs: Dict[str, Any]) -> Output_Files:
                     **kwargs,
                 ),
             ),
-            (
-                'gt',
-                molecule_graph.graph_gt(
-                    mol_data,
-                    **kwargs,
+        ]
+        +
+        (
+            [
+                (
+                    'gt',
+                    molecule_graph.graph_gt(
+                        mol_data,
+                        **kwargs,
+                    ),
                 ),
-            ),
-        ],
+            ]
+            if STORE_GRAPH_GT
+            else
+            []
+        )
     ))
 
 def lgf(mol_data) -> Output_Files:
