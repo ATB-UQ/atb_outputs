@@ -146,6 +146,12 @@ class MolData(object):
         for (atom_id, atom) in self.atoms.items():
             atom['id'] = atom_id
 
+    def __str__(self) -> str:
+        return 'MolData(atoms={0}, bonds={1})'.format(
+            self.atoms,
+            self.bonds,
+        )
+
 def build_rings(data: MolData, log: Optional[Logger] = None) -> Dict[int, Ring]:
 
     def _is_ring_in_all_rings(ring: Any, all_rings: List[Any]) -> bool:
