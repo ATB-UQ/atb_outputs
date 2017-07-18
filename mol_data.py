@@ -130,11 +130,15 @@ class MolData(object):
 
         has_connects = lambda atom: 'conn' in atom and atom['conn']
         if not all([has_connects(atom) for atom in list(pdbDict.values())]):
-            raise MolDataFailure(
-                 'Mol_Data Error: Missing connectivities for atoms {0}'.format(
-                    [atom['index'] for atom in list(pdbDict.values()) if not has_connects(atom)],
-                ),
-            )
+            if len(pdbDict) == 1:
+                # Only single atom molecules are allowed to have no bonds
+                pass
+            else:
+                raise MolDataFailure(
+                     'Mol_Data Error: Missing connectivities for atoms {0}'.format(
+                        [atom['index'] for atom in list(pdbDict.values()) if not has_connects(atom)],
+                    ),
+                )
 
         # sort and unique connectivities
         for ID, atom in list(pdbDict.items()):
