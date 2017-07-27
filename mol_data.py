@@ -10,11 +10,11 @@ class MolDataFailure(Exception):
     pass
 
 class MolData(object):
-    def __init__(self, pdb_str: str, log: Optional[Logger] = None, build_ring: bool = True) -> None:
+    def __init__(self, pdb_str: str, log: Optional[Logger] = None, build_ring: bool = True, enforce_single_molecule: bool = True) -> None:
         self.atoms      = {}
         self.bonds     = []
         self.equivalenceGroups = {}
-        self._readPDB(pdb_str)
+        self._readPDB(pdb_str, enforce_single_molecule=enforce_single_molecule)
 
         if build_ring:
             self.rings = build_rings(self, log)
@@ -61,7 +61,7 @@ class MolData(object):
             return
         self.bonds.append({"atoms":[int(atm1),int(atm2)]})
 
-    def _readPDB(self, pdb_str: str) -> None:
+    def _readPDB(self, pdb_str: str, enforce_single_molecule: bool = True) -> None:
         '''Read lines of PDB files'''
         assert type(pdb_str) == str
 
@@ -134,11 +134,14 @@ class MolData(object):
                 # Only single atom molecules are allowed to have no bonds
                 pass
             else:
-                raise MolDataFailure(
-                     'Mol_Data Error: Missing connectivities for atoms {0}'.format(
-                        [atom['index'] for atom in list(pdbDict.values()) if not has_connects(atom)],
-                    ),
-                )
+                if enforce_single_molecule:
+                    raise MolDataFailure(
+                         'Mol_Data Error: Missing connectivities for atoms {0}'.format(
+                            [atom['index'] for atom in list(pdbDict.values()) if not has_connects(atom)],
+                        ),
+                    )
+                else:
+                    pass
 
         # sort and unique connectivities
         for ID, atom in list(pdbDict.items()):
