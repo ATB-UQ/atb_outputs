@@ -2,6 +2,7 @@ from io import StringIO
 from copy import deepcopy
 import yaml
 import pickle as pickle_module
+from typing import Dict, Any
 
 from atb_outputs.helpers.types_helpers import MolData, Dict, Any, Output_File, Output_Files
 import atb_outputs.pdb as PDB
@@ -89,10 +90,11 @@ def graph(mol_data: MolData, **kwargs: Dict[str, Any]) -> Output_Files:
         )
     ))
 
-def lgf(mol_data) -> Output_Files:
+def lgf(mol_data, **kwargs: Dict[str, Any]) -> Output_Files:
     try:
         return [
-            ('lgf', LGF.graph(mol_data)),
+            ('lgf', LGF.graph(mol_data, **kwargs)),
         ]
     except AssertionError:
+        raise
         return []

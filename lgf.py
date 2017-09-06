@@ -1,6 +1,6 @@
 from io import StringIO
 
-def graph(molecule_data):
+def graph(molecule_data, enforce_has_charges: bool = True, enforce_has_ocoords: bool = True):
     io = StringIO()
 
     print('''@nodes
@@ -8,18 +8,24 @@ partial_charge  label   label2  atomType    coordX  coordY  coordZ  initColor'''
 
     atoms = list(molecule_data.atoms.values())
 
-    assert all([('charge' in atom) for atom in atoms]), '''ERROR: Can't output .lgf because of missing charges.'''
-    assert all([('ocoord' in atom) for atom in atoms]), '''ERROR: Can't output .lgf because of missing optimised coordinates.'''
+    if enforce_has_charges:
+        assert all([('charge' in atom) for atom in atoms]), '''ERROR: Can't output .lgf because of missing charges.'''
+
+    if enforce_has_ocoords:
+        assert all([('ocoord' in atom) for atom in atoms]), '''ERROR: Can't output .lgf because of missing optimised coordinates.'''
+        coordinate_key = 'ocoord'
+    else:
+        coordinate_key = 'coord'
 
     for atom in atoms:
         print('''{0:4.3f} {1} {2} {3} {4:4.3f} {5:4.3f} {6:4.3f} {7}'''.format(
-            atom['charge'],
+            atom['charge'] if 'charge' in atom else 0.0,
             atom['id'],
             atom['symbol'],
             atom['iacm'],
-            atom['ocoord'][0],
-            atom['ocoord'][1],
-            atom['ocoord'][2],
+            atom[coordinate_key][0],
+            atom[coordinate_key][1],
+            atom[coordinate_key][2],
             atom['cgroup'],
         ), file=io)
 
