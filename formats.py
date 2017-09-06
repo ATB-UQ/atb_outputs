@@ -96,5 +96,4 @@ def lgf(mol_data, **kwargs: Dict[str, Any]) -> Output_Files:
             ('lgf', LGF.graph(mol_data, **kwargs)),
         ]
     except AssertionError:
-        raise
         return []
