@@ -1,0 +1,2451 @@
+#
+# force_constant      Ka: force constant
+# value_angle       phi0: equilibrium angle
+#                    phi: actual angle
+#                      V: potential energy of angle
+#
+# functional form
+#   fc: 
+#       V = 1/2*Ka*( cos(phi) - cos(phi0) )^2
+#   hfc:
+#       V = 1/2*Ka*(phi - phi0)^2
+#
+# angles data structure
+#    'atoms' : atom IDs of this angle
+#    'value' : optimized bond angle (degree)
+#    'code'  : [[mcb, fc, len] ....] possible parameters
+#    'fc'    : force constant
+#    'hfc'   : harmonic force constant
+angles:
+- atoms: [8, 1, 10]
+  code:
+  - code: 7
+    fc: 465.0
+    hfc: 0.12788754
+    match_r: [value, types, hfc]
+    types: [N, C, C]
+    value: 108.0
+  fc: 921.140100508165
+  hfc: 0.26
+  united: true
+  value: 107.18032522750511
+- atoms: [8, 1, 9]
+  code:
+  - code: 7
+    fc: 465.0
+    hfc: 0.12788754
+    match_r: [value, types, hfc]
+    types: [N, C, C]
+    value: 108.0
+  fc: 1030.5680300084607
+  hfc: 0.29
+  united: true
+  value: 107.16833127014007
+- atoms: [8, 1, 2]
+  code:
+  - code: 52
+    fc: 532.0
+    hfc: 0.14025677
+    match_r: [value]
+    value: 111.4
+  fc: 1005.2812197628316
+  hfc: 0.27
+  united: true
+  value: 111.45928687969497
+- atoms: [10, 1, 9]
+  code:
+  - code: 7
+    fc: 465.0
+    hfc: 0.12788754
+    match_r: [value, types, hfc]
+    types: [N, C, C]
+    value: 108.0
+  fc: 797.5429438277316
+  hfc: 0.22
+  united: true
+  value: 108.07550269245785
+- atoms: [10, 1, 2]
+  code:
+  - code: 52
+    fc: 532.0
+    hfc: 0.14025677
+    match_r: [value]
+    value: 111.4
+  fc: 669.6879556143427
+  hfc: 0.18
+  united: true
+  value: 111.37373868915542
+- atoms: [9, 1, 2]
+  code:
+  - code: 52
+    fc: 532.0
+    hfc: 0.14025677
+    match_r: [value]
+    value: 111.4
+  fc: 669.6320579447765
+  hfc: 0.18
+  united: true
+  value: 111.36758607283612
+- atoms: [1, 2, 7]
+  code:
+  - code: 27
+    fc: 560.0
+    hfc: 0.12774922
+    match_r: [value, types, hfc]
+    types:
+    - [X, C, C]
+    - [N, C, C]
+    - [C, C, C]
+    - [C, N, C]
+    - [N, C, N]
+    value: 120.0
+  fc: 1767.74013823435
+  hfc: 0.4
+  value: 120.93464475503349
+- atoms: [1, 2, 3]
+  code:
+  - code: 27
+    fc: 560.0
+    hfc: 0.12774922
+    match_r: [value, types, hfc]
+    types:
+    - [X, C, C]
+    - [N, C, C]
+    - [C, C, C]
+    - [C, N, C]
+    - [N, C, N]
+    value: 120.0
+  fc: 1767.310860997649
+  hfc: 0.4
+  value: 120.9226219732107
+- atoms: [7, 2, 3]
+  code:
+  - code: 27
+    fc: 560.0
+    hfc: 0.12774922
+    match_r: [value, types, hfc]
+    types:
+    - [X, C, C]
+    - [N, C, C]
+    - [C, C, C]
+    - [C, N, C]
+    - [N, C, N]
+    value: 120.0
+  fc: 2187.2389956993616
+  hfc: 0.52
+  value: 118.14210478380468
+- atoms: [2, 7, 15]
+  code:
+  - code: 25
+    fc: 505.0
+    hfc: 0.11518373
+    match_r: [value, types, hfc]
+    types:
+    - [H, N, C]
+    - [H, C, C]
+    - [H, C, N]
+    - [H, C, O]
+    value: 120.0
+  fc: 724.7168057531924
+  hfc: 0.17
+  value: 119.34781181146354
+- atoms: [2, 7, 6]
+  code:
+  - code: 27
+    fc: 560.0
+    hfc: 0.12774922
+    match_r: [value, types, hfc]
+    types:
+    - [X, C, C]
+    - [N, C, C]
+    - [C, C, C]
+    - [C, N, C]
+    - [N, C, N]
+    value: 120.0
+  fc: 2317.25647100199
+  hfc: 0.52
+  value: 121.05495592302607
+- atoms: [15, 7, 6]
+  code:
+  - code: 25
+    fc: 505.0
+    hfc: 0.11518373
+    match_r: [value, types, hfc]
+    types:
+    - [H, N, C]
+    - [H, C, C]
+    - [H, C, N]
+    - [H, C, O]
+    value: 120.0
+  fc: 728.269607075433
+  hfc: 0.17
+  value: 119.5959233545632
+- atoms: [7, 6, 14]
+  code:
+  - code: 25
+    fc: 505.0
+    hfc: 0.11518373
+    match_r: [value, types, hfc]
+    types:
+    - [H, N, C]
+    - [H, C, C]
+    - [H, C, N]
+    - [H, C, O]
+    value: 120.0
+  fc: 743.0085632660421
+  hfc: 0.17
+  value: 119.69876861958913
+- atoms: [7, 6, 5]
+  code:
+  - code: 27
+    fc: 560.0
+    hfc: 0.12774922
+    match_r: [value, types, hfc]
+    types:
+    - [X, C, C]
+    - [N, C, C]
+    - [C, C, C]
+    - [C, N, C]
+    - [N, C, N]
+    value: 120.0
+  fc: 2142.318615284456
+  hfc: 0.49
+  value: 120.1887342919467
+- atoms: [14, 6, 5]
+  code:
+  - code: 25
+    fc: 505.0
+    hfc: 0.11518373
+    match_r: [value, types, hfc]
+    types:
+    - [H, N, C]
+    - [H, C, C]
+    - [H, C, N]
+    - [H, C, O]
+    value: 120.0
+  fc: 735.8242169845066
+  hfc: 0.17
+  value: 120.11187262821889
+- atoms: [6, 5, 13]
+  code:
+  - code: 25
+    fc: 505.0
+    hfc: 0.11518373
+    match_r: [value, types, hfc]
+    types:
+    - [H, N, C]
+    - [H, C, C]
+    - [H, C, N]
+    - [H, C, O]
+    value: 120.0
+  fc: 752.3040554637786
+  hfc: 0.17
+  value: 120.3167493631639
+- atoms: [6, 5, 4]
+  code:
+  - code: 27
+    fc: 560.0
+    hfc: 0.12774922
+    match_r: [value, types, hfc]
+    types:
+    - [X, C, C]
+    - [N, C, C]
+    - [C, C, C]
+    - [C, N, C]
+    - [N, C, N]
+    value: 120.0
+  fc: 1844.258150769952
+  hfc: 0.43
+  value: 119.37016305965439
+- atoms: [13, 5, 4]
+  code:
+  - code: 25
+    fc: 505.0
+    hfc: 0.11518373
+    match_r: [value, types, hfc]
+    types:
+    - [H, N, C]
+    - [H, C, C]
+    - [H, C, N]
+    - [H, C, O]
+    value: 120.0
+  fc: 725.4139576545462
+  hfc: 0.16
+  value: 120.31276710450855
+- atoms: [5, 4, 12]
+  code:
+  - code: 25
+    fc: 505.0
+    hfc: 0.11518373
+    match_r: [value, types, hfc]
+    types:
+    - [H, N, C]
+    - [H, C, C]
+    - [H, C, N]
+    - [H, C, O]
+    value: 120.0
+  fc: 722.483558484404
+  hfc: 0.16
+  value: 120.11319732229477
+- atoms: [5, 4, 3]
+  code:
+  - code: 27
+    fc: 560.0
+    hfc: 0.12774922
+    match_r: [value, types, hfc]
+    types:
+    - [X, C, C]
+    - [N, C, C]
+    - [C, C, C]
+    - [C, N, C]
+    - [N, C, N]
+    value: 120.0
+  fc: 2008.483934527767
+  hfc: 0.46
+  value: 120.1887342919467
+- atoms: [12, 4, 3]
+  code:
+  - code: 25
+    fc: 505.0
+    hfc: 0.11518373
+    match_r: [value, types, hfc]
+    types:
+    - [H, N, C]
+    - [H, C, C]
+    - [H, C, N]
+    - [H, C, O]
+    value: 120.0
+  fc: 756.2347980094416
+  hfc: 0.17
+  value: 119.69678983415726
+- atoms: [2, 3, 4]
+  code:
+  - code: 27
+    fc: 560.0
+    hfc: 0.12774922
+    match_r: [value, types, hfc]
+    types:
+    - [X, C, C]
+    - [N, C, C]
+    - [C, C, C]
+    - [C, N, C]
+    - [N, C, N]
+    value: 120.0
+  fc: 2317.2141820034158
+  hfc: 0.52
+  value: 121.0542871079155
+- atoms: [2, 3, 11]
+  code:
+  - code: 25
+    fc: 505.0
+    hfc: 0.11518373
+    match_r: [value, types, hfc]
+    types:
+    - [H, N, C]
+    - [H, C, C]
+    - [H, C, N]
+    - [H, C, O]
+    value: 120.0
+  fc: 751.1054363349821
+  hfc: 0.17
+  value: 119.35241313812699
+- atoms: [4, 3, 11]
+  code:
+  - code: 25
+    fc: 505.0
+    hfc: 0.11518373
+    match_r: [value, types, hfc]
+    types:
+    - [H, N, C]
+    - [H, C, C]
+    - [H, C, N]
+    - [H, C, O]
+    value: 120.0
+  fc: 754.6683797532011
+  hfc: 0.17
+  value: 119.59262876787861
+#
+# atom data structure
+#    atom_id:
+#        'index'  : index after rearrange
+#        'uindex' : united atom index
+#        'symbol' : atom symbol from pdb file
+#        'type'   : atom type code
+#        'group'  : residue name in pdb
+#        'charge' : atom charge from QM
+#        'coord'  : atom coordinates from pdb
+#        'ocoord' : optimized coordinates from QM
+#        'excl'   : exclusion list, use sorted atomed index rather than atomid, BE CAREFUL
+#        'uexcl'  : united atom exclusion list
+#        'equivalenceGroup'  : symmetry group that this atoms belongs to
+atoms:
+  1:
+    aromatic: false
+    cgroup: 0
+    charge: -0.515
+    conn: [2, 8, 9, 10]
+    coord: [0.2427, 0.0, -0.00030000000000000003]
+    equivalenceGroup: 0
+    excl: [3, 4, 5, 6, 14]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 12
+    icgm: 1
+    id: 1
+    index: 2
+    ljsym: C
+    mass: 12.011
+    mass_code: 12
+    ocoord: [-0.24655713033844787, -8.227700785177003e-07, 4.6985923110880065e-05]
+    pdb: HETATM    1   C1 0       0       2.427   0.000  -0.003  1.00  0.00           C
+    symbol: C1
+    type: C
+    type_energy: CH3
+    ucharge: 0.057
+    uconn: [2]
+    uexcl: [2, 3, 11]
+    uiacm: 16
+    uicgm: 1
+    uindex: 1
+    uljsym: CH3
+    umass: 15.035
+    umass_code: 5
+    united: true
+  2:
+    aromatic: true
+    cgroup: 1
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - &id001 !!python/object/apply:numpy.dtype
+      args: [f8, 0, 1]
+      state: !!python/tuple [3, <, null, null, null, -1, -1, 0]
+    - !!binary |
+      zKFFtvP91D8=
+    conn: [1, 3, 7]
+    coord: [0.0945, 0.0, -0.001]
+    equivalenceGroup: 1
+    excl: [6, 7, 8, 10, 12, 14, 15]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 12
+    icgm: 1
+    id: 2
+    index: 5
+    ljsym: C
+    mass: 12.011
+    mass_code: 12
+    ocoord: [-0.09531162824587462, 6.7999805673749845e-06, -0.00020616500082796716]
+    pdb: HETATM    2   C2 0       0       0.945   0.000  -0.010  1.00  0.00           C
+    symbol: C2
+    type: C
+    type_energy: CR6
+    ucharge: 0.09
+    uconn: [1, 3, 7]
+    uexcl: [3, 4, 5, 7, 9, 11, 12]
+    uicgm: 1
+    uindex: 2
+  3:
+    aromatic: false
+    cgroup: 2
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      9P3UeOkm0b8=
+    conn: [2, 4, 11]
+    coord: [0.0236, 0.12079999999999999, -0.0006000000000000001]
+    equivalenceGroup: 2
+    excl: [15]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 12
+    icgm: 1
+    id: 3
+    index: 14
+    ljsym: C
+    mass: 12.011
+    mass_code: 12
+    ocoord: [-0.023222350586923603, -0.1203222752421318, -5.1162285211892924e-05]
+    pdb: HETATM    3   C3 0       0       0.236   1.208  -0.006  1.00  0.00           C
+    symbol: C3
+    type: C
+    type_energy: CR16
+    ucharge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      iUFg5dAiy78=
+    uconn: [2, 4, 11]
+    uexcl: [12]
+    uicgm: 1
+    uindex: 11
+  4:
+    aromatic: true
+    cgroup: 3
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      WmQ730+Nt78=
+    conn: [3, 5, 12]
+    coord: [-0.11579999999999999, 0.1207, 0.0001]
+    equivalenceGroup: 3
+    excl: [13, 14, 15]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 12
+    icgm: 1
+    id: 4
+    index: 12
+    ljsym: C
+    mass: 12.011
+    mass_code: 12
+    ocoord: [0.1164978994259137, -0.12063497582601082, 0.00016682786388363063]
+    pdb: HETATM    4   C4 0       0      -1.158   1.207   0.001  1.00  0.00           C
+    symbol: C4
+    type: C
+    type_energy: CR16
+    ucharge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      AiuHFtnOt78=
+    uconn: [3, 5, 12]
+    uexcl: [10, 11, 12]
+    uicgm: 1
+    uindex: 9
+  5:
+    aromatic: true
+    cgroup: 4
+    charge: -0.171
+    conn: [4, 6, 13]
+    coord: [-0.1857, 0.0, 0.0004]
+    equivalenceGroup: 4
+    excl: [11, 12, 13, 14]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 12
+    icgm: 1
+    id: 5
+    index: 10
+    ljsym: C
+    mass: 12.011
+    mass_code: 12
+    ocoord: [0.1870364149015051, -6.420470519709649e-06, -8.036219055980848e-05]
+    pdb: HETATM    5   C5 0       0      -1.857   0.000   0.004  1.00  0.00           C
+    symbol: C5
+    type: C
+    type_energy: CR16
+    ucharge: -0.153
+    uconn: [4, 6, 13]
+    uexcl: [8, 9, 10, 11]
+    uicgm: 1
+    uindex: 7
+  6:
+    aromatic: true
+    cgroup: 5
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      WmQ730+Nt78=
+    conn: [5, 7, 14]
+    coord: [-0.11579999999999999, -0.1207, 0.0002]
+    equivalenceGroup: 3
+    excl: [9, 10, 11, 12, 14]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 12
+    icgm: 1
+    id: 6
+    index: 8
+    ljsym: C
+    mass: 12.011
+    mass_code: 12
+    ocoord: [0.11650845325759117, 0.12062927367127244, 0.00015931346227947068]
+    pdb: HETATM    6   C6 0       0      -1.158  -1.207   0.002  1.00  0.00           C
+    symbol: C6
+    type: C
+    type_energy: CR16
+    ucharge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      AiuHFtnOt78=
+    uconn: [5, 7, 14]
+    uexcl: [6, 7, 8, 9, 11]
+    uicgm: 1
+    uindex: 5
+  7:
+    aromatic: true
+    cgroup: 6
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      9P3UeOkm0b8=
+    conn: [2, 6, 15]
+    coord: [0.0236, -0.12079999999999999, -0.0005]
+    equivalenceGroup: 2
+    excl: [7, 8, 9, 10, 12, 14]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 12
+    icgm: 1
+    id: 7
+    index: 6
+    ljsym: C
+    mass: 12.011
+    mass_code: 12
+    ocoord: [-0.023209930712221213, 0.12032873018854927, -4.442756278286463e-05]
+    pdb: HETATM    7   C7 0       0       0.236  -1.208  -0.005  1.00  0.00           C
+    symbol: C7
+    type: C
+    type_energy: CR16
+    ucharge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      iUFg5dAiy78=
+    uconn: [2, 6, 15]
+    uexcl: [4, 5, 6, 7, 9, 11]
+    uicgm: 1
+    uindex: 3
+  8:
+    aromatic: false
+    cgroup: 7
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      PzVeukkMwj8=
+    conn: [1]
+    coord: [0.2802, 0.0001, 0.1051]
+    equivalenceGroup: 5
+    excl: [2, 3, 4, 5]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 20
+    icgm: 1
+    id: 8
+    index: 1
+    ljsym: HC
+    mass: 1.008
+    mass_code: 1
+    ocoord: [-0.28657656654616576, 8.384503941714439e-05, 0.10235688184902372]
+    pdb: HETATM    8   H1 0       0       2.802   0.001   1.051  1.00  0.00           H
+    symbol: H1
+    type: H
+    type_energy: HCH3
+    ucharge: null
+    uconn: [1]
+    uexcl: [1, 2]
+    united: true
+  9:
+    aromatic: false
+    cgroup: 8
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      PzVeukkMwj8=
+    conn: [1]
+    coord: [0.28300000000000003, -0.0907, -0.051500000000000004]
+    equivalenceGroup: 5
+    excl: [5]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 20
+    icgm: 1
+    id: 9
+    index: 4
+    ljsym: HC
+    mass: 1.008
+    mass_code: 1
+    ocoord: [-0.2865640415451111, 0.088641763542644, -0.050401187429096606]
+    pdb: HETATM    9   H2 0       0       2.830  -0.907  -0.515  1.00  0.00           H
+    symbol: H2
+    type: H
+    type_energy: HCH3
+    ucharge: null
+    uconn: [1]
+    uexcl: [2]
+    united: true
+  10:
+    aromatic: false
+    cgroup: 9
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      PzVeukkMwj8=
+    conn: [1]
+    coord: [0.28300000000000003, 0.0905, -0.0518]
+    equivalenceGroup: 5
+    excl: [4, 5]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 20
+    icgm: 1
+    id: 10
+    index: 3
+    ljsym: HC
+    mass: 1.008
+    mass_code: 1
+    ocoord: [-0.2865647725611464, -0.08871023930621082, -0.05027691826974795]
+    pdb: HETATM   10   H3 0       0       2.830   0.905  -0.518  1.00  0.00           H
+    symbol: H3
+    type: H
+    type_energy: HCH3
+    ucharge: null
+    uconn: [1]
+    uexcl: [2]
+    united: true
+  11:
+    aromatic: false
+    cgroup: 10
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      kxgEVg4twj8=
+    conn: [3]
+    coord: [0.0785, 0.21600000000000003, -0.001]
+    equivalenceGroup: 6
+    excl: []
+    formal_charge: 0.0
+    group: '0'
+    iacm: 20
+    icgm: 1
+    id: 11
+    index: 15
+    ljsym: HC
+    mass: 1.008
+    mass_code: 1
+    ocoord: [-0.07717977635460271, -0.2148401621894978, -0.0007512739723009448]
+    pdb: HETATM   11   H4 0       0       0.785   2.160  -0.010  1.00  0.00           H
+    symbol: H4
+    type: H
+    type_energy: HCR6
+    ucharge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      +FPjpZvEwD8=
+    uconn: [3]
+    uexcl: []
+    uicgm: 1
+    uindex: 12
+  12:
+    aromatic: false
+    cgroup: 11
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      YOXQItv5vj8=
+    conn: [4]
+    coord: [-0.1705, 0.21600000000000003, 0.0005]
+    equivalenceGroup: 7
+    excl: [14]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 20
+    icgm: 1
+    id: 12
+    index: 13
+    ljsym: HC
+    mass: 1.008
+    mass_code: 1
+    ocoord: [0.1701644126256742, -0.21522434652330485, 1.7823864519813e-05]
+    pdb: HETATM   12   H5 0       0      -1.705   2.160   0.005  1.00  0.00           H
+    symbol: H5
+    type: H
+    type_energy: HCR6
+    ucharge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      GQRWDi2yvT8=
+    uconn: [4]
+    uexcl: [11]
+    uicgm: 1
+    uindex: 10
+  13:
+    aromatic: false
+    cgroup: 12
+    charge: 0.129
+    conn: [5]
+    coord: [-0.2956, 0.0, 0.0007]
+    equivalenceGroup: 8
+    excl: [12]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 20
+    icgm: 1
+    id: 13
+    index: 11
+    ljsym: HC
+    mass: 1.008
+    mass_code: 1
+    ocoord: [0.29575671585079905, -1.4686018061735131e-05, -0.00010563587060054095]
+    pdb: HETATM   13   H6 0       0      -2.956   0.000   0.007  1.00  0.00           H
+    symbol: H6
+    type: H
+    type_energy: HCR6
+    ucharge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      BqwcWmQ7vz8=
+    uconn: [5]
+    uexcl: [9]
+    uicgm: 1
+    uindex: 8
+  14:
+    aromatic: false
+    cgroup: 13
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      YOXQItv5vj8=
+    conn: [6]
+    coord: [-0.1706, -0.21600000000000003, 0.0006000000000000001]
+    equivalenceGroup: 7
+    excl: [10]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 20
+    icgm: 1
+    id: 14
+    index: 9
+    ljsym: HC
+    mass: 1.008
+    mass_code: 1
+    ocoord: [0.17018593866714574, 0.21521194146027367, 4.364706867476954e-07]
+    pdb: HETATM   14   H7 0       0      -1.706  -2.160   0.006  1.00  0.00           H
+    symbol: H7
+    type: H
+    type_energy: HCR6
+    ucharge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      GQRWDi2yvT8=
+    uconn: [6]
+    uexcl: [7]
+    uicgm: 1
+    uindex: 6
+  15:
+    aromatic: false
+    cgroup: 14
+    charge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      kxgEVg4twj8=
+    conn: [7]
+    coord: [0.0785, -0.21600000000000003, -0.0008]
+    equivalenceGroup: 6
+    excl: [8]
+    formal_charge: 0.0
+    group: '0'
+    iacm: 20
+    icgm: 1
+    id: 15
+    index: 7
+    ljsym: HC
+    mass: 1.008
+    mass_code: 1
+    ocoord: [-0.07716523608783066, 0.2148481984339543, -0.0007330867746819684]
+    pdb: HETATM   15   H8 0       0       0.785  -2.160  -0.008  1.00  0.00           H
+    symbol: H8
+    type: H
+    type_energy: HCR6
+    ucharge: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      +FPjpZvEwD8=
+    uconn: [7]
+    uexcl: [5]
+    uicgm: 1
+    uindex: 4
+#
+# force_constant    Kb: force constant
+# value_dist        b0: equilibrium bond length
+#                    b: length of bond
+#                    V: potential energy of bond
+#
+# functional form
+#   fc: 
+#       V = 1/2*Kb*(b - b0)^2       Harmonic
+#   hfc:
+#       V = 1/4*Kb*(b^2 - b0^2)^2   Quartic
+#
+# bonds data structure
+#    'atoms' : atom IDs of this bond 
+#    'value' : optimized length (nm)
+#    'fc'    : force constant
+#    'hfc'   : harmonic force constant
+#    'code'  : [[mcb, fc, len] ....] possible parameters
+#    'order' : bond order information from QM
+bonds:
+- aromatic: false
+  atoms: [8, 1]
+  code:
+  - code: 3
+    fc: 12300000.0
+    hfc: 292272.6
+    match_r: [value, types, hfc]
+    types: [H, C]
+    value: 0.109
+  fc: 2520661.1570247933
+  hfc: 61000.0
+  order: 1.0
+  order_qm: 0.932
+  united: true
+  value: 0.1098584418576592
+- aromatic: false
+  atoms: [1, 10]
+  code:
+  - code: 3
+    fc: 12300000.0
+    hfc: 292272.6
+    match_r: [value, types, hfc]
+    types: [H, C]
+    value: 0.109
+  fc: 11983471.074380165
+  hfc: 290000.0
+  order: 1.0
+  order_qm: 0.943
+  united: true
+  value: 0.1095557727899927
+- aromatic: false
+  atoms: [1, 9]
+  code:
+  - code: 3
+    fc: 12300000.0
+    hfc: 292272.6
+    match_r: [value, types, hfc]
+    types: [H, C]
+    value: 0.109
+  fc: 11983471.074380165
+  hfc: 290000.0
+  order: 1.0
+  order_qm: 0.943
+  united: true
+  value: 0.10955856537523972
+- aromatic: false
+  atoms: [1, 2]
+  code:
+  - code: 26
+    fc: 5430000.0
+    hfc: 250909.44
+    match_r: [value, types, hfc]
+    types: [C, C]
+    value: 0.152
+  fc: 4385772.5538353585
+  hfc: 200000.0
+  order: 1.0
+  order_qm: 0.991
+  value: 0.15124571414334756
+- aromatic: true
+  atoms: [2, 7]
+  code:
+  - code: 17
+    fc: 8540000.0
+    hfc: 334768.0
+    match_r: [value, types, hfc]
+    types: [C, N]
+    value: 0.14
+  fc: 6377551.020408162
+  hfc: 250000.0
+  order: 1.5
+  order_qm: 1.437
+  value: 0.14027133647045562
+- aromatic: true
+  atoms: [2, 3]
+  code:
+  - code: 17
+    fc: 8540000.0
+    hfc: 334768.0
+    match_r: [value, types, hfc]
+    types: [C, N]
+    value: 0.14
+  fc: 6377551.020408162
+  hfc: 250000.0
+  order: 1.5
+  order_qm: 1.437
+  value: 0.14027107443511358
+- aromatic: false
+  atoms: [7, 15]
+  code:
+  - code: 3
+    fc: 12300000.0
+    hfc: 292272.6
+    match_r: [value, types, hfc]
+    types: [H, C]
+    value: 0.109
+  fc: 13466879.892264962
+  hfc: 320000.0
+  order: 1.0
+  order_qm: 0.924
+  value: 0.10883739755745511
+- aromatic: true
+  atoms: [7, 6]
+  code:
+  - code: 15
+    fc: 8660000.0
+    hfc: 334639.72
+    match_r: [value, types, hfc]
+    types: [C, C]
+    value: 0.139
+  fc: 8418367.346938774
+  hfc: 330000.0
+  order: 1.5
+  order_qm: 1.439
+  value: 0.13971885576373083
+- aromatic: false
+  atoms: [6, 14]
+  code:
+  - code: 3
+    fc: 12300000.0
+    hfc: 292272.6
+    match_r: [value, types, hfc]
+    types: [H, C]
+    value: 0.109
+  fc: 13466879.892264962
+  hfc: 320000.0
+  order: 1.0
+  order_qm: 0.927
+  value: 0.10875283319470795
+- aromatic: true
+  atoms: [6, 5]
+  code:
+  - code: 15
+    fc: 8660000.0
+    hfc: 334639.72
+    match_r: [value, types, hfc]
+    types: [C, C]
+    value: 0.139
+  fc: 7142857.142857142
+  hfc: 280000.0
+  order: 1.5
+  order_qm: 1.446
+  value: 0.1397398351191813
+- aromatic: false
+  atoms: [5, 13]
+  code:
+  - code: 3
+    fc: 12300000.0
+    hfc: 292272.6
+    match_r: [value, types, hfc]
+    types: [H, C]
+    value: 0.109
+  fc: 13466879.892264962
+  hfc: 320000.0
+  order: 1.0
+  order_qm: 0.928
+  value: 0.1087203042011161
+- aromatic: true
+  atoms: [5, 4]
+  code:
+  - code: 15
+    fc: 8660000.0
+    hfc: 334639.72
+    match_r: [value, types, hfc]
+    types: [C, C]
+    value: 0.139
+  fc: 9183673.469387753
+  hfc: 360000.0
+  order: 1.5
+  order_qm: 1.446
+  value: 0.1397390125755011
+- aromatic: false
+  atoms: [4, 12]
+  code:
+  - code: 3
+    fc: 12300000.0
+    hfc: 292272.6
+    match_r: [value, types, hfc]
+    types: [H, C]
+    value: 0.109
+  fc: 13046039.895631682
+  hfc: 310000.0
+  order: 1.0
+  order_qm: 0.927
+  value: 0.10875323392948828
+- aromatic: true
+  atoms: [4, 3]
+  code:
+  - code: 15
+    fc: 8660000.0
+    hfc: 334639.72
+    match_r: [value, types, hfc]
+    types: [C, C]
+    value: 0.139
+  fc: 8418367.346938774
+  hfc: 330000.0
+  order: 1.5
+  order_qm: 1.439
+  value: 0.1397207699843156
+- aromatic: false
+  atoms: [3, 11]
+  code:
+  - code: 3
+    fc: 12300000.0
+    hfc: 292272.6
+    match_r: [value, types, hfc]
+    types: [H, C]
+    value: 0.109
+  fc: 13046039.895631682
+  hfc: 310000.0
+  order: 1.0
+  order_qm: 0.924
+  value: 0.10883714855160467
+#
+# force_constant      Kd: force constant for dihedral potential
+# value_angle     theta0: equilibrium angle between planes 
+# period               m: multiplicity 
+# phase_shift      delta: phase shift
+#                  theta: actual angle between planes
+#                      V: potential energy of dihedral
+#
+# functional form
+#       V = Kd*(1 + cos(delta)cos(m*theta))
+#
+# dihedrals data structure
+#    'atoms'     : atom IDs of this dihedral
+#    'value'     : optimized dihedral angle, in degree
+#    'code'      : [[mcb, fc, phase shift, multiplicity, [possible atom type list]] ...
+#    'fc'        : force constant
+#    'phase'     : phase shift
+#    'mul'       : multiplicity
+#    'essential' : redudant or not
+dihedrals:
+- atoms: [8, 1, 2, 7]
+  code:
+  - code: 40
+    fc: 1.0
+    match_r: [value, mul, types, hfc]
+    mul: 6
+    types: [X, C, C, X]
+    value: 0.0
+  essential: false
+  fc: null
+  mul: 6
+  united: true
+  value: -89.81692973982302
+- atoms: [8, 1, 2, 3]
+  code:
+  - code: 40
+    fc: 1.0
+    match_r: [value, mul, types, hfc]
+    mul: 6
+    types: [X, C, C, X]
+    value: 0.0
+  essential: true
+  fc: null
+  mul: 6
+  united: true
+  value: 89.91732656257943
+- atoms: [10, 1, 2, 7]
+  code:
+  - code: 40
+    fc: 1.0
+    match_r: [value, mul, types, hfc]
+    mul: 6
+    types: [X, C, C, X]
+    value: 0.0
+  essential: false
+  fc: null
+  mul: 6
+  united: true
+  value: 150.53547551687961
+- atoms: [10, 1, 2, 3]
+  code:
+  - code: 40
+    fc: 1.0
+    match_r: [value, mul, types, hfc]
+    mul: 6
+    types: [X, C, C, X]
+    value: 0.0
+  essential: false
+  fc: null
+  mul: 6
+  united: true
+  value: -29.73026818071792
+- atoms: [9, 1, 2, 7]
+  code:
+  - code: 40
+    fc: 1.0
+    match_r: [value, mul, types, hfc]
+    mul: 6
+    types: [X, C, C, X]
+    value: 0.0
+  essential: false
+  fc: null
+  mul: 6
+  united: true
+  value: 29.811600188100652
+- atoms: [9, 1, 2, 3]
+  code:
+  - code: 40
+    fc: 1.0
+    match_r: [value, mul, types, hfc]
+    mul: 6
+    types: [X, C, C, X]
+    value: 0.0
+  essential: false
+  fc: null
+  mul: 6
+  united: true
+  value: -150.4541435094969
+- atoms: [1, 2, 7, 15]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: -0.6044586505552274
+- atoms: [1, 2, 7, 6]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: 179.79085703897917
+- atoms: [3, 2, 7, 15]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: 179.6540766457727
+- atoms: [3, 2, 7, 6]
+  code:
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: true
+  fc: null
+  mul: 2
+  value: 0.04939233530708483
+- atoms: [1, 2, 3, 4]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: -179.78406038560473
+- atoms: [1, 2, 3, 11]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: 0.6081751538570325
+- atoms: [7, 2, 3, 4]
+  code:
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: true
+  fc: null
+  mul: 2
+  value: -0.04256426803496292
+- atoms: [7, 2, 3, 11]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: -179.6503287285732
+- atoms: [2, 7, 6, 14]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: 179.8291790117162
+- atoms: [2, 7, 6, 5]
+  code:
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: true
+  fc: null
+  mul: 2
+  value: 0.13549004760185687
+- atoms: [15, 7, 6, 14]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: 0.22546396834219978
+- atoms: [15, 7, 6, 5]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: -179.46822499577218
+- atoms: [7, 6, 5, 13]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: 179.88820491792387
+- atoms: [7, 6, 5, 4]
+  code:
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: true
+  fc: null
+  mul: 2
+  value: -0.3254364912874195
+- atoms: [14, 6, 5, 13]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: 0.1957889216906564
+- atoms: [14, 6, 5, 4]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: 179.98214751247937
+- atoms: [6, 5, 4, 12]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: -179.9797283498671
+- atoms: [6, 5, 4, 3]
+  code:
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: true
+  fc: null
+  mul: 2
+  value: 0.33218684462373327
+- atoms: [13, 5, 4, 12]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: -0.19336212590391616
+- atoms: [13, 5, 4, 3]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: -179.8814469314131
+- atoms: [5, 4, 3, 2]
+  code:
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: true
+  fc: null
+  mul: 2
+  value: -0.14918225378983058
+- atoms: [5, 4, 3, 11]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: 179.45765164336626
+- atoms: [12, 4, 3, 2]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: -179.83856839905036
+- atoms: [12, 4, 3, 11]
+  code:
+  - code: 10
+    fc: 5.86
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  - code: 15
+    fc: 41.8
+    match_r: [value, mul, types, hfc]
+    mul: 2
+    types: [X, C, C, X]
+    value: 180.0
+  essential: false
+  fc: null
+  mul: 2
+  value: -0.2317345018942487
+#
+# force_constant      Kd: force constant for dihedral potential
+# value_angle     theta0: equilibrium angle between planes 
+# period               m: multiplicity 
+# phase_shift      delta: phase shift
+#                  theta: actual angle between planes
+#                      V: potential energy of dihedral
+#
+# functional form
+#       V = 1/2*Kd*(theta - theta0)^2
+#
+# improper dihedrals data structure
+#    'atoms' : atom IDs of this improper dihedral
+#    'ring'  : in which ring if in a ring
+#    'code'  : improper type code (because there's no possible alternatives this is not a list)
+impropers:
+- atoms: [2, 1, 3, 7]
+  code: 1
+  value: 0.15091489038533232
+- atoms: [3, 2, 4, 11]
+  code: 1
+  value: 0.20937478417959574
+- atoms: [4, 3, 5, 12]
+  code: 1
+  value: 0.16446465581060601
+- atoms: [5, 4, 6, 13]
+  code: 1
+  value: -0.11185725917286257
+- atoms: [6, 5, 7, 14]
+  code: 1
+  value: 0.16218331456183513
+- atoms: [7, 2, 6, 15]
+  code: 1
+  value: -0.21102997887315095
+#
+# rings data structure
+#   ring_id:
+#       'aromatic' : aromatic ring?
+#       'atoms'    : list of atoms on the ring
+rings:
+  1:
+    aromatic: true
+    atoms: [2, 7, 6, 5, 4, 3]
+var:
+  A_born_energy: 0.2853262596682796
+  E_born_energy: 0.48789164465077683
+  REV_DATE: '2017-09-18 11:12:19'
+  VERSION: e8c6cb56
+  dipole: [-0.009061693534848151, 2.459398922440015e-06, -6.7954174476146e-05]
+  enforce_unique_atom_names: true
+  ff_version: 54A7
+  has_manual_charges: false
+  iupac: methylbenzene
+  manual_charges: null
+  molid: '21'
+  name: Toluene
+  new_parameter_added: false
+  qm0_method: AM1
+  qm_1_ESP:
+  - !!python/tuple [-5.14836, 3.40176, 1.9851, 0.004076]
+  - !!python/tuple [-5.14836, -3.40179, 1.9851, 0.004066]
+  - !!python/tuple [-8.51236, 0.94969, 0.00089, 0.003492]
+  - !!python/tuple [-8.51236, -0.94972, 0.00089, 0.003493]
+  - !!python/tuple [-6.64347, -2.0e-05, -3.43587, 0.001858]
+  - !!python/tuple [-4.65925, -2.0e-05, -3.96754, -0.003299]
+  - !!python/tuple [-1.80113, 0.00013, 3.96453, -0.018266]
+  - !!python/tuple [0.18308, 0.00013, 3.43286, -0.031325]
+  - !!python/tuple [-2.79323, 1.71851, 3.43286, -0.009233]
+  - !!python/tuple [-2.79323, -1.71825, 3.43286, -0.009247]
+  - !!python/tuple [0.18308, 0.00013, -3.44065, -0.03211]
+  - !!python/tuple [-2.79323, 1.71851, -3.44065, -0.010846]
+  - !!python/tuple [-2.79323, -1.71825, -3.44065, -0.010852]
+  - !!python/tuple [-1.80113, 0.00013, -3.97232, -0.020319]
+  - !!python/tuple [-0.43884, -2.27376, 3.96746, -0.023374]
+  - !!python/tuple [0.55327, -0.55538, 3.43579, -0.032073]
+  - !!python/tuple [-2.42305, -2.27376, 3.43579, -0.011823]
+  - !!python/tuple [-1.43094, -3.99214, 3.43579, -0.009899]
+  - !!python/tuple [0.55327, -3.99214, 3.43579, -0.016676]
+  - !!python/tuple [0.55327, -0.55538, -3.43772, -0.032729]
+  - !!python/tuple [-2.42305, -2.27376, -3.43772, -0.012354]
+  - !!python/tuple [-1.43094, -3.99214, -3.43772, -0.009514]
+  - !!python/tuple [0.55327, -3.99214, -3.43772, -0.0167]
+  - !!python/tuple [-0.43884, -2.27376, -3.96939, -0.023844]
+  - !!python/tuple [2.20149, -2.27967, 3.97158, -0.024893]
+  - !!python/tuple [4.1857, -2.27967, 3.43991, -0.017157]
+  - !!python/tuple [1.20938, -0.56129, 3.43991, -0.032858]
+  - !!python/tuple [1.20938, -3.99805, 3.43991, -0.016658]
+  - !!python/tuple [3.1936, -3.99805, 3.43991, -0.010944]
+  - !!python/tuple [4.1857, -2.27967, -3.4336, -0.017402]
+  - !!python/tuple [1.20938, -0.56129, -3.4336, -0.033433]
+  - !!python/tuple [1.20938, -3.99805, -3.4336, -0.016749]
+  - !!python/tuple [3.1936, -3.99805, -3.4336, -0.011089]
+  - !!python/tuple [2.20149, -2.27967, -3.96527, -0.025252]
+  - !!python/tuple [3.53448, -0.00012, 3.96691, -0.025429]
+  - !!python/tuple [5.51869, -0.00012, 3.43524, -0.01152]
+  - !!python/tuple [4.52658, 1.71826, 3.43524, -0.0172]
+  - !!python/tuple [1.55026, -0.00012, 3.43524, -0.033161]
+  - !!python/tuple [4.52658, -1.7185, 3.43524, -0.017199]
+  - !!python/tuple [5.51869, -0.00012, -3.43828, -0.01174]
+  - !!python/tuple [4.52658, 1.71826, -3.43828, -0.01743]
+  - !!python/tuple [1.55026, -0.00012, -3.43828, -0.033676]
+  - !!python/tuple [4.52658, -1.7185, -3.43828, -0.017432]
+  - !!python/tuple [3.53448, -0.00012, -3.96994, -0.025735]
+  - !!python/tuple [2.20169, 2.27956, 3.97144, -0.024894]
+  - !!python/tuple [4.1859, 2.27956, 3.43977, -0.017156]
+  - !!python/tuple [3.1938, 3.99794, 3.43977, -0.010945]
+  - !!python/tuple [1.20958, 3.99794, 3.43977, -0.016657]
+  - !!python/tuple [1.20958, 0.56118, 3.43977, -0.032858]
+  - !!python/tuple [4.1859, 2.27956, -3.43375, -0.017398]
+  - !!python/tuple [3.1938, 3.99794, -3.43375, -0.011085]
+  - !!python/tuple [1.20958, 3.99794, -3.43375, -0.016748]
+  - !!python/tuple [1.20958, 0.56118, -3.43375, -0.033431]
+  - !!python/tuple [2.20169, 2.27956, -3.96541, -0.025248]
+  - !!python/tuple [-0.4386, 2.27388, 3.96759, -0.023369]
+  - !!python/tuple [0.5535, 3.99226, 3.43592, -0.016672]
+  - !!python/tuple [-1.43071, 3.99226, 3.43592, -0.009892]
+  - !!python/tuple [-2.42282, 2.27388, 3.43592, -0.011813]
+  - !!python/tuple [0.5535, 0.55551, 3.43592, -0.032072]
+  - !!python/tuple [0.5535, 3.99226, -3.4376, -0.016699]
+  - !!python/tuple [-1.43071, 3.99226, -3.4376, -0.009514]
+  - !!python/tuple [-2.42282, 2.27388, -3.4376, -0.012351]
+  - !!python/tuple [0.5535, 0.55551, -3.4376, -0.032729]
+  - !!python/tuple [-0.4386, 2.27388, -3.96926, -0.023843]
+  - !!python/tuple [-5.41551, 0.00158, 5.109, 0.005951]
+  - !!python/tuple [-3.54945, 0.00158, 4.50268, -0.002344]
+  - !!python/tuple [-4.83887, 1.77632, 4.50268, 0.003391]
+  - !!python/tuple [-6.92519, 1.09843, 4.50268, 0.007994]
+  - !!python/tuple [-6.92519, -1.09526, 4.50268, 0.007988]
+  - !!python/tuple [-4.83887, -1.77315, 4.50268, 0.003378]
+  - !!python/tuple [-4.89121, 2.97507, 2.91531, 0.00278]
+  - !!python/tuple [-6.92519, 2.61642, 2.91531, 0.00533]
+  - !!python/tuple [-8.25278, 1.03427, 2.91531, 0.006705]
+  - !!python/tuple [-8.25278, -1.0311, 2.91531, 0.006699]
+  - !!python/tuple [-6.92519, -2.61326, 2.91531, 0.005315]
+  - !!python/tuple [-4.89121, -2.9719, 2.91531, 0.002761]
+  - !!python/tuple [-4.89097, 4.64857, 0.0286, 0.011532]
+  - !!python/tuple [-6.92495, 4.28993, 0.0286, 0.008673]
+  - !!python/tuple [-8.25254, 2.70777, 0.0286, 0.005995]
+  - !!python/tuple [-4.89097, 4.64857, -1.93349, 0.010715]
+  - !!python/tuple [-6.92495, 4.28993, -1.93349, 0.010383]
+  - !!python/tuple [-8.25254, 2.70777, -1.93349, 0.007728]
+  - !!python/tuple [-8.25254, 0.64241, -1.93349, 0.003825]
+  - !!python/tuple [-3.54921, 1.67509, -3.52086, -0.004944]
+  - !!python/tuple [-4.83863, 3.44982, -3.52086, 0.005583]
+  - !!python/tuple [-6.92495, 2.77193, -3.52086, 0.007364]
+  - !!python/tuple [-6.92495, 0.57824, -3.52086, 0.002563]
+  - !!python/tuple [-5.41528, 1.67509, -4.12718, 0.001807]
+  - !!python/tuple [-8.25256, -2.70906, 0.03095, 0.005999]
+  - !!python/tuple [-6.92497, -4.29122, 0.03095, 0.00868]
+  - !!python/tuple [-4.89098, -4.64987, 0.03095, 0.011537]
+  - !!python/tuple [-8.25256, -0.6437, -1.93114, 0.003825]
+  - !!python/tuple [-8.25256, -2.70906, -1.93114, 0.007731]
+  - !!python/tuple [-6.92497, -4.29122, -1.93114, 0.010388]
+  - !!python/tuple [-4.89098, -4.64987, -1.93114, 0.010724]
+  - !!python/tuple [-3.54922, -1.67638, -3.51851, -0.004943]
+  - !!python/tuple [-6.92497, -0.57953, -3.51851, 0.00256]
+  - !!python/tuple [-6.92497, -2.77323, -3.51851, 0.007363]
+  - !!python/tuple [-4.83864, -3.45111, -3.51851, 0.005585]
+  - !!python/tuple [-5.41529, -1.67638, -4.12484, 0.001802]
+  - !!python/tuple [-2.96816, -5.15674, 2.55422, 0.003953]
+  - !!python/tuple [-0.88184, -5.83462, 2.55422, 0.0014]
+  - !!python/tuple [-4.29575, -5.09257, 0.96685, 0.010093]
+  - !!python/tuple [-2.96816, -6.67473, 0.96685, 0.010471]
+  - !!python/tuple [-0.93418, -7.03338, 0.96685, 0.008703]
+  - !!python/tuple [0.85448, -6.0007, 0.96685, 0.008253]
+  - !!python/tuple [-4.29575, -5.09257, -0.99525, 0.012331]
+  - !!python/tuple [-2.96816, -6.67473, -0.99525, 0.010868]
+  - !!python/tuple [-0.93418, -7.03338, -0.99525, 0.008826]
+  - !!python/tuple [0.85448, -6.0007, -0.99525, 0.008168]
+  - !!python/tuple [-2.96816, -5.15674, -2.58262, 0.0053]
+  - !!python/tuple [-0.88184, -5.83462, -2.58262, 0.001708]
+  - !!python/tuple [5.08171, -4.06715, 2.56876, -0.000481]
+  - !!python/tuple [3.79229, -5.84188, 2.56876, 0.003351]
+  - !!python/tuple [6.235, -4.06715, 0.98139, 0.007178]
+  - !!python/tuple [1.70596, -6.68199, 0.98139, 0.007686]
+  - !!python/tuple [3.73995, -7.04064, 0.98139, 0.009395]
+  - !!python/tuple [5.5286, -6.00796, 0.98139, 0.009201]
+  - !!python/tuple [6.235, -4.06715, -0.98071, 0.007142]
+  - !!python/tuple [1.70596, -6.68199, -0.98071, 0.007713]
+  - !!python/tuple [3.73995, -7.04064, -0.98071, 0.009387]
+  - !!python/tuple [5.5286, -6.00796, -0.98071, 0.009181]
+  - !!python/tuple [5.08171, -4.06715, -2.56808, -0.000587]
+  - !!python/tuple [3.79229, -5.84188, -2.56808, 0.003303]
+  - !!python/tuple [7.45506, -0.00028, 2.56642, 0.003081]
+  - !!python/tuple [6.16564, 1.77446, 2.56642, -0.002427]
+  - !!python/tuple [6.16564, -1.77501, 2.56642, -0.002425]
+  - !!python/tuple [8.60835, -0.00028, 0.97905, 0.009338]
+  - !!python/tuple [7.90195, 1.94053, 0.97905, 0.008073]
+  - !!python/tuple [6.1133, 2.97321, 0.97905, 0.007548]
+  - !!python/tuple [6.1133, -2.97376, 0.97905, 0.007549]
+  - !!python/tuple [7.90195, -1.94108, 0.97905, 0.008074]
+  - !!python/tuple [8.60835, -0.00028, -0.98304, 0.009301]
+  - !!python/tuple [7.90195, 1.94053, -0.98304, 0.008031]
+  - !!python/tuple [6.1133, 2.97321, -0.98304, 0.007477]
+  - !!python/tuple [6.1133, -2.97376, -0.98304, 0.007474]
+  - !!python/tuple [7.90195, -1.94108, -0.98304, 0.008032]
+  - !!python/tuple [7.45506, -0.00028, -2.57041, 0.00296]
+  - !!python/tuple [6.16564, 1.77446, -2.57041, -0.002586]
+  - !!python/tuple [6.16564, -1.77501, -2.57041, -0.002586]
+  - !!python/tuple [5.08211, 4.06692, 2.56843, -0.000481]
+  - !!python/tuple [3.79269, 5.84165, 2.56843, 0.003351]
+  - !!python/tuple [6.2354, 4.06692, 0.98106, 0.007179]
+  - !!python/tuple [5.52901, 6.00772, 0.98106, 0.009203]
+  - !!python/tuple [3.74035, 7.0404, 0.98106, 0.009395]
+  - !!python/tuple [1.70637, 6.68176, 0.98106, 0.007686]
+  - !!python/tuple [6.2354, 4.06692, -0.98104, 0.007144]
+  - !!python/tuple [5.52901, 6.00772, -0.98104, 0.009183]
+  - !!python/tuple [3.74035, 7.0404, -0.98104, 0.009388]
+  - !!python/tuple [1.70637, 6.68176, -0.98104, 0.007713]
+  - !!python/tuple [5.08211, 4.06692, -2.56841, -0.000583]
+  - !!python/tuple [3.79269, 5.84165, -2.56841, 0.003306]
+  - !!python/tuple [-0.88157, 5.83478, 2.55457, 0.001403]
+  - !!python/tuple [-2.96789, 5.15689, 2.55457, 0.003958]
+  - !!python/tuple [0.85475, 6.00085, 0.9672, 0.00825]
+  - !!python/tuple [-0.93391, 7.03353, 0.9672, 0.008704]
+  - !!python/tuple [-2.96789, 6.67488, 0.9672, 0.010471]
+  - !!python/tuple [-4.29548, 5.09272, 0.9672, 0.010091]
+  - !!python/tuple [0.85475, 6.00085, -0.9949, 0.008169]
+  - !!python/tuple [-0.93391, 7.03353, -0.9949, 0.008825]
+  - !!python/tuple [-2.96789, 6.67488, -0.9949, 0.010867]
+  - !!python/tuple [-4.29548, 5.09272, -0.9949, 0.012324]
+  - !!python/tuple [-0.88157, 5.83478, -2.58227, 0.001708]
+  - !!python/tuple [-2.96789, 5.15689, -2.58227, 0.0053]
+  - !!python/tuple [-5.16388, 3.50977, 2.82863, 0.002645]
+  - !!python/tuple [-5.16388, -3.5098, 2.82863, 0.002629]
+  - !!python/tuple [-8.64301, 1.91846, 1.0101, 0.003594]
+  - !!python/tuple [-9.08089, -2.0e-05, 1.0101, 0.003156]
+  - !!python/tuple [-8.64301, -1.91849, 1.0101, 0.003593]
+  - !!python/tuple [-9.08089, -2.0e-05, -1.00832, 0.002756]
+  - !!python/tuple [-6.62707, -2.0e-05, -4.08531, 0.000912]
+  - !!python/tuple [-4.65925, -2.0e-05, -4.53445, -0.003682]
+  - !!python/tuple [-1.80113, 0.00013, 4.53145, -0.015561]
+  - !!python/tuple [0.16668, 0.00013, 4.08231, -0.027236]
+  - !!python/tuple [-2.78503, 1.7043, 4.08231, -0.009019]
+  - !!python/tuple [-2.78503, -1.70405, 4.08231, -0.00903]
+  - !!python/tuple [0.16668, 0.00013, -4.0901, -0.027986]
+  - !!python/tuple [-2.78503, 1.7043, -4.0901, -0.010851]
+  - !!python/tuple [-2.78503, -1.70405, -4.0901, -0.010855]
+  - !!python/tuple [-1.80113, 0.00013, -4.53924, -0.017426]
+  - !!python/tuple [-0.43884, -2.27376, 4.53438, -0.019247]
+  - !!python/tuple [0.54507, -0.56959, 4.08524, -0.027852]
+  - !!python/tuple [-2.40665, -2.27376, 4.08524, -0.010936]
+  - !!python/tuple [-1.42274, -3.97794, 4.08524, -0.009689]
+  - !!python/tuple [0.54507, -3.97794, 4.08524, -0.014877]
+  - !!python/tuple [0.54507, -0.56959, -4.08717, -0.028504]
+  - !!python/tuple [-2.40665, -2.27376, -4.08717, -0.011782]
+  - !!python/tuple [-1.42274, -3.97794, -4.08717, -0.009535]
+  - !!python/tuple [0.54507, -3.97794, -4.08717, -0.014954]
+  - !!python/tuple [-0.43884, -2.27376, -4.53631, -0.019761]
+  - !!python/tuple [2.20149, -2.27967, 4.53849, -0.020754]
+  - !!python/tuple [4.1693, -2.27967, 4.08935, -0.015516]
+  - !!python/tuple [1.21759, -0.5755, 4.08935, -0.028528]
+  - !!python/tuple [1.21759, -3.98385, 4.08935, -0.014963]
+  - !!python/tuple [3.1854, -3.98385, 4.08935, -0.010994]
+  - !!python/tuple [1.69686, -5.78945, 2.83089, -0.002246]
+  - !!python/tuple [1.69686, -5.78945, -2.82459, -0.002207]
+  - !!python/tuple [4.1693, -2.27967, -4.08305, -0.015759]
+  - !!python/tuple [1.21759, -0.5755, -4.08305, -0.029113]
+  - !!python/tuple [1.21759, -3.98385, -4.08305, -0.0151]
+  - !!python/tuple [3.1854, -3.98385, -4.08305, -0.011151]
+  - !!python/tuple [2.20149, -2.27967, -4.53219, -0.021096]
+  - !!python/tuple [3.53448, -0.00012, 4.53382, -0.021185]
+  - !!python/tuple [5.50229, -0.00012, 4.08468, -0.011452]
+  - !!python/tuple [4.51838, 1.70405, 4.08468, -0.01555]
+  - !!python/tuple [1.56666, -0.00012, 4.08468, -0.028818]
+  - !!python/tuple [4.51838, -1.7043, 4.08468, -0.015549]
+  - !!python/tuple [5.50229, -0.00012, -4.08772, -0.011651]
+  - !!python/tuple [4.51838, 1.70405, -4.08772, -0.015762]
+  - !!python/tuple [1.56666, -0.00012, -4.08772, -0.029295]
+  - !!python/tuple [4.51838, -1.7043, -4.08772, -0.015763]
+  - !!python/tuple [3.53448, -0.00012, -4.53686, -0.02147]
+  - !!python/tuple [2.20169, 2.27956, 4.53835, -0.020755]
+  - !!python/tuple [4.1695, 2.27956, 4.08921, -0.015516]
+  - !!python/tuple [3.1856, 3.98374, 4.08921, -0.010995]
+  - !!python/tuple [1.21778, 3.98374, 4.08921, -0.014963]
+  - !!python/tuple [1.21778, 0.57539, 4.08921, -0.028529]
+  - !!python/tuple [1.69706, 5.78934, 2.83075, -0.002246]
+  - !!python/tuple [1.69706, 5.78934, -2.82473, -0.002207]
+  - !!python/tuple [4.1695, 2.27956, -4.08319, -0.015755]
+  - !!python/tuple [3.1856, 3.98374, -4.08319, -0.011148]
+  - !!python/tuple [1.21778, 3.98374, -4.08319, -0.015099]
+  - !!python/tuple [1.21778, 0.57539, -4.08319, -0.029112]
+  - !!python/tuple [2.20169, 2.27956, -4.53233, -0.021093]
+  - !!python/tuple [-0.4386, 2.27388, 4.5345, -0.019243]
+  - !!python/tuple [0.5453, 3.97806, 4.08536, -0.014874]
+  - !!python/tuple [-1.42251, 3.97806, 4.08536, -0.009683]
+  - !!python/tuple [-2.40642, 2.27388, 4.08536, -0.010927]
+  - !!python/tuple [0.5453, 0.56971, 4.08536, -0.027851]
+  - !!python/tuple [0.5453, 3.97806, -4.08704, -0.014952]
+  - !!python/tuple [-1.42251, 3.97806, -4.08704, -0.009535]
+  - !!python/tuple [-2.40642, 2.27388, -4.08704, -0.01178]
+  - !!python/tuple [0.5453, 0.56971, -4.08704, -0.028505]
+  - !!python/tuple [-0.4386, 2.27388, -4.53618, -0.01976]
+  - !!python/tuple [-5.41551, 0.00158, 5.56254, 0.003473]
+  - !!python/tuple [-3.60137, 0.00158, 5.07644, -0.002872]
+  - !!python/tuple [-4.50844, 1.57267, 5.07644, 0.000729]
+  - !!python/tuple [-6.32258, 1.57267, 5.07644, 0.00473]
+  - !!python/tuple [-7.22965, 0.00158, 5.07644, 0.005975]
+  - !!python/tuple [-6.32258, -1.5695, 5.07644, 0.004723]
+  - !!python/tuple [-4.50844, -1.5695, 5.07644, 0.00072]
+  - !!python/tuple [-4.44453, 2.98997, 3.7484, 0.000425]
+  - !!python/tuple [-6.3865, 2.98997, 3.7484, 0.003881]
+  - !!python/tuple [-7.95759, 1.84851, 3.7484, 0.005338]
+  - !!python/tuple [-8.55769, 0.00158, 3.7484, 0.005806]
+  - !!python/tuple [-7.95759, -1.84534, 3.7484, 0.005331]
+  - !!python/tuple [-6.3865, -2.9868, 3.7484, 0.003868]
+  - !!python/tuple [-4.44453, -2.9868, 3.7484, 0.000408]
+  - !!python/tuple [-8.55769, 1.81572, 1.93426, 0.004036]
+  - !!python/tuple [-9.04379, 0.00158, 1.93426, 0.004094]
+  - !!python/tuple [-8.55769, -1.81255, 1.93426, 0.004031]
+  - !!python/tuple [-6.38626, 4.66347, 0.86169, 0.006354]
+  - !!python/tuple [-7.95735, 3.52201, 0.86169, 0.00495]
+  - !!python/tuple [-5.41528, 5.30336, -0.95244, 0.009256]
+  - !!python/tuple [-7.22941, 4.81726, -0.95244, 0.007759]
+  - !!python/tuple [-8.55745, 3.48922, -0.95244, 0.006183]
+  - !!python/tuple [-9.04355, 1.67509, -0.95244, 0.004041]
+  - !!python/tuple [-4.44429, 4.66347, -2.76658, 0.006476]
+  - !!python/tuple [-6.38626, 4.66347, -2.76658, 0.007599]
+  - !!python/tuple [-7.95735, 3.52201, -2.76658, 0.00668]
+  - !!python/tuple [-8.55745, 1.67509, -2.76658, 0.00439]
+  - !!python/tuple [-3.60114, 1.67509, -4.09462, -0.005833]
+  - !!python/tuple [-4.50821, 3.24618, -4.09462, 0.001507]
+  - !!python/tuple [-6.32234, 3.24618, -4.09462, 0.004843]
+  - !!python/tuple [-7.22941, 1.67509, -4.09462, 0.003377]
+  - !!python/tuple [-5.41528, 1.67509, -4.58072, 0.000332]
+  - !!python/tuple [-7.95736, -3.52331, 0.86404, 0.004952]
+  - !!python/tuple [-6.38628, -4.66477, 0.86404, 0.006356]
+  - !!python/tuple [-9.04356, -1.67638, -0.9501, 0.004042]
+  - !!python/tuple [-8.55747, -3.49052, -0.9501, 0.006186]
+  - !!python/tuple [-7.22943, -4.81856, -0.9501, 0.007764]
+  - !!python/tuple [-5.41529, -5.30465, -0.9501, 0.009262]
+  - !!python/tuple [-8.55747, -1.67638, -2.76423, 0.00439]
+  - !!python/tuple [-7.95736, -3.52331, -2.76423, 0.006681]
+  - !!python/tuple [-6.38628, -4.66477, -2.76423, 0.007602]
+  - !!python/tuple [-4.4443, -4.66477, -2.76423, 0.006484]
+  - !!python/tuple [-3.60115, -1.67638, -4.09227, -0.005835]
+  - !!python/tuple [-7.22943, -1.67638, -4.09227, 0.003375]
+  - !!python/tuple [-6.32236, -3.24747, -4.09227, 0.004843]
+  - !!python/tuple [-4.50822, -3.24747, -4.09227, 0.001508]
+  - !!python/tuple [-5.41529, -1.67638, -4.57837, 0.000329]
+  - !!python/tuple [-3.27262, -4.05989, 3.12798, -0.001076]
+  - !!python/tuple [-2.36555, -5.63098, 3.12798, 0.000999]
+  - !!python/tuple [-0.55142, -5.63098, 3.12798, -0.002795]
+  - !!python/tuple [-4.00056, -5.90682, 1.79994, 0.006613]
+  - !!python/tuple [-2.42947, -7.04828, 1.79994, 0.006304]
+  - !!python/tuple [-0.4875, -7.04828, 1.79994, 0.004639]
+  - !!python/tuple [-4.60066, -5.87403, -0.0142, 0.009349]
+  - !!python/tuple [-3.27262, -7.20207, -0.0142, 0.008595]
+  - !!python/tuple [-1.45849, -7.68816, -0.0142, 0.007557]
+  - !!python/tuple [0.35565, -7.20207, -0.0142, 0.006987]
+  - !!python/tuple [-4.00056, -5.90682, -1.82833, 0.008047]
+  - !!python/tuple [-2.42947, -7.04828, -1.82833, 0.006707]
+  - !!python/tuple [-0.4875, -7.04828, -1.82833, 0.004775]
+  - !!python/tuple [-3.27262, -4.05989, -3.15637, 0.000787]
+  - !!python/tuple [-2.36555, -5.63098, -3.15637, 0.001728]
+  - !!python/tuple [-0.55142, -5.63098, -3.15637, -0.002568]
+  - !!python/tuple [5.02978, -4.06715, 3.14251, -0.003365]
+  - !!python/tuple [2.30857, -5.63824, 3.14251, -0.003002]
+  - !!python/tuple [4.12271, -5.63824, 3.14251, 9.1e-05]
+  - !!python/tuple [6.35782, -4.06715, 1.81447, 0.003426]
+  - !!python/tuple [2.24465, -7.05554, 1.81447, 0.004513]
+  - !!python/tuple [4.18663, -7.05554, 1.81447, 0.005677]
+  - !!python/tuple [5.75772, -5.91408, 1.81447, 0.005229]
+  - !!python/tuple [6.84392, -4.06715, 0.00034, 0.006427]
+  - !!python/tuple [1.4015, -7.20933, 0.00034, 0.00696]
+  - !!python/tuple [3.21564, -7.69542, 0.00034, 0.007179]
+  - !!python/tuple [5.02978, -7.20933, 0.00034, 0.007493]
+  - !!python/tuple [6.35782, -5.88129, 0.00034, 0.006886]
+  - !!python/tuple [6.35782, -4.06715, -1.8138, 0.003368]
+  - !!python/tuple [2.24465, -7.05554, -1.8138, 0.00453]
+  - !!python/tuple [4.18663, -7.05554, -1.8138, 0.00566]
+  - !!python/tuple [5.75772, -5.91408, -1.8138, 0.005194]
+  - !!python/tuple [5.02978, -4.06715, -3.14184, -0.003477]
+  - !!python/tuple [2.30857, -5.63824, -3.14184, -0.003029]
+  - !!python/tuple [4.12271, -5.63824, -3.14184, 2.8e-05]
+  - !!python/tuple [7.40313, -0.00028, 3.14018, -0.000272]
+  - !!python/tuple [6.49606, 1.57081, 3.14018, -0.003552]
+  - !!python/tuple [6.49606, -1.57137, 3.14018, -0.003551]
+  - !!python/tuple [8.73117, -0.00028, 1.81214, 0.005422]
+  - !!python/tuple [8.13107, 1.84665, 1.81214, 0.004575]
+  - !!python/tuple [6.55998, 2.98811, 1.81214, 0.00273]
+  - !!python/tuple [6.55998, -2.98867, 1.81214, 0.002732]
+  - !!python/tuple [8.13107, -1.8472, 1.81214, 0.004576]
+  - !!python/tuple [9.21727, -0.00028, -0.002, 0.007196]
+  - !!python/tuple [8.73117, 1.81386, -0.002, 0.006725]
+  - !!python/tuple [7.40313, 3.1419, -0.002, 0.006361]
+  - !!python/tuple [7.40313, -3.14245, -0.002, 0.006361]
+  - !!python/tuple [8.73117, -1.81441, -0.002, 0.006725]
+  - !!python/tuple [8.73117, -0.00028, -1.81613, 0.005365]
+  - !!python/tuple [8.13107, 1.84665, -1.81613, 0.004513]
+  - !!python/tuple [6.55998, 2.98811, -1.81613, 0.002643]
+  - !!python/tuple [6.55998, -2.98867, -1.81613, 0.002641]
+  - !!python/tuple [8.13107, -1.8472, -1.81613, 0.004513]
+  - !!python/tuple [7.40313, -0.00028, -3.14417, -0.000395]
+  - !!python/tuple [6.49606, 1.57081, -3.14417, -0.003698]
+  - !!python/tuple [6.49606, -1.57137, -3.14417, -0.003698]
+  - !!python/tuple [5.03018, 4.06692, 3.14219, -0.003364]
+  - !!python/tuple [4.12312, 5.638, 3.14219, 9.1e-05]
+  - !!python/tuple [2.30898, 5.638, 3.14219, -0.003002]
+  - !!python/tuple [6.35823, 4.06692, 1.81415, 0.003426]
+  - !!python/tuple [5.75812, 5.91384, 1.81415, 0.00523]
+  - !!python/tuple [4.18703, 7.0553, 1.81415, 0.005678]
+  - !!python/tuple [2.24506, 7.0553, 1.81415, 0.004514]
+  - !!python/tuple [6.84432, 4.06692, 1.0e-05, 0.006428]
+  - !!python/tuple [6.35823, 5.88105, 1.0e-05, 0.006887]
+  - !!python/tuple [5.03018, 7.20909, 1.0e-05, 0.007494]
+  - !!python/tuple [3.21605, 7.69519, 1.0e-05, 0.007179]
+  - !!python/tuple [1.40191, 7.20909, 1.0e-05, 0.00696]
+  - !!python/tuple [6.35823, 4.06692, -1.81413, 0.00337]
+  - !!python/tuple [5.75812, 5.91384, -1.81413, 0.005196]
+  - !!python/tuple [4.18703, 7.0553, -1.81413, 0.005661]
+  - !!python/tuple [2.24506, 7.0553, -1.81413, 0.004531]
+  - !!python/tuple [5.03018, 4.06692, -3.14217, -0.003473]
+  - !!python/tuple [4.12312, 5.638, -3.14217, 3.0e-05]
+  - !!python/tuple [2.30898, 5.638, -3.14217, -0.003028]
+  - !!python/tuple [-0.55114, 5.63113, 3.12832, -0.002792]
+  - !!python/tuple [-2.36528, 5.63113, 3.12832, 0.001003]
+  - !!python/tuple [-3.27235, 4.06004, 3.12832, -0.001067]
+  - !!python/tuple [-0.48723, 7.04843, 1.80028, 0.00464]
+  - !!python/tuple [-2.4292, 7.04843, 1.80028, 0.006305]
+  - !!python/tuple [-4.00029, 5.90697, 1.80028, 0.006615]
+  - !!python/tuple [0.35593, 7.20222, -0.01385, 0.006987]
+  - !!python/tuple [-1.45821, 7.68832, -0.01385, 0.007557]
+  - !!python/tuple [-3.27235, 7.20222, -0.01385, 0.008595]
+  - !!python/tuple [-4.60039, 5.87418, -0.01385, 0.009345]
+  - !!python/tuple [-0.48723, 7.04843, -1.82799, 0.004775]
+  - !!python/tuple [-2.4292, 7.04843, -1.82799, 0.006706]
+  - !!python/tuple [-4.00029, 5.90697, -1.82799, 0.008044]
+  - !!python/tuple [-0.55114, 5.63113, -3.15603, -0.002567]
+  - !!python/tuple [-2.36528, 5.63113, -3.15603, 0.001728]
+  - !!python/tuple [-3.27235, 4.06004, -3.15603, 0.000789]
+  - !!python/tuple [-5.70819, 4.59567, 1.95344, 0.004435]
+  - !!python/tuple [-7.59831, 3.68544, 1.95344, 0.003884]
+  - !!python/tuple [-7.59831, -3.68547, 1.95344, 0.003882]
+  - !!python/tuple [-5.70819, -4.5957, 1.95344, 0.004434]
+  - !!python/tuple [-9.76151, -2.0e-05, 0.00089, 0.002741]
+  - !!python/tuple [-9.37313, -2.0e-05, -1.95166, 0.002791]
+  - !!python/tuple [-3.68298, 1.69094, -4.71299, -0.005548]
+  - !!python/tuple [-6.6118, -2.0e-05, -4.71299, 0.000476]
+  - !!python/tuple [-3.68298, -1.69097, -4.71299, -0.005553]
+  - !!python/tuple [-4.65925, -2.0e-05, -5.10137, -0.003594]
+  - !!python/tuple [-1.80113, 0.00013, 5.09836, -0.012955]
+  - !!python/tuple [0.15142, 0.00013, 4.70998, -0.022371]
+  - !!python/tuple [-2.7774, 1.69109, 4.70998, -0.007982]
+  - !!python/tuple [-2.7774, -1.69083, 4.70998, -0.00799]
+  - !!python/tuple [0.15142, 0.00013, -4.71777, -0.023087]
+  - !!python/tuple [-2.7774, 1.69109, -4.71777, -0.009758]
+  - !!python/tuple [-2.7774, -1.69083, -4.71777, -0.009762]
+  - !!python/tuple [-1.80113, 0.00013, -5.10616, -0.014606]
+  - !!python/tuple [-0.43884, -2.27376, 5.10129, -0.01568]
+  - !!python/tuple [0.53744, -0.5828, 4.71291, -0.022874]
+  - !!python/tuple [-2.39139, -2.27376, 4.71291, -0.009414]
+  - !!python/tuple [-1.41511, -3.96472, 4.71291, -0.008653]
+  - !!python/tuple [0.53744, -3.96472, 4.71291, -0.012626]
+  - !!python/tuple [0.53744, -0.5828, -4.71484, -0.023505]
+  - !!python/tuple [-2.39139, -2.27376, -4.71484, -0.010382]
+  - !!python/tuple [-1.41511, -3.96472, -4.71484, -0.008668]
+  - !!python/tuple [0.53744, -3.96472, -4.71484, -0.012752]
+  - !!python/tuple [-0.43884, -2.27376, -5.10323, -0.016212]
+  - !!python/tuple [2.20149, -2.27967, 5.10541, -0.017076]
+  - !!python/tuple [4.15404, -2.27967, 4.71703, -0.013345]
+  - !!python/tuple [1.22522, -0.58871, 4.71703, -0.023445]
+  - !!python/tuple [1.22522, -3.97063, 4.71703, -0.012771]
+  - !!python/tuple [3.17777, -3.97063, 4.71703, -0.010042]
+  - !!python/tuple [1.68804, -5.85079, 3.611, -0.003968]
+  - !!python/tuple [5.2366, -4.23022, 3.611, -0.00349]
+  - !!python/tuple [1.68804, -5.85079, -3.60469, -0.003959]
+  - !!python/tuple [5.2366, -4.23022, -3.60469, -0.003584]
+  - !!python/tuple [4.15404, -2.27967, -4.71072, -0.013576]
+  - !!python/tuple [1.22522, -0.58871, -4.71072, -0.024008]
+  - !!python/tuple [1.22522, -3.97063, -4.71072, -0.012938]
+  - !!python/tuple [3.17777, -3.97063, -4.71072, -0.010204]
+  - !!python/tuple [2.20149, -2.27967, -5.09911, -0.017404]
+  - !!python/tuple [3.53448, -0.00012, 5.10074, -0.017445]
+  - !!python/tuple [5.48703, -0.00012, 4.71236, -0.010424]
+  - !!python/tuple [4.51075, 1.69084, 4.71236, -0.013376]
+  - !!python/tuple [1.58193, -0.00012, 4.71236, -0.0237]
+  - !!python/tuple [4.51075, -1.69108, 4.71236, -0.013375]
+  - !!python/tuple [6.56959, 1.95043, 3.60632, -0.004044]
+  - !!python/tuple [6.56959, -1.95067, 3.60632, -0.004043]
+  - !!python/tuple [6.56959, 1.95043, -3.60936, -0.004174]
+  - !!python/tuple [6.56959, -1.95067, -3.60936, -0.004175]
+  - !!python/tuple [5.48703, -0.00012, -4.71539, -0.010609]
+  - !!python/tuple [4.51075, 1.69084, -4.71539, -0.013578]
+  - !!python/tuple [1.58193, -0.00012, -4.71539, -0.024152]
+  - !!python/tuple [4.51075, -1.69108, -4.71539, -0.013579]
+  - !!python/tuple [3.53448, -0.00012, -5.10378, -0.017715]
+  - !!python/tuple [2.20169, 2.27956, 5.10527, -0.017076]
+  - !!python/tuple [4.15424, 2.27956, 4.71688, -0.013345]
+  - !!python/tuple [3.17797, 3.97052, 4.71688, -0.010042]
+  - !!python/tuple [1.22542, 3.97052, 4.71688, -0.01277]
+  - !!python/tuple [1.22542, 0.5886, 4.71688, -0.023446]
+  - !!python/tuple [5.2368, 4.23011, 3.61085, -0.00349]
+  - !!python/tuple [1.68824, 5.85068, 3.61085, -0.003968]
+  - !!python/tuple [5.2368, 4.23011, -3.60483, -0.003581]
+  - !!python/tuple [1.68824, 5.85068, -3.60483, -0.003958]
+  - !!python/tuple [4.15424, 2.27956, -4.71086, -0.013574]
+  - !!python/tuple [3.17797, 3.97052, -4.71086, -0.010202]
+  - !!python/tuple [1.22542, 3.97052, -4.71086, -0.012937]
+  - !!python/tuple [1.22542, 0.5886, -4.71086, -0.024006]
+  - !!python/tuple [2.20169, 2.27956, -5.09925, -0.017401]
+  - !!python/tuple [-0.4386, 2.27388, 5.10142, -0.015677]
+  - !!python/tuple [0.53767, 3.96484, 4.71303, -0.012622]
+  - !!python/tuple [-1.41488, 3.96484, 4.71303, -0.008648]
+  - !!python/tuple [-2.39115, 2.27388, 4.71303, -0.009407]
+  - !!python/tuple [0.53767, 0.58293, 4.71303, -0.022873]
+  - !!python/tuple [0.53767, 3.96484, -4.71471, -0.012751]
+  - !!python/tuple [-1.41488, 3.96484, -4.71471, -0.008667]
+  - !!python/tuple [-2.39115, 2.27388, -4.71471, -0.01038]
+  - !!python/tuple [0.53767, 0.58293, -4.71471, -0.023505]
+  - !!python/tuple [-0.4386, 2.27388, -5.1031, -0.016212]
+  - !!python/tuple [-5.41551, 0.00158, 6.01607, 0.00199]
+  - !!python/tuple [-3.37461, 0.00158, 5.46921, -0.004232]
+  - !!python/tuple [-4.39506, 1.76906, 5.46921, -0.00052]
+  - !!python/tuple [-6.43596, 1.76906, 5.46921, 0.00335]
+  - !!python/tuple [-7.45642, 0.00158, 5.46921, 0.004458]
+  - !!python/tuple [-6.43596, -1.76589, 5.46921, 0.003344]
+  - !!python/tuple [-4.39506, -1.76589, 5.46921, -0.000528]
+  - !!python/tuple [-3.94704, 3.21709, 3.97517, -0.001492]
+  - !!python/tuple [-5.91859, 3.50055, 3.97517, 0.002543]
+  - !!python/tuple [-7.73041, 2.67312, 3.97517, 0.003965]
+  - !!python/tuple [-8.80727, 0.99749, 3.97517, 0.004553]
+  - !!python/tuple [-8.80727, -0.99433, 3.97517, 0.00455]
+  - !!python/tuple [-7.73041, -2.66995, 3.97517, 0.003958]
+  - !!python/tuple [-5.91859, -3.49738, 3.97517, 0.002532]
+  - !!python/tuple [-3.94704, -3.21392, 3.97517, -0.001507]
+  - !!python/tuple [-9.37871, 0.97843, 1.93426, 0.003564]
+  - !!python/tuple [-9.37871, -0.97526, 1.93426, 0.003562]
+  - !!python/tuple [-5.91835, 5.17406, 1.08846, 0.005934]
+  - !!python/tuple [-7.73017, 4.34662, 1.08846, 0.004703]
+  - !!python/tuple [-6.8627, 5.49164, -0.95244, 0.006702]
+  - !!python/tuple [-8.47055, 4.38183, -0.95244, 0.005609]
+  - !!python/tuple [-9.37847, 2.65193, -0.95244, 0.00424]
+  - !!python/tuple [-5.91835, 5.17406, -2.99335, 0.005951]
+  - !!python/tuple [-7.73017, 4.34662, -2.99335, 0.005689]
+  - !!python/tuple [-8.80703, 2.671, -2.99335, 0.004443]
+  - !!python/tuple [-8.80703, 0.67918, -2.99335, 0.002918]
+  - !!python/tuple [-4.39482, 3.44256, -4.48739, 0.000228]
+  - !!python/tuple [-6.43573, 3.44256, -4.48739, 0.00351]
+  - !!python/tuple [-7.45618, 1.67509, -4.48739, 0.002564]
+  - !!python/tuple [-5.41528, 1.67509, -5.03425, -0.000443]
+  - !!python/tuple [-7.73019, -4.34792, 1.09081, 0.004704]
+  - !!python/tuple [-5.91836, -5.17535, 1.09081, 0.005933]
+  - !!python/tuple [-9.37849, -2.65322, -0.9501, 0.004242]
+  - !!python/tuple [-8.47057, -4.38312, -0.9501, 0.005612]
+  - !!python/tuple [-6.86272, -5.49294, -0.9501, 0.006705]
+  - !!python/tuple [-8.80705, -0.68047, -2.991, 0.002918]
+  - !!python/tuple [-8.80705, -2.67229, -2.991, 0.004443]
+  - !!python/tuple [-7.73019, -4.34792, -2.991, 0.005691]
+  - !!python/tuple [-5.91836, -5.17535, -2.991, 0.005955]
+  - !!python/tuple [-7.45619, -1.67638, -4.48505, 0.002562]
+  - !!python/tuple [-6.43574, -3.44386, -4.48505, 0.00351]
+  - !!python/tuple [-4.39484, -3.44386, -4.48505, 0.000229]
+  - !!python/tuple [-5.41529, -1.67638, -5.0319, -0.000445]
+  - !!python/tuple [-2.47894, -5.82737, 3.52075, 0.000267]
+  - !!python/tuple [-4.85025, -5.0558, 2.02671, 0.004907]
+  - !!python/tuple [-3.77339, -6.73143, 2.02671, 0.005219]
+  - !!python/tuple [-1.96156, -7.55886, 2.02671, 0.004529]
+  - !!python/tuple [0.00998, -7.27539, 2.02671, 0.003234]
+  - !!python/tuple [-4.51376, -6.76663, -0.0142, 0.007344]
+  - !!python/tuple [-2.90592, -7.87645, -0.0142, 0.006568]
+  - !!python/tuple [-0.96648, -8.11194, -0.0142, 0.005766]
+  - !!python/tuple [0.86025, -7.41915, -0.0142, 0.006154]
+  - !!python/tuple [-3.77339, -6.73143, -2.0551, 0.006037]
+  - !!python/tuple [-1.96156, -7.55886, -2.0551, 0.004802]
+  - !!python/tuple [0.00998, -7.27539, -2.0551, 0.003318]
+  - !!python/tuple [-2.47894, -5.82737, -3.54915, 0.000911]
+  - !!python/tuple [4.23609, -5.83463, 3.53529, -0.00073]
+  - !!python/tuple [6.75059, -4.06715, 2.04124, 0.002453]
+  - !!python/tuple [2.71257, -7.56612, 2.04124, 0.00364]
+  - !!python/tuple [4.68411, -7.28265, 2.04124, 0.004169]
+  - !!python/tuple [6.18943, -5.97829, 2.04124, 0.003676]
+  - !!python/tuple [7.29745, -4.06715, 0.00034, 0.005268]
+  - !!python/tuple [1.76821, -7.88371, 0.00034, 0.005495]
+  - !!python/tuple [3.70765, -8.1192, 0.00034, 0.0056]
+  - !!python/tuple [5.53437, -7.42641, 0.00034, 0.005647]
+  - !!python/tuple [6.8299, -5.96406, 0.00034, 0.005198]
+  - !!python/tuple [6.75059, -4.06715, -2.04057, 0.002398]
+  - !!python/tuple [2.71257, -7.56612, -2.04057, 0.003647]
+  - !!python/tuple [4.68411, -7.28265, -2.04057, 0.004149]
+  - !!python/tuple [6.18943, -5.97829, -2.04057, 0.003641]
+  - !!python/tuple [4.23609, -5.83463, -3.53461, -0.000791]
+  - !!python/tuple [7.6299, -0.00028, 3.53295, -0.001063]
+  - !!python/tuple [9.12394, -0.00028, 2.03891, 0.003874]
+  - !!python/tuple [8.56278, 1.91086, 2.03891, 0.003353]
+  - !!python/tuple [7.05746, 3.21523, 2.03891, 0.002223]
+  - !!python/tuple [7.05746, -3.21578, 2.03891, 0.002224]
+  - !!python/tuple [8.56278, -1.91142, 2.03891, 0.003353]
+  - !!python/tuple [9.6708, -0.00028, -0.002, 0.005393]
+  - !!python/tuple [9.20325, 1.89663, -0.002, 0.005128]
+  - !!python/tuple [7.90772, 3.35898, -0.002, 0.005035]
+  - !!python/tuple [7.90772, -3.35954, -0.002, 0.005034]
+  - !!python/tuple [9.20325, -1.89719, -0.002, 0.005128]
+  - !!python/tuple [9.12394, -0.00028, -2.0429, 0.003822]
+  - !!python/tuple [8.56278, 1.91086, -2.0429, 0.003297]
+  - !!python/tuple [7.05746, 3.21523, -2.0429, 0.002149]
+  - !!python/tuple [7.05746, -3.21578, -2.0429, 0.002148]
+  - !!python/tuple [8.56278, -1.91142, -2.0429, 0.003297]
+  - !!python/tuple [7.6299, -0.00028, -3.53695, -0.001176]
+  - !!python/tuple [4.2365, 5.83439, 3.53496, -0.000729]
+  - !!python/tuple [6.751, 4.06692, 2.04091, 0.002454]
+  - !!python/tuple [6.18984, 5.97805, 2.04091, 0.003676]
+  - !!python/tuple [4.68452, 7.28242, 2.04091, 0.00417]
+  - !!python/tuple [2.71297, 7.56588, 2.04091, 0.00364]
+  - !!python/tuple [7.29786, 4.06692, 1.0e-05, 0.005268]
+  - !!python/tuple [6.83031, 5.96383, 1.0e-05, 0.005199]
+  - !!python/tuple [5.53478, 7.42618, 1.0e-05, 0.005648]
+  - !!python/tuple [3.70806, 8.11896, 1.0e-05, 0.005601]
+  - !!python/tuple [1.76862, 7.88347, 1.0e-05, 0.005495]
+  - !!python/tuple [6.751, 4.06692, -2.0409, 0.002399]
+  - !!python/tuple [6.18984, 5.97805, -2.0409, 0.003642]
+  - !!python/tuple [4.68452, 7.28242, -2.0409, 0.00415]
+  - !!python/tuple [2.71297, 7.56588, -2.0409, 0.003647]
+  - !!python/tuple [4.2365, 5.83439, -3.53494, -0.000789]
+  - !!python/tuple [-2.47866, 5.82752, 3.5211, 0.00027]
+  - !!python/tuple [0.01026, 7.27555, 2.02705, 0.003235]
+  - !!python/tuple [-1.96129, 7.55901, 2.02705, 0.004531]
+  - !!python/tuple [-3.77311, 6.73158, 2.02705, 0.005221]
+  - !!python/tuple [-4.84997, 5.05595, 2.02705, 0.004908]
+  - !!python/tuple [0.86052, 7.4193, -0.01385, 0.006154]
+  - !!python/tuple [-0.9662, 8.11209, -0.01385, 0.005766]
+  - !!python/tuple [-2.90564, 7.8766, -0.01385, 0.006568]
+  - !!python/tuple [-4.51349, 6.76678, -0.01385, 0.007342]
+  - !!python/tuple [0.01026, 7.27555, -2.05476, 0.003319]
+  - !!python/tuple [-1.96129, 7.55901, -2.05476, 0.004802]
+  - !!python/tuple [-3.77311, 6.73158, -2.05476, 0.006036]
+  - !!python/tuple [-2.47866, 5.82752, -3.5488, 0.000912]
+  - !!python/tuple [-5.17245, 4.88274, 2.83548, 0.003045]
+  - !!python/tuple [-7.11408, 4.25187, 2.83548, 0.003286]
+  - !!python/tuple [-7.11408, -4.2519, 2.83548, 0.00328]
+  - !!python/tuple [-5.17245, -4.88277, 2.83548, 0.003039]
+  - !!python/tuple [-9.40606, 2.93908, 0.98533, 0.003482]
+  - !!python/tuple [-10.14724, 1.02587, 0.98533, 0.002902]
+  - !!python/tuple [-10.14724, -1.0259, 0.98533, 0.002902]
+  - !!python/tuple [-9.40606, -2.93911, 0.98533, 0.003482]
+  - !!python/tuple [-10.14724, 1.02587, -0.98355, 0.002861]
+  - !!python/tuple [-10.14724, -1.0259, -0.98355, 0.002861]
+  - !!python/tuple [-3.68977, 1.67918, -5.3264, -0.005281]
+  - !!python/tuple [-6.59823, -2.0e-05, -5.3264, 0.000129]
+  - !!python/tuple [-3.68977, -1.67922, -5.3264, -0.005284]
+  - !!python/tuple [-4.65925, -2.0e-05, -5.66829, -0.00342]
+  - !!python/tuple [-1.80113, 0.00013, 5.66528, -0.0108]
+  - !!python/tuple [0.13784, 0.00013, 5.32339, -0.018149]
+  - !!python/tuple [-2.77062, 1.67933, 5.32339, -0.006946]
+  - !!python/tuple [-2.77062, -1.67907, 5.32339, -0.006952]
+  - !!python/tuple [0.13784, 0.00013, -5.33118, -0.018827]
+  - !!python/tuple [-2.77062, 1.67933, -5.33118, -0.008551]
+  - !!python/tuple [-2.77062, -1.67907, -5.33118, -0.008553]
+  - !!python/tuple [-1.80113, 0.00013, -5.67307, -0.012237]
+  - !!python/tuple [-0.43884, -2.27376, 5.66821, -0.012862]
+  - !!python/tuple [0.53065, -0.59456, 5.32632, -0.018558]
+  - !!python/tuple [-2.37781, -2.27376, 5.32632, -0.008023]
+  - !!python/tuple [-1.40833, -3.95296, 5.32632, -0.007563]
+  - !!python/tuple [0.53065, -3.95296, 5.32632, -0.010647]
+  - !!python/tuple [-2.8252, -5.02777, 4.34188, -0.002051]
+  - !!python/tuple [-0.95745, -5.88075, 4.34188, -0.00321]
+  - !!python/tuple [-2.8252, -5.02777, -4.34381, -0.001435]
+  - !!python/tuple [-0.95745, -5.88075, -4.34381, -0.003]
+  - !!python/tuple [0.53065, -0.59456, -5.32825, -0.019158]
+  - !!python/tuple [-2.37781, -2.27376, -5.32825, -0.009]
+  - !!python/tuple [-1.40833, -3.95296, -5.32825, -0.007698]
+  - !!python/tuple [0.53065, -3.95296, -5.32825, -0.010813]
+  - !!python/tuple [-0.43884, -2.27376, -5.67014, -0.013393]
+  - !!python/tuple [2.20149, -2.27967, 5.67233, -0.014112]
+  - !!python/tuple [4.14046, -2.27967, 5.33044, -0.011387]
+  - !!python/tuple [1.232, -0.60047, 5.33044, -0.019038]
+  - !!python/tuple [1.232, -3.95887, 5.33044, -0.010819]
+  - !!python/tuple [3.17098, -3.95887, 5.33044, -0.008931]
+  - !!python/tuple [1.68288, -5.88666, 4.34599, -0.004505]
+  - !!python/tuple [3.7153, -5.59444, 4.34599, -0.003408]
+  - !!python/tuple [5.26708, -4.24981, 4.34599, -0.004265]
+  - !!python/tuple [1.68288, -5.88666, -4.33969, -0.004522]
+  - !!python/tuple [3.7153, -5.59444, -4.33969, -0.003476]
+  - !!python/tuple [5.26708, -4.24981, -4.33969, -0.004368]
+  - !!python/tuple [4.14046, -2.27967, -5.32413, -0.011608]
+  - !!python/tuple [1.232, -0.60047, -5.32413, -0.019568]
+  - !!python/tuple [1.232, -3.95887, -5.32413, -0.011007]
+  - !!python/tuple [3.17098, -3.95887, -5.32413, -0.009096]
+  - !!python/tuple [2.20149, -2.27967, -5.66603, -0.014426]
+  - !!python/tuple [3.53448, -0.00012, 5.66766, -0.014439]
+  - !!python/tuple [5.47345, -0.00012, 5.32577, -0.009264]
+  - !!python/tuple [4.50396, 1.67908, 5.32577, -0.011418]
+  - !!python/tuple [1.5955, -0.00012, 5.32577, -0.019257]
+  - !!python/tuple [4.50396, -1.67932, 5.32577, -0.011418]
+  - !!python/tuple [7.17855, -0.00012, 4.34132, -0.00373]
+  - !!python/tuple [6.60007, 1.97002, 4.34132, -0.004688]
+  - !!python/tuple [6.60007, -1.97026, 4.34132, -0.004687]
+  - !!python/tuple [7.17855, -0.00012, -4.34436, -0.003855]
+  - !!python/tuple [6.60007, 1.97002, -4.34436, -0.004814]
+  - !!python/tuple [6.60007, -1.97026, -4.34436, -0.004815]
+  - !!python/tuple [5.47345, -0.00012, -5.3288, -0.00944]
+  - !!python/tuple [4.50396, 1.67908, -5.3288, -0.011613]
+  - !!python/tuple [1.5955, -0.00012, -5.3288, -0.019688]
+  - !!python/tuple [4.50396, -1.67932, -5.3288, -0.011613]
+  - !!python/tuple [3.53448, -0.00012, -5.6707, -0.014697]
+  - !!python/tuple [2.20169, 2.27956, 5.67219, -0.014112]
+  - !!python/tuple [4.14066, 2.27956, 5.3303, -0.011387]
+  - !!python/tuple [3.17118, 3.95876, 5.3303, -0.00893]
+  - !!python/tuple [1.2322, 3.95876, 5.3303, -0.010818]
+  - !!python/tuple [1.2322, 0.60036, 5.3303, -0.019039]
+  - !!python/tuple [5.26728, 4.2497, 4.34585, -0.004265]
+  - !!python/tuple [3.71549, 5.59433, 4.34585, -0.003408]
+  - !!python/tuple [1.68308, 5.88655, 4.34585, -0.004504]
+  - !!python/tuple [5.26728, 4.2497, -4.33983, -0.004366]
+  - !!python/tuple [3.71549, 5.59433, -4.33983, -0.003474]
+  - !!python/tuple [1.68308, 5.88655, -4.33983, -0.004521]
+  - !!python/tuple [4.14066, 2.27956, -5.32427, -0.011606]
+  - !!python/tuple [3.17118, 3.95876, -5.32427, -0.009094]
+  - !!python/tuple [1.2322, 3.95876, -5.32427, -0.011006]
+  - !!python/tuple [1.2322, 0.60036, -5.32427, -0.019567]
+  - !!python/tuple [2.20169, 2.27956, -5.66617, -0.014424]
+  - !!python/tuple [-0.4386, 2.27388, 5.66834, -0.012859]
+  - !!python/tuple [0.53088, 3.95308, 5.32645, -0.010644]
+  - !!python/tuple [-1.40809, 3.95308, 5.32645, -0.007559]
+  - !!python/tuple [-2.37758, 2.27388, 5.32645, -0.008018]
+  - !!python/tuple [0.53088, 0.59468, 5.32645, -0.018557]
+  - !!python/tuple [-0.95721, 5.88087, 4.342, -0.003207]
+  - !!python/tuple [-2.82497, 5.02789, 4.342, -0.002045]
+  - !!python/tuple [-0.95721, 5.88087, -4.34368, -0.002999]
+  - !!python/tuple [-2.82497, 5.02789, -4.34368, -0.001434]
+  - !!python/tuple [0.53088, 3.95308, -5.32812, -0.010812]
+  - !!python/tuple [-1.40809, 3.95308, -5.32812, -0.007697]
+  - !!python/tuple [-2.37758, 2.27388, -5.32812, -0.008999]
+  - !!python/tuple [0.53088, 0.59468, -5.32812, -0.019159]
+  - !!python/tuple [-0.4386, 2.27388, -5.67002, -0.013393]
+  - !!python/tuple [-5.41551, 0.00158, 6.46961, 0.001033]
+  - !!python/tuple [-3.4477, 0.00158, 6.02047, -0.00382]
+  - !!python/tuple [-4.43161, 1.70576, 6.02047, -0.000919]
+  - !!python/tuple [-6.39942, 1.70576, 6.02047, 0.002305]
+  - !!python/tuple [-7.38332, 0.00158, 6.02047, 0.00325]
+  - !!python/tuple [-6.39942, -1.70259, 6.02047, 0.002301]
+  - !!python/tuple [-4.43161, -1.70259, 6.02047, -0.000925]
+  - !!python/tuple [-3.9425, 3.22702, 4.762, -0.001882]
+  - !!python/tuple [-5.92014, 3.51137, 4.762, 0.001849]
+  - !!python/tuple [-7.73757, 2.68138, 4.762, 0.003261]
+  - !!python/tuple [-8.81775, 1.00057, 4.762, 0.003807]
+  - !!python/tuple [-8.81775, -0.9974, 4.762, 0.003806]
+  - !!python/tuple [-7.73757, -2.67821, 4.762, 0.003256]
+  - !!python/tuple [-5.92014, -3.5082, 4.762, 0.00184]
+  - !!python/tuple [-3.9425, -3.22386, 4.762, -0.001894]
+  - !!python/tuple [-8.17235, 3.45856, 2.94347, 0.003404]
+  - !!python/tuple [-9.39926, 1.92006, 2.94347, 0.003502]
+  - !!python/tuple [-9.83714, 0.00158, 2.94347, 0.003532]
+  - !!python/tuple [-9.39926, -1.91689, 2.94347, 0.003499]
+  - !!python/tuple [-8.17235, -3.45539, 2.94347, 0.003399]
+  - !!python/tuple [-6.39918, 5.98586, 0.05676, 0.005876]
+  - !!python/tuple [-8.17212, 5.13206, 0.05676, 0.004811]
+  - !!python/tuple [-9.39903, 3.59356, 0.05676, 0.003956]
+  - !!python/tuple [-6.39918, 5.98586, -1.96165, 0.005773]
+  - !!python/tuple [-8.17212, 5.13206, -1.96165, 0.005093]
+  - !!python/tuple [-9.39903, 3.59356, -1.96165, 0.004237]
+  - !!python/tuple [-9.83691, 1.67509, -1.96165, 0.003242]
+  - !!python/tuple [-3.94227, 4.90053, -3.78018, 0.001993]
+  - !!python/tuple [-5.91991, 5.18487, -3.78018, 0.004143]
+  - !!python/tuple [-7.73733, 4.35488, -3.78018, 0.004262]
+  - !!python/tuple [-8.81752, 2.67407, -3.78018, 0.00349]
+  - !!python/tuple [-4.43137, 3.37926, -5.03865, -0.00073]
+  - !!python/tuple [-6.39918, 3.37926, -5.03865, 0.00219]
+  - !!python/tuple [-7.38309, 1.67509, -5.03865, 0.001761]
+  - !!python/tuple [-5.41528, 1.67509, -5.48779, -0.000902]
+  - !!python/tuple [-9.39904, -3.59485, 0.05911, 0.003957]
+  - !!python/tuple [-8.17213, -5.13335, 0.05911, 0.004812]
+  - !!python/tuple [-6.39919, -5.98715, 0.05911, 0.005877]
+  - !!python/tuple [-9.83692, -1.67638, -1.9593, 0.003242]
+  - !!python/tuple [-9.39904, -3.59485, -1.9593, 0.004238]
+  - !!python/tuple [-8.17213, -5.13335, -1.9593, 0.005095]
+  - !!python/tuple [-6.39919, -5.98715, -1.9593, 0.005776]
+  - !!python/tuple [-8.81753, -2.67537, -3.77784, 0.00349]
+  - !!python/tuple [-7.73734, -4.35617, -3.77784, 0.004263]
+  - !!python/tuple [-5.91992, -5.18616, -3.77784, 0.004146]
+  - !!python/tuple [-3.94228, -4.90182, -3.77784, 0.001999]
+  - !!python/tuple [-7.3831, -1.67638, -5.0363, 0.00176]
+  - !!python/tuple [-6.39919, -3.38056, -5.0363, 0.00219]
+  - !!python/tuple [-4.43138, -3.38056, -5.0363, -0.00073]
+  - !!python/tuple [-5.41529, -1.67638, -5.48544, -0.000904]
+  - !!python/tuple [-2.44239, -5.76406, 4.07201, -0.000986]
+  - !!python/tuple [-4.86073, -5.05888, 2.81354, 0.00309]
+  - !!python/tuple [-3.78054, -6.73968, 2.81354, 0.003314]
+  - !!python/tuple [-1.96312, -7.56967, 2.81354, 0.002672]
+  - !!python/tuple [0.01452, -7.28533, 2.81354, 0.001283]
+  - !!python/tuple [-5.44224, -5.97836, 0.99501, 0.006005]
+  - !!python/tuple [-4.21533, -7.51686, 0.99501, 0.005437]
+  - !!python/tuple [-2.44239, -8.37066, 0.99501, 0.004851]
+  - !!python/tuple [-0.47458, -8.37066, 0.99501, 0.004319]
+  - !!python/tuple [-4.21533, -7.51686, -1.02341, 0.005788]
+  - !!python/tuple [-2.44239, -8.37066, -1.02341, 0.004981]
+  - !!python/tuple [-0.47458, -8.37066, -1.02341, 0.00437]
+  - !!python/tuple [-3.78054, -6.73968, -2.84194, 0.004151]
+  - !!python/tuple [-1.96312, -7.56967, -2.84194, 0.002967]
+  - !!python/tuple [0.01452, -7.28533, -2.84194, 0.001379]
+  - !!python/tuple [-2.44239, -5.76406, -4.1004, -0.000471]
+  - !!python/tuple [4.19955, -5.77132, 4.08654, -0.002066]
+  - !!python/tuple [2.71101, -7.57693, 2.82808, 0.001743]
+  - !!python/tuple [4.68865, -7.29259, 2.82808, 0.002246]
+  - !!python/tuple [6.19862, -5.98419, 2.82808, 0.001789]
+  - !!python/tuple [7.63727, -4.06715, 1.00955, 0.003944]
+  - !!python/tuple [2.23174, -8.37792, 1.00955, 0.00411]
+  - !!python/tuple [4.19955, -8.37792, 1.00955, 0.004207]
+  - !!python/tuple [5.97248, -7.52412, 1.00955, 0.004146]
+  - !!python/tuple [7.19939, -5.98562, 1.00955, 0.003804]
+  - !!python/tuple [7.63727, -4.06715, -1.00887, 0.003921]
+  - !!python/tuple [2.23174, -8.37792, -1.00887, 0.004123]
+  - !!python/tuple [4.19955, -8.37792, -1.00887, 0.004203]
+  - !!python/tuple [5.97248, -7.52412, -1.00887, 0.004136]
+  - !!python/tuple [7.19939, -5.98562, -1.00887, 0.003789]
+  - !!python/tuple [2.71101, -7.57693, -2.8274, 0.001747]
+  - !!python/tuple [4.68865, -7.29259, -2.8274, 0.00222]
+  - !!python/tuple [6.19862, -5.98419, -2.8274, 0.001744]
+  - !!python/tuple [4.19955, -5.77132, -4.08587, -0.002134]
+  - !!python/tuple [7.5568, -0.00028, 4.08421, -0.002384]
+  - !!python/tuple [9.13486, -0.00028, 2.82574, 0.001958]
+  - !!python/tuple [8.57197, 1.91677, 2.82574, 0.001474]
+  - !!python/tuple [8.57197, -1.91732, 2.82574, 0.001475]
+  - !!python/tuple [10.01062, -0.00028, 1.00721, 0.003938]
+  - !!python/tuple [9.57274, 1.9182, 1.00721, 0.00377]
+  - !!python/tuple [8.34583, 3.45669, 1.00721, 0.003675]
+  - !!python/tuple [8.34583, -3.45725, 1.00721, 0.003676]
+  - !!python/tuple [9.57274, -1.91875, 1.00721, 0.00377]
+  - !!python/tuple [10.01062, -0.00028, -1.0112, 0.003918]
+  - !!python/tuple [9.57274, 1.9182, -1.0112, 0.003749]
+  - !!python/tuple [8.34583, 3.45669, -1.0112, 0.00365]
+  - !!python/tuple [8.34583, -3.45725, -1.0112, 0.00365]
+  - !!python/tuple [9.57274, -1.91875, -1.0112, 0.003749]
+  - !!python/tuple [9.13486, -0.00028, -2.82974, 0.001896]
+  - !!python/tuple [8.57197, 1.91677, -2.82974, 0.001407]
+  - !!python/tuple [8.57197, -1.91732, -2.82974, 0.001407]
+  - !!python/tuple [7.5568, -0.00028, -4.0882, -0.002498]
+  - !!python/tuple [4.19995, 5.77109, 4.08621, -0.002066]
+  - !!python/tuple [6.19903, 5.98396, 2.82775, 0.001789]
+  - !!python/tuple [4.68906, 7.29236, 2.82775, 0.002247]
+  - !!python/tuple [2.71142, 7.5767, 2.82775, 0.001744]
+  - !!python/tuple [7.63768, 4.06692, 1.00922, 0.003944]
+  - !!python/tuple [7.1998, 5.98539, 1.00922, 0.003805]
+  - !!python/tuple [5.97289, 7.52389, 1.00922, 0.004147]
+  - !!python/tuple [4.19995, 8.37769, 1.00922, 0.004207]
+  - !!python/tuple [2.23214, 8.37769, 1.00922, 0.004111]
+  - !!python/tuple [7.63768, 4.06692, -1.0092, 0.003921]
+  - !!python/tuple [7.1998, 5.98539, -1.0092, 0.00379]
+  - !!python/tuple [5.97289, 7.52389, -1.0092, 0.004137]
+  - !!python/tuple [4.19995, 8.37769, -1.0092, 0.004204]
+  - !!python/tuple [2.23214, 8.37769, -1.0092, 0.004123]
+  - !!python/tuple [6.19903, 5.98396, -2.82773, 0.001746]
+  - !!python/tuple [4.68906, 7.29236, -2.82773, 0.002221]
+  - !!python/tuple [2.71142, 7.5767, -2.82773, 0.001748]
+  - !!python/tuple [4.19995, 5.77109, -4.08619, -0.002132]
+  - !!python/tuple [-2.44212, 5.76422, 4.07235, -0.000982]
+  - !!python/tuple [0.0148, 7.28548, 2.81389, 0.001284]
+  - !!python/tuple [-1.96284, 7.56982, 2.81389, 0.002673]
+  - !!python/tuple [-3.78026, 6.73983, 2.81389, 0.003316]
+  - !!python/tuple [-4.86045, 5.05903, 2.81389, 0.003094]
+  - !!python/tuple [-0.47431, 8.37081, 0.99536, 0.00432]
+  - !!python/tuple [-2.44212, 8.37081, 0.99536, 0.004851]
+  - !!python/tuple [-4.21505, 7.51701, 0.99536, 0.005437]
+  - !!python/tuple [-5.44196, 5.97852, 0.99536, 0.006002]
+  - !!python/tuple [-0.47431, 8.37081, -1.02306, 0.004371]
+  - !!python/tuple [-2.44212, 8.37081, -1.02306, 0.004981]
+  - !!python/tuple [-4.21505, 7.51701, -1.02306, 0.005787]
+  - !!python/tuple [0.0148, 7.28548, -2.84159, 0.00138]
+  - !!python/tuple [-1.96284, 7.56982, -2.84159, 0.002967]
+  - !!python/tuple [-3.78026, 6.73983, -2.84159, 0.004151]
+  - !!python/tuple [-2.44212, 5.76422, -4.10006, -0.000471]
+  qm_level: 2
+  rnme: _I0L
+  run_charge_group_partitioning: false
+  sp_timeout: null
+  symmetrise_charges: true
+  topology_hash: '94579'
+  total_charge: 0
+  total_qm_charge: 5.551115123125783e-17
+  update_ifp: false
+  volume: 97.30022379

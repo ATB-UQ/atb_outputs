@@ -10,7 +10,7 @@ class MolDataFailure(Exception):
     pass
 
 class MolData(object):
-    def __init__(self, pdb_str: str, log: Optional[Logger] = None, build_ring: bool = True, enforce_single_molecule: bool = True) -> None:
+    def __init__(self, pdb_str: Optional[str], log: Optional[Logger] = None, build_ring: bool = True, enforce_single_molecule: bool = True) -> None:
         self.atoms      = {}
         self.bonds     = []
         self.equivalenceGroups = {}
@@ -61,12 +61,12 @@ class MolData(object):
             return
         self.bonds.append({"atoms":[int(atm1),int(atm2)]})
 
-    def _readPDB(self, pdb_str: str, enforce_single_molecule: bool = True) -> None:
+    def _readPDB(self, pdb_str: Optional[str], enforce_single_molecule: bool = True) -> None:
         '''Read lines of PDB files'''
-        assert type(pdb_str) == str
+        assert pdb_str is None or isinstance(pdb_str, str), type(pdb_str)
 
         pdbDict = {}
-        for line in pdb_str.splitlines():
+        for line in ([] if pdb_str is None else pdb_str.splitlines()):
             #lines with atom coordinates
             if line.startswith("ATOM") or line.startswith('HETATM'):
                 #split line for different fields
@@ -158,6 +158,14 @@ class MolData(object):
             self.atoms,
             self.bonds,
         )
+
+def mol_data_from_mol_data_dict(mol_data_dict: Dict[str, Any]) -> MolData:
+    mol_data = MolData(None)
+
+    for key in mol_data_dict.keys():
+        setattr(mol_data, key, mol_data_dict[key])
+
+    return mol_data
 
 def build_rings(data: MolData, log: Optional[Logger] = None) -> Dict[int, Ring]:
 
