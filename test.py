@@ -1,6 +1,6 @@
 from yaml import load
 
-from atb_outputsformats import g96
+from atb_outputs.formats import g96
 from atb_outputs.mol_data import mol_data_from_mol_data_dict
 
 if __name__ == '__main__':

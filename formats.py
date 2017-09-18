@@ -53,7 +53,7 @@ def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Outp
                 residue_index=1,
                 residue_name=mol_data.var['rnme'],
                 atom_name=atom['symbol'],
-                atom_index=atom['index'],
+                atom_index=atom['uindex' if united else 'index'],
                 **dict(zip(('x', 'y', 'z'), atom['ocoord'])),
                 THREE_SPACE=' ' * 3,
             ),
