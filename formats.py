@@ -28,6 +28,44 @@ def pdb(mol_data: MolData, optimized: bool = True, united: bool = False, use_rnm
 
     return io.getvalue()
 
+def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Output_File:
+    io = StringIO()
+    print_to_io = lambda *args: print(*args, file=io)
+
+    atoms = list(
+        sorted(
+            filter(
+                lambda atom: (not united) or (united and 'uindex' in atom),
+                mol_data.atoms.values(),
+            ),
+            key=lambda x:x['index'],
+        ),
+    )
+
+    print_to_io('TITLE')
+    print_to_io('')
+    print_to_io('END')
+
+    print_to_io('POSITION')
+    for atom in atoms:
+        print_to_io(
+            '{residue_index:>5d}{residue_name:>4s}{atom_name:>6s}{atom_index:>9d}{THREE_SPACE}{x:12.9f}{THREE_SPACE}{y:12.9f}{THREE_SPACE}{z:12.9f}'.format(
+                residue_index=1,
+                residue_name=mol_data.var['rnme'],
+                atom_name=atom['symbol'],
+                atom_index=atom['index'],
+                **dict(zip(('x', 'y', 'z'), atom['ocoord'])),
+                THREE_SPACE=' ' * 3,
+            ),
+        )
+
+    print_to_io('END')
+    print_to_io('BOX')
+    print_to_io('    0.000000000    0.000000000    0.000000000')
+    print_to_io('END')
+
+    return io.getvalue()
+
 def mol_data_dict(mol_data: MolData) -> Dict[str, Any]:
     return {
         'atoms': mol_data.atoms,
