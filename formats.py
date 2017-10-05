@@ -48,14 +48,15 @@ def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Outp
 
     print_to_io('POSITION')
     for atom in atoms:
+        # Source: GROMOS96 Manual (ISBN 3 7281 2422 2), page III-41
         print_to_io(
-            '{residue_index:>5d}{residue_name:>4s}{atom_name:>6s}{atom_index:>9d}{THREE_SPACE}{x:12.9f}{THREE_SPACE}{y:12.9f}{THREE_SPACE}{z:12.9f}'.format(
+            '{residue_index:>5d}{X:1s}{residue_name:>5s}{X:1s}{atom_name:>5s}{atom_index:>7d}{x:15.9f}{y:15.9f}{z:15.9f}'.format(
+                X=' ',
                 residue_index=1,
                 residue_name=mol_data.var['rnme'],
                 atom_name=atom['symbol'],
                 atom_index=atom['uindex' if united else 'index'],
                 **dict(zip(('x', 'y', 'z'), atom['ocoord'])),
-                THREE_SPACE=' ' * 3,
             ),
         )
 
