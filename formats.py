@@ -61,9 +61,6 @@ def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Outp
         )
 
     print_to_io('END')
-    print_to_io('BOX')
-    print_to_io('    0.000000000    0.000000000    0.000000000')
-    print_to_io('END')
 
     return io.getvalue()
 
