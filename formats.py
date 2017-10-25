@@ -65,8 +65,11 @@ def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Outp
     return io.getvalue()
 
 def mol_data_dict(mol_data: MolData) -> Dict[str, Any]:
+    def clean_up_flavours(atom: Dict[str, Any]) -> Dict[str, Any]:
+        return {k: v for (k, v) in atom.items() if k != 'flavour'}
+
     return {
-        'atoms': mol_data.atoms,
+        'atoms': {atom_id: clean_up_flavours(atom) for (atom_id, atom) in mol_data.atoms.items()},
          'bonds': YML.clean_bonds(mol_data.bonds),
          'angles': YML.clean_angles(mol_data.angles),
          'dihedrals': YML.clean_dihedrals(mol_data.dihedrals),
