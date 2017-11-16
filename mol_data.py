@@ -23,7 +23,7 @@ class MolData(object):
 
     def unite_atoms(self) -> None:
         self.united_hydrogens = []
-        for atom in list(self.atoms.values()):
+        for atom in self.atoms.values():
             connected_hydrogens = [a_id for a_id in atom["conn"] if self.atoms[a_id]["type"] == "H"]
             if atom["type"] == "C" and len(connected_hydrogens) > 1:
                 self.united_hydrogens.extend([a_id for a_id in connected_hydrogens])
@@ -44,7 +44,7 @@ class MolData(object):
 
     def get_id(self, index: int) -> int:
         '''return id of the atom with specified index number'''
-        return [k for (k,v) in list(self.atoms.items()) if v['index'] == index][0]
+        return [k for (k,v) in self.atoms.items() if v['index'] == index][0]
 
     def __getitem__(self, atom_id: int) -> Atom:
         '''return an atom with atom_id. '''
@@ -79,14 +79,18 @@ class MolData(object):
                 it = [ i.strip() for i in it] 
                 #store information that we are interested in. Refer to MoleculeData
                 #class for more details, also here we have a angstrom to nm conversion
-                pdbDict[int(it[1])] = {\
-                    'index':int(it[1]), 'symbol':it[2], 'group': it[3], 
-                    'coord':[float(it[5])/10.,float(it[6])/10.,float(it[7])/10.],
-                    'pdb':line.strip(),'type':it[-1].upper()}
+                pdbDict[int(it[1])] = {
+                    'index': int(it[1]),
+                    'symbol': it[2],
+                    'group': it[3],
+                    'coord': [float(it[5]) / 10.,float(it[6]) / 10.,float(it[7]) / 10.],
+                    'pdb': line.strip(),
+                    'type': it[-1].upper(),
+                }
             #connectivity records
             if line.startswith('CONECT'):
                 it = line.split()
-                for key, item in list(pdbDict.items()):
+                for key, item in pdbDict.items():
                     if key == int(it[1]):
                         conn_list = []
                         for i in it[2:6]:
@@ -120,7 +124,7 @@ class MolData(object):
                         pdbDict[conn]['conn'] = [ key ] # create new list containing this atom
 
         # remove any orphan connection records
-        for k, connList in list(orphanAtomReference.items()):
+        for (k, connList) in orphanAtomReference.items():
             for c in connList:
                 pdbDict[k]["conn"].remove(c)
                 error_msg = "connectivity made from %s to non-existent atom %s removed" % (k, c)
@@ -129,23 +133,23 @@ class MolData(object):
                 raise MolDataFailure(error_msg)
 
         has_connects = lambda atom: 'conn' in atom and atom['conn']
-        if not all([has_connects(atom) for atom in list(pdbDict.values())]):
+        if not all(has_connects(atom) for atom in pdbDict.values()):
             if len(pdbDict) == 1:
                 # Only single atom molecules are allowed to have no bonds
-                pass
+                list(pdbDict.values())[0]['conn'] = []
             else:
                 if enforce_single_molecule:
                     raise MolDataFailure(
                          'Mol_Data Error: Missing connectivities for atoms {0}'.format(
-                            [atom['index'] for atom in list(pdbDict.values()) if not has_connects(atom)],
+                            [atom['index'] for atom in pdbDict.values() if not has_connects(atom)],
                         ),
                     )
                 else:
                     pass
 
         # sort and unique connectivities
-        for ID, atom in list(pdbDict.items()):
-            atom['conn'] = sorted(list(set(atom['conn'])))
+        for (ID, atom) in pdbDict.items():
+            atom['conn'] = sorted(set(atom['conn']))
             for neighbour in atom['conn']:
                 self._addBondData(ID, neighbour)
 
@@ -170,7 +174,7 @@ def mol_data_from_mol_data_dict(mol_data_dict: Dict[str, Any]) -> MolData:
 def build_rings(data: MolData, log: Optional[Logger] = None) -> Dict[int, Ring]:
 
     def _is_ring_in_all_rings(ring: Any, all_rings: List[Any]) -> bool:
-        for existing_ring in list(all_rings.values()):
+        for existing_ring in all_rings.values():
             if frozenset(existing_ring["atoms"]) == frozenset(ring):
                 return True
         return False
@@ -220,7 +224,7 @@ def has_ring_planar_valences(data: MolData, ring: Ring, log: Logger) -> bool:
     ring_atoms = [data.atoms[atom_id] for atom_id in ring['atoms']]
     has_aromatic_valences = True
     for atom in ring_atoms:
-        for atom_type, accepted_valences in list(ACCEPTED_PLANAR_VALENCE_PER_ATOM_TYPE.items()):
+        for atom_type, accepted_valences in ACCEPTED_PLANAR_VALENCE_PER_ATOM_TYPE.items():
             if atom['type'].upper() == atom_type:
                 if not len(atom['conn']) in accepted_valences: has_aromatic_valences = False
                 break
@@ -232,7 +236,7 @@ def has_ring_planar_valences(data: MolData, ring: Ring, log: Logger) -> bool:
     return has_aromatic_valences
 
 def _serialize_weighted_graph(G: Any, indent: str = "", output: List[Any] = []) -> None:
-    for node, branches in list(G.items()):
+    for node, branches in G.items():
         line = indent + str(node)
         if type(branches) is dict:
             output.append( line + "--" )
@@ -306,7 +310,7 @@ def _get_all_rings_for_bond(mol_graph: Any, bond_atom_ids: Any) -> List[Any]:
 
 def _get_graph_dict(atoms: Dict[int, Atom]) -> Dict[str, Atom]:
     G = {}
-    for atom_id, atom in list(atoms.items()):
+    for (atom_id, atom) in atoms.items():
         tmp = {}
         for i in atom["conn"]:
             tmp[str(i)] = 1
