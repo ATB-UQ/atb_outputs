@@ -73,6 +73,7 @@ def mol_data_dict(mol_data: MolData) -> Dict[str, Any]:
          'bonds': YML.clean_bonds(mol_data.bonds),
          'angles': YML.clean_angles(mol_data.angles),
          'dihedrals': YML.clean_dihedrals(mol_data.dihedrals),
+         '_dihedrals': mol_data._dihedrals,
          'impropers': mol_data.impropers,
          'rings': mol_data.rings,
          'var': mol_data.var,
