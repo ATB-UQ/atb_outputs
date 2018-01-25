@@ -150,7 +150,7 @@ def graph_img(data, molecule_graph: Optional[Any] = None, return_pos: bool = Fal
         molecule_graph = graph(data, **kwargs)
 
     if molecule_graph is not None:
-        io = StringIO()
+        io = BytesIO()
 
         output_pos = graph_draw(
             molecule_graph,
@@ -168,11 +168,13 @@ def graph_img(data, molecule_graph: Optional[Any] = None, return_pos: bool = Fal
                 else {}
             )
         )
+        img_str = io.getvalue().decode()
+        assert img_str, img_str
 
         if not return_pos:
-            return io.getvalue()
+            return img_str
         else:
-            return (io.getvalue(), molecule_graph, output_pos)
+            return (img_str, molecule_graph, output_pos)
     else:
         return None
 
