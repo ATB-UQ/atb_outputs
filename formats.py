@@ -16,8 +16,11 @@ def pdb(mol_data: MolData, optimized: bool = True, united: bool = False, use_rnm
 
     atoms = list(
         sorted(
-            mol_data.atoms.values(),
-            key=lambda x:x['index'],
+            filter(
+                lambda atom: (not united) or (united and 'uindex' in atom),
+                mol_data.atoms.values(),
+            ),
+            key=lambda atom: atom['uindex' if united else 'index'],
         ),
     )
 
@@ -38,7 +41,7 @@ def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Outp
                 lambda atom: (not united) or (united and 'uindex' in atom),
                 mol_data.atoms.values(),
             ),
-            key=lambda x:x['index'],
+            key=lambda atom: atom['uindex' if united else 'index'],
         ),
     )
 
