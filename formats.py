@@ -8,7 +8,13 @@ from atb_outputs.helpers.types_helpers import MolData, Dict, Any, Output_File, O
 import atb_outputs.pdb as PDB
 import atb_outputs.yml as YML
 import atb_outputs.lgf as LGF
+import atb_outputs.ccd_cif as CIF
 import atb_outputs.graph as molecule_graph
+
+
+def ccd_cif(mol_data):
+    return "test ccd_cif"
+
 
 def pdb(mol_data: MolData, optimized: bool = True, united: bool = False, use_rnme: bool = True) -> Output_File:
     '''return a new pdb string reflecting changes of atom order and numbering'''
