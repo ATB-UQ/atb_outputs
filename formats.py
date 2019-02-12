@@ -2,7 +2,6 @@ from io import StringIO
 from copy import deepcopy
 import yaml
 import pickle as pickle_module
-from typing import Dict, Any
 
 from atb_outputs.helpers.types_helpers import MolData, Dict, Any, Output_File, Output_Files
 import atb_outputs.pdb as PDB
@@ -12,8 +11,48 @@ import atb_outputs.ccd_cif as CIF
 import atb_outputs.graph as molecule_graph
 
 
-def ccd_cif(mol_data):
-    return "test ccd_cif"
+def ccd_cif(mol_data, comp_id):
+    cif_str = CIF.MOLECULE_DESCRIPTERS_TEMPLATE.format(
+        comp_id=comp_id,
+        net_charge=mol_data.var["total_charge"],
+    )
+    cif_str += CIF.ATOMS_HEADER
+    aromatic_ring_atoms = [r["atoms"] for r in list(mol_data.rings.values()) if "aromatic" in r and r["aromatic"]]
+    aromatic_atom_ids = [a for r in aromatic_ring_atoms for a in r]
+    for atom in sorted(mol_data.atoms.values(), key=lambda x:x["index"]):
+        line_params = dict(
+            comp_id=comp_id,
+            name=atom["symbol"],
+            type=atom["type"],
+            charge=0,
+            pdbx_align=1,
+            aromatic="Y" if atom["id"] in aromatic_atom_ids else "N",
+            terminal_atom="N",
+            stereo_config="N",
+            x_model=atom["coord"][0]*10,
+            y_model=atom["coord"][1]*10,
+            z_model=atom["coord"][2]*10,
+            x_ideal=atom["ocoord"][0]*10,
+            y_ideal=atom["ocoord"][1]*10,
+            z_ideal=atom["ocoord"][2]*10,
+            index=atom["index"],
+        )
+
+        cif_str += CIF.ATOM_LINE_TEMPLATE.format(
+            **line_params
+        )
+    cif_str += CIF.BONDS_HEADER
+    for i, bond in enumerate(sorted(mol_data.bonds, key=lambda x:mol_data.atoms[ x['atoms'][0] ]["index"])):
+        cif_str += CIF.BONDS_TEMPLATE.format(
+            comp_id=comp_id,
+            name1=mol_data.atoms[bond["atoms"][0]]["symbol"],
+            name2=mol_data.atoms[bond["atoms"][1]]["symbol"],
+            bond_order="SING",
+            aromatic="Y" if all([atom_id in aromatic_atom_ids for atom_id in bond["atoms"]]) else "N",
+            stereo_config="N",
+            index=i,
+        )
+    return cif_str
 
 
 def pdb(mol_data: MolData, optimized: bool = True, united: bool = False, use_rnme: bool = True) -> Output_File:

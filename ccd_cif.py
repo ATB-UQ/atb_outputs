@@ -1,33 +1,34 @@
 
 
-MOLECULE_DESCRIPTERS_TEMOKATE = '''data_{comp_id}
+MOLECULE_DESCRIPTERS_TEMPLATE = '''data_{comp_id}
 # 
 _chem_comp.id                                    {comp_id} 
-_chem_comp.name                                  NORLEUCINE 
-_chem_comp.type                                  "L-PEPTIDE LINKING" 
+_chem_comp.name                                  ? 
+_chem_comp.type                                  ? 
 _chem_comp.pdbx_type                             ATOMP 
-_chem_comp.formula                               "C6 H13 N O2" 
-_chem_comp.mon_nstd_parent_comp_id               LEU 
+_chem_comp.formula                               ? 
+_chem_comp.mon_nstd_parent_comp_id               ? 
 _chem_comp.pdbx_synonyms                         ? 
-_chem_comp.pdbx_formal_charge                    0 
-_chem_comp.pdbx_initial_date                     1999-07-08 
-_chem_comp.pdbx_modified_date                    2011-06-04 
-_chem_comp.pdbx_ambiguous_flag                   N 
-_chem_comp.pdbx_release_status                   REL 
+_chem_comp.pdbx_formal_charge                    {net_charge} 
+_chem_comp.pdbx_initial_date                     ? 
+_chem_comp.pdbx_modified_date                    ? 
+_chem_comp.pdbx_ambiguous_flag                   ? 
+_chem_comp.pdbx_release_status                   ? 
 _chem_comp.pdbx_replaced_by                      ? 
 _chem_comp.pdbx_replaces                         ? 
-_chem_comp.formula_weight                        131.173 
-_chem_comp.one_letter_code                       L 
-_chem_comp.three_letter_code                     NLE 
+_chem_comp.formula_weight                        ? 
+_chem_comp.one_letter_code                       ? 
+_chem_comp.three_letter_code                     {comp_id} 
 _chem_comp.pdbx_model_coordinates_details        ? 
 _chem_comp.pdbx_model_coordinates_missing_flag   N 
-_chem_comp.pdbx_ideal_coordinates_details        Corina 
+_chem_comp.pdbx_ideal_coordinates_details        ATB 
 _chem_comp.pdbx_ideal_coordinates_missing_flag   N 
 _chem_comp.pdbx_model_coordinates_db_code        ? 
 _chem_comp.pdbx_subcomponent_list                ? 
-_chem_comp.pdbx_processing_site                  EBI'''
+_chem_comp.pdbx_processing_site                  ?
+'''
 
-ATOMS_TEMPLATE = '''# 
+ATOMS_HEADER = '''# 
 loop_
 _chem_comp_atom.comp_id 
 _chem_comp_atom.atom_id 
@@ -46,7 +47,13 @@ _chem_comp_atom.pdbx_model_Cartn_y_ideal
 _chem_comp_atom.pdbx_model_Cartn_z_ideal 
 _chem_comp_atom.pdbx_component_atom_id 
 _chem_comp_atom.pdbx_component_comp_id 
-_chem_comp_atom.pdbx_ordinal 
+_chem_comp_atom.pdbx_ordinal
+'''
+ATOM_LINE_TEMPLATE = "{comp_id:<3} {name:<3} {name:<3} {type:<2} {charge:1} {pdbx_align:1} {aromatic:1} " \
+                     "{terminal_atom} {stereo_config} {x_model:>6.3f} {y_model:>6.3f} {z_model:>6.3f} {x_ideal:>6.3f} " \
+                     "{y_ideal:>6.3f} {z_ideal:>6.3f} {name:<3} {comp_id:<3} {index:<}\n" \
+
+'''
 NLE N   N   N 0 1 N N N 16.557 39.518 17.898 0.720  1.773  0.288  N   NLE 1  
 NLE CA  CA  C 0 1 N N S 15.812 40.611 17.285 0.763  0.319  0.492  CA  NLE 2  
 NLE C   C   C 0 1 N N N 16.773 41.690 16.789 2.084  -0.218 0.003  C   NLE 3  
@@ -70,7 +77,7 @@ NLE HE1 1HE H 0 1 N N N 11.747 39.724 21.141 -4.284 0.985  0.009  HE1 NLE 20
 NLE HE2 2HE H 0 1 N N N 10.655 40.422 19.897 -5.011 -0.568 -0.469 HE2 NLE 21 
 NLE HE3 3HE H 0 1 N N N 11.711 39.028 19.485 -4.260 -0.393 1.135  HE3 NLE 22 '''
 
-BONDS_TEMPLATE = '''#
+BONDS_HEADER = '''#
 loop_
 _chem_comp_bond.comp_id 
 _chem_comp_bond.atom_id_1 
@@ -78,7 +85,11 @@ _chem_comp_bond.atom_id_2
 _chem_comp_bond.value_order 
 _chem_comp_bond.pdbx_aromatic_flag 
 _chem_comp_bond.pdbx_stereo_config 
-_chem_comp_bond.pdbx_ordinal 
+_chem_comp_bond.pdbx_ordinal
+'''
+
+BONDS_TEMPLATE = "{comp_id:<3} {name1:<3} {name2:<3} {bond_order:4} {aromatic:1} {stereo_config:1} {index:<}\n"
+'''
 NLE N   CA  SING N N 1  
 NLE N   H   SING N N 2  
 NLE N   HN2 SING N N 3  
