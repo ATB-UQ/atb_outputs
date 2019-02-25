@@ -10,9 +10,17 @@ import atb_outputs.lgf as LGF
 import atb_outputs.ccd_cif as CIF
 import atb_outputs.graph as molecule_graph
 
+DOUBLE_BOND_LENGTH_CUTOFF = {
+    frozenset(['C', 'C']): 0.139, #nm, Source: phenix.elbow.elbow.quantum.hf_631Gdp.py
+    frozenset(['C', 'N']): 0.132, #nm, Source: phenix.elbow.elbow.quantum.hf_631Gdp.py
+    frozenset(['N', 'N']): 0.136, #nm, Source: phenix.elbow.elbow.quantum.hf_631Gdp.py
+    frozenset(['C', 'O']): 0.134, #nm, Source: phenix.elbow.elbow.quantum.hf_631Gdp.py
+}
+
 
 def ccd_cif(mol_data, comp_id):
-    cif_str = CIF.MOLECULE_DESCRIPTERS_TEMPLATE.format(
+    cif_str = CIF.CCD_DISCLAIMER
+    cif_str += CIF.MOLECULE_DESCRIPTERS_TEMPLATE.format(
         comp_id=comp_id,
         net_charge=mol_data.var["total_charge"],
     )
@@ -42,15 +50,23 @@ def ccd_cif(mol_data, comp_id):
             **line_params
         )
     cif_str += CIF.BONDS_HEADER
-    for i, bond in enumerate(sorted(mol_data.bonds, key=lambda x:mol_data.atoms[ x['atoms'][0] ]["index"])):
+    for i, bond in enumerate(sorted(mol_data.bonds, key=lambda x:mol_data.atoms[x['atoms'][0]]["index"])):
+        bond_length = bond["value"]
+        atom1_type = mol_data.atoms[bond["atoms"][0]]["type"]
+        atom2_type = mol_data.atoms[bond["atoms"][1]]["type"]
+        bond_order_id = frozenset([atom1_type, atom2_type])
+        if bond_order_id in DOUBLE_BOND_LENGTH_CUTOFF:
+            bond_order = "DOUB" if bond_length < DOUBLE_BOND_LENGTH_CUTOFF[bond_order_id] else "SING"
+        else:
+            bond_order = "SING"
         cif_str += CIF.BONDS_TEMPLATE.format(
             comp_id=comp_id,
             name1=mol_data.atoms[bond["atoms"][0]]["symbol"],
             name2=mol_data.atoms[bond["atoms"][1]]["symbol"],
-            bond_order="SING",
+            bond_order=bond_order,
             aromatic="Y" if all([atom_id in aromatic_atom_ids for atom_id in bond["atoms"]]) else "N",
             stereo_config="N",
-            index=i,
+            index=i+1,
         )
     return cif_str
 
@@ -75,6 +91,7 @@ def pdb(mol_data: MolData, optimized: bool = True, united: bool = False, use_rnm
     PDB.footer(mol_data, io)
 
     return io.getvalue()
+
 
 def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Output_File:
     io = StringIO()
@@ -112,6 +129,7 @@ def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Outp
 
     return io.getvalue()
 
+
 def mol_data_dict(mol_data: MolData) -> Dict[str, Any]:
     def clean_up_flavours(atom: Dict[str, Any]) -> Dict[str, Any]:
         return {k: v for (k, v) in atom.items() if k != 'flavour'}
@@ -127,12 +145,15 @@ def mol_data_dict(mol_data: MolData) -> Dict[str, Any]:
          'var': mol_data.var,
     }
 
+
 def yml(mol_data: MolData) -> Output_File:
     mol_data = mol_data_dict(mol_data)
     return YML.add_yml_comments(yaml.dump(mol_data))
 
+
 def pickle(mol_data: MolData) -> Output_File:
     return pickle_module.dumps(mol_data_dict(mol_data))
+
 
 def template_yml(mol_data: MolData) -> Output_File:
     mol_data = deepcopy(mol_data)
@@ -147,7 +168,9 @@ def template_yml(mol_data: MolData) -> Output_File:
     }
     return YML.add_yml_comments(yaml.dump(mol_data))
 
+
 STORE_GRAPH_GT = False
+
 
 def graph(mol_data: MolData, **kwargs: Dict[str, Any]) -> Output_Files:
     return list(filter(
@@ -177,6 +200,7 @@ def graph(mol_data: MolData, **kwargs: Dict[str, Any]) -> Output_Files:
             []
         )
     ))
+
 
 def lgf(mol_data, **kwargs: Dict[str, Any]) -> Output_Files:
     try:
