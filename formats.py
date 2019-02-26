@@ -27,6 +27,7 @@ def ccd_cif(mol_data, comp_id):
     cif_str += CIF.ATOMS_HEADER
     aromatic_ring_atoms = [r["atoms"] for r in list(mol_data.rings.values()) if "aromatic" in r and r["aromatic"]]
     aromatic_atom_ids = [a for r in aromatic_ring_atoms for a in r]
+    ocoord_key = "ocoord" if "ocoord" in mol_data.atoms.values()[0] else "coord"
     for atom in sorted(mol_data.atoms.values(), key=lambda x:x["index"]):
         line_params = dict(
             comp_id=comp_id,
@@ -40,9 +41,9 @@ def ccd_cif(mol_data, comp_id):
             x_model=atom["coord"][0]*10,
             y_model=atom["coord"][1]*10,
             z_model=atom["coord"][2]*10,
-            x_ideal=atom["ocoord"][0]*10,
-            y_ideal=atom["ocoord"][1]*10,
-            z_ideal=atom["ocoord"][2]*10,
+            x_ideal=atom[ocoord_key][0]*10,
+            y_ideal=atom[ocoord_key][1]*10,
+            z_ideal=atom[ocoord_key][2]*10,
             index=atom["index"],
         )
 
