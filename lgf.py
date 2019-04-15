@@ -22,7 +22,7 @@ partial_charge  label   label2  atomType    coordX  coordY  coordZ  initColor'''
             atom['charge'] if 'charge' in atom else 0.0,
             atom['id'],
             atom['symbol'],
-            atom['iacm'],
+            atom['std_iacm'],
             atom[coordinate_key][0],
             atom[coordinate_key][1],
             atom[coordinate_key][2],
