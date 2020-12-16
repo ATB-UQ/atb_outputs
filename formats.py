@@ -18,10 +18,11 @@ DOUBLE_BOND_LENGTH_CUTOFF = {
 }
 
 
-def ccd_cif(mol_data, comp_id):
+def ccd_cif(mol_data, comp_id, comp_id_3char):
     cif_str = CIF.CCD_DISCLAIMER
     cif_str += CIF.MOLECULE_DESCRIPTERS_TEMPLATE.format(
         comp_id=comp_id,
+        comp_id_3char=comp_id_3char,
         net_charge=mol_data.var["total_charge"],
     )
     cif_str += CIF.ATOMS_HEADER
