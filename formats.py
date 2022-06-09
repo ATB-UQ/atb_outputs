@@ -1,6 +1,7 @@
 from io import StringIO
 from copy import deepcopy
 import yaml
+import numpy as np
 import pickle as pickle_module
 
 from atb_outputs.helpers.types_helpers import MolData, Dict, Any, Output_File, Output_Files
@@ -18,7 +19,7 @@ DOUBLE_BOND_LENGTH_CUTOFF = {
 }
 
 
-def ccd_cif(mol_data, comp_id, comp_id_3char):
+def ccd_cif(mol_data, comp_id, comp_id_3char, average_ch2_bonds=True, average_ch3_bonds=True):
     cif_str = CIF.CCD_DISCLAIMER
     cif_str += CIF.MOLECULE_DESCRIPTERS_TEMPLATE.format(
         comp_id=comp_id,
@@ -29,7 +30,23 @@ def ccd_cif(mol_data, comp_id, comp_id_3char):
     aromatic_ring_atoms = [r["atoms"] for r in list(mol_data.rings.values()) if "aromatic" in r and r["aromatic"]]
     aromatic_atom_ids = [a for r in aromatic_ring_atoms for a in r]
     ocoord_key = "ocoord" if "ocoord" in list(mol_data.atoms.values())[0] else "coord"
+    if average_ch2_bonds:
+        updated_ch2_coords = get_averaged_ch_bond(mol_data, 2, ocoord_key)
+    else:
+        updated_ch2_coords = {}
+    if average_ch3_bonds:
+        updated_ch3_coords = get_averaged_ch_bond(mol_data, 3, ocoord_key)
+    else:
+        updated_ch3_coords = {}
+
     for atom in sorted(mol_data.atoms.values(), key=lambda x:x["index"]):
+        if atom["symbol"] in updated_ch2_coords:
+            x, y, z = updated_ch2_coords[atom["symbol"]]
+        elif atom["symbol"] in updated_ch3_coords:
+            x, y, z = updated_ch3_coords[atom["symbol"]]
+        else:
+            x, y, z = atom[ocoord_key][0], atom[ocoord_key][1], atom[ocoord_key][2]
+
         line_params = dict(
             comp_id=comp_id,
             name=atom["symbol"],
@@ -42,9 +59,9 @@ def ccd_cif(mol_data, comp_id, comp_id_3char):
             x_model=atom["coord"][0]*10,
             y_model=atom["coord"][1]*10,
             z_model=atom["coord"][2]*10,
-            x_ideal=atom[ocoord_key][0]*10,
-            y_ideal=atom[ocoord_key][1]*10,
-            z_ideal=atom[ocoord_key][2]*10,
+            x_ideal=x*10,
+            y_ideal=y*10,
+            z_ideal=z*10,
             index=atom["index"],
         )
 
@@ -73,7 +90,7 @@ def ccd_cif(mol_data, comp_id, comp_id_3char):
     return cif_str
 
 
-def pdb(mol_data: MolData, optimized: bool = True, united: bool = False, use_rnme: bool = True) -> Output_File:
+def pdb(mol_data: MolData, optimized: bool = True, united: bool = False, use_rnme: bool = True, write_connects=True) -> Output_File:
     '''return a new pdb string reflecting changes of atom order and numbering'''
     io = StringIO()
 
@@ -89,10 +106,48 @@ def pdb(mol_data: MolData, optimized: bool = True, united: bool = False, use_rnm
 
     PDB.header(mol_data, io, rev_date=mol_data.var["REV_DATE"], united=united)
     PDB.atoms(mol_data, io, atoms, united=united, use_rnme=use_rnme, optimized=optimized)
-    PDB.connectivity(mol_data, io, atoms, united=united)
+    if write_connects:
+        PDB.connectivity(mol_data, io, atoms, united=united)
     PDB.footer(mol_data, io)
 
     return io.getvalue()
+
+
+def get_averaged_ch_bond(mol_data, n_hydrogens, ocoord_key):
+    selected_carbons = get_carbons_with_n_hydrogens(mol_data, n_hydrogens)
+    ch_scaling_factors = {}
+    for c_atom in selected_carbons:
+        ch_bond_lengths = []
+        h_ids = []
+        for conn_atom_id in c_atom["conn"]:
+            conn_atom = mol_data[conn_atom_id]
+            if conn_atom["type"] == "H":
+                ch_length = np.linalg.norm(np.array(c_atom[ocoord_key]) - np.array(conn_atom[ocoord_key]))
+                ch_bond_lengths.append(ch_length)
+                h_ids.append(conn_atom_id)
+        av_ch_len = np.mean(ch_bond_lengths)
+        ch_scaling_factors.update({h_id: av_ch_len/ch_bond_length for h_id, ch_bond_length in zip(h_ids, ch_bond_lengths)})
+    updated_h_coords = {}
+    for h_id, scaling_factor in ch_scaling_factors.items():
+        updated_h_coords[mol_data.atoms[h_id]["symbol"]] = get_av_bond_length_coords(mol_data, h_id, scaling_factor, ocoord_key)
+    return updated_h_coords
+
+
+def get_av_bond_length_coords(mol_data, h_id, scaling_factor, ocoord_key):
+    h_atom = mol_data.atoms[h_id]
+    assert len(h_atom["conn"]) == 1, "Hydrogen does not have exactly 1 bond, method assumptions no longer hold."
+    c_atom = mol_data.atoms[h_atom["conn"][0]]
+    return (np.array(h_atom[ocoord_key]) - np.array(c_atom[ocoord_key])) * scaling_factor + np.array(c_atom[ocoord_key])
+
+
+
+def get_carbons_with_n_hydrogens(mol_data, n_hydrogens):
+    selected_carbons = []
+    for a in mol_data.atoms.values():
+        if a["type"] == "C" and \
+                len([atom_id for atom_id in a["conn"] if mol_data.atoms[atom_id]["type"] == "H"]) == n_hydrogens:
+            selected_carbons.append(a)
+    return selected_carbons
 
 
 def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Output_File:

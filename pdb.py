@@ -12,8 +12,8 @@ def header(data, io, rev_date="", united=False):
             strtype = 'ALL'
         print('TITLE '+4*' '+\
                 '%-70s' %(strtype + ' ATOM STRUCTURE FOR MOLECULE ' + data[1]['group']), file=io)
-        print('AUTHOR'+4*' '+'GROMOS AUTOMATIC TOPOLOGY BUILDER REVISION ' + rev_date, file=io)
-        print('AUTHOR'+3*' '+'2'+'  http://compbio.biosci.uq.edu.au/atb', file=io)
+        print('AUTHOR'+4*' '+'AUTOMATED TOPOLOGY BUILDER (ATB) REVISION ' + rev_date, file=io)
+        print('AUTHOR'+3*' '+'2'+'  https://atb.uq.edu.au', file=io)
 
 def atoms(data, io, atoms, united=False, optimized=True, use_rnme=True):
         # Write structure
@@ -31,7 +31,7 @@ def atoms(data, io, atoms, united=False, optimized=True, use_rnme=True):
                 rnme = data.var['rnme']
             else:
                 rnme = i['group']
-            print(i['pdb'][:6] + '%5d' %index + i['pdb'][11:17] + \
+            print(i['pdb'][:6] + '%5d' %index + "{:>5} ".format(i["symbol"]) + \
                     '%-4s' %rnme + "    0    " + \
                     '%8.3f' %coord[0] + '%8.3f' %coord[1] + '%8.3f' %coord[2] +\
                     i['pdb'][54:], file=io)
