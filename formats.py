@@ -10,6 +10,7 @@ import atb_outputs.yml as YML
 import atb_outputs.lgf as LGF
 import atb_outputs.ccd_cif as CIF
 import atb_outputs.graph as molecule_graph
+import atb_outputs.mol2 as MOL2
 
 DOUBLE_BOND_LENGTH_CUTOFF = {
     frozenset(['C', 'C']): 0.139, #nm, Source: phenix.elbow.elbow.quantum.hf_631Gdp.py
@@ -148,6 +149,10 @@ def get_carbons_with_n_hydrogens(mol_data, n_hydrogens):
                 len([atom_id for atom_id in a["conn"] if mol_data.atoms[atom_id]["type"] == "H"]) == n_hydrogens:
             selected_carbons.append(a)
     return selected_carbons
+
+
+def mol2(pdb_str):
+    return MOL2.use_babel(pdb_str)
 
 
 def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Output_File:
