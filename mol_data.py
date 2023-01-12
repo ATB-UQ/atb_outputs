@@ -10,11 +10,22 @@ class MolDataFailure(Exception):
     pass
 
 class MolData(object):
-    def __init__(self, pdb_str: Optional[str], log: Optional[Logger] = None, build_ring: bool = True, enforce_single_molecule: bool = True) -> None:
+    def __init__(self,
+                 pdb_str: Optional[str],
+                 log: Optional[Logger] = None,
+                 build_ring: bool = True,
+                 enforce_single_molecule: bool = True) -> None:
+
+        #### Added method for instanciating from FDBMolecule objects
+
         self.atoms      = {}
         self.bonds     = []
         self.equivalenceGroups = {}
-        self._readPDB(pdb_str, enforce_single_molecule=enforce_single_molecule)
+
+        if type(pdb_str).__name__ in ['FDBMolecule', 'Molecule3D']:
+            self._readFDBMolecule(pdb_str)
+        else:
+            self._readPDB(pdb_str, enforce_single_molecule=enforce_single_molecule)
 
         if build_ring:
             self.rings = build_rings(self, log)
@@ -60,6 +71,31 @@ class MolData(object):
         if set([atm1, atm2]) in [set(b["atoms"]) for b in self.bonds]:
             return
         self.bonds.append({"atoms":[int(atm1),int(atm2)]})
+
+    def _readFDBMolecule(self, Molecule: 'FDBMolecule') -> None:
+        fdb_atom_info = Molecule.atom_info
+        for a in Molecule.atoms:
+            index_dict = Molecule.atoms[a]._index
+
+            bond_info = Molecule.bonds(a)
+            connectivity = [Molecule.atoms[a_bonded]._index['id'] for _, a_bonded in bond_info]
+            i = index_dict['id']
+            name = index_dict['name']
+            fdb_info = [a_fdb for a_fdb in fdb_atom_info if a_fdb['elementID']==name]
+            assert len(fdb_info)==1, fdb_info
+            fdb_info = fdb_info[0]
+
+            self.atoms[i] = {'id': i,
+                             'index': i,
+                             'symbol': name,
+                             'type': Molecule.atoms[a].element,
+                             'conn': connectivity,
+                             'coord': [fdb_info['x3d'], fdb_info['y3d'], fdb_info['z3d']]
+                             }
+
+            self.bonds = [
+                {'atoms': [Molecule.atoms[a1]._index['id'], Molecule.atoms[a2]._index['id']]}
+            for a1, a2 in Molecule.bonds]
 
     def _readPDB(self, pdb_str: Optional[str], enforce_single_molecule: bool = True) -> None:
         '''Read lines of PDB files'''
@@ -250,7 +286,6 @@ def is_ring_planar(data: MolData, ring: Ring, log: Logger) -> bool:
     coord_type = "ocoord" if "ocoord" in list(atoms.values())[0] else "coord"
 
     ring_atoms = [atoms[atom_id] for atom_id in ring["atoms"]]
-
     A, B, C, D = equation_of_plane(
         ring_atoms[0][coord_type],
         ring_atoms[1][coord_type],
