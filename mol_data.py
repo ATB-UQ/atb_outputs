@@ -6,8 +6,10 @@ from typing import Optional
 from atb_outputs.helpers.types_helpers import Logger, Optional, Any, List, Dict, Atom, Tuple, Ring, Coordinate
 from atb_outputs.helpers.dijkstra import shortestPath
 
+
 class MolDataFailure(Exception):
     pass
+
 
 class MolData(object):
     def __init__(self,
@@ -18,12 +20,14 @@ class MolData(object):
 
         #### Added method for instanciating from FDBMolecule objects
 
-        self.atoms      = {}
-        self.bonds     = []
+        self.atoms = {}
+        self.bonds = []
         self.equivalenceGroups = {}
 
-        if type(pdb_str).__name__ in ['FDBMolecule', 'Molecule3D']:
+        if type(pdb_str).__name__ == 'FDBMolecule':
             self._readFDBMolecule(pdb_str)
+        elif type(pdb_str).__name__ == 'Molecule3D':
+            self._readMolecule3D(pdb_str)
         else:
             self._readPDB(pdb_str, enforce_single_molecule=enforce_single_molecule)
 
@@ -55,7 +59,7 @@ class MolData(object):
 
     def get_id(self, index: int) -> int:
         '''return id of the atom with specified index number'''
-        return [k for (k,v) in self.atoms.items() if v['index'] == index][0]
+        return [k for (k, v) in self.atoms.items() if v['index'] == index][0]
 
     def __getitem__(self, atom_id: int) -> Atom:
         '''return an atom with atom_id. '''
@@ -70,7 +74,7 @@ class MolData(object):
             return
         if set([atm1, atm2]) in [set(b["atoms"]) for b in self.bonds]:
             return
-        self.bonds.append({"atoms":[int(atm1),int(atm2)]})
+        self.bonds.append({"atoms": [int(atm1), int(atm2)]})
 
     def _readFDBMolecule(self, Molecule: 'FDBMolecule') -> None:
         fdb_atom_info = Molecule.atom_info
@@ -81,8 +85,8 @@ class MolData(object):
             connectivity = [Molecule.atoms[a_bonded]._index['id'] for _, a_bonded in bond_info]
             i = index_dict['id']
             name = index_dict['name']
-            fdb_info = [a_fdb for a_fdb in fdb_atom_info if a_fdb['elementID']==name]
-            assert len(fdb_info)==1, fdb_info
+            fdb_info = [a_fdb for a_fdb in fdb_atom_info if a_fdb['elementID'] == name]
+            assert len(fdb_info) == 1, fdb_info
             fdb_info = fdb_info[0]
 
             self.atoms[i] = {'id': i,
@@ -95,7 +99,33 @@ class MolData(object):
 
             self.bonds = [
                 {'atoms': [Molecule.atoms[a1]._index['id'], Molecule.atoms[a2]._index['id']]}
-            for a1, a2 in Molecule.bonds]
+                for a1, a2 in Molecule.bonds]
+
+    def _readMolecule3D(self, Molecule: 'Molecule3D') -> None:
+        for a in Molecule.atoms:
+            atom_obj = Molecule.atoms[a]
+            # index_dict = Molecule.atoms[a]._index
+
+            bond_info = Molecule.bonds(a)
+            # the queried atom is almost first in the tuple when getting bond info
+            connectivity = [Molecule.atoms[a_bonded].get_index('id') for _, a_bonded in bond_info]
+            i = atom_obj.get_index('id')
+            name = index_dict['name']
+            # fdb_info = [a_fdb for a_fdb in fdb_atom_info if a_fdb['elementID']==name]
+            # assert len(fdb_info)==1, fdb_info
+            # fdb_info = fdb_info[0]
+
+            self.atoms[i] = {'id': i,
+                             'index': i,
+                             'symbol': name,
+                             'type': atom_obj.element,
+                             'conn': connectivity,
+                             'coord': atom_obj.coordinates
+                             }
+
+            self.bonds = [
+                {'atoms': [Molecule.atoms[a1].get_index('id'), Molecule.atoms[a2].get_index('id')]}
+                for a1, a2 in Molecule.bonds]
 
     def _readPDB(self, pdb_str: Optional[str], enforce_single_molecule: bool = True) -> None:
         '''Read lines of PDB files'''
@@ -103,27 +133,27 @@ class MolData(object):
 
         pdbDict = {}
         for line in ([] if pdb_str is None else pdb_str.splitlines()):
-            #lines with atom coordinates
+            # lines with atom coordinates
             if line.startswith("ATOM") or line.startswith('HETATM'):
-                #split line for different fields
-                #it = line.split()
-                #in case of some fields are missing, read according to pdb standard
-                #if len(it) < 11:
-                it = [line[0:6],line[6:11],line[12:16],line[17:20],
-                        line[22:27], line[30:38],line[38:46],line[46:54],line[54:60],
-                        line[60:66],line[76:78]]
-                it = [ i.strip() for i in it] 
-                #store information that we are interested in. Refer to MoleculeData
-                #class for more details, also here we have a angstrom to nm conversion
+                # split line for different fields
+                # it = line.split()
+                # in case of some fields are missing, read according to pdb standard
+                # if len(it) < 11:
+                it = [line[0:6], line[6:11], line[12:16], line[17:20],
+                      line[22:27], line[30:38], line[38:46], line[46:54], line[54:60],
+                      line[60:66], line[76:78]]
+                it = [i.strip() for i in it]
+                # store information that we are interested in. Refer to MoleculeData
+                # class for more details, also here we have a angstrom to nm conversion
                 pdbDict[int(it[1])] = {
                     'index': int(it[1]),
                     'symbol': it[2],
                     'group': it[3],
-                    'coord': [float(it[5]) / 10.,float(it[6]) / 10.,float(it[7]) / 10.],
+                    'coord': [float(it[5]) / 10., float(it[6]) / 10., float(it[7]) / 10.],
                     'pdb': line.strip(),
                     'type': it[-1].upper(),
                 }
-            #connectivity records
+            # connectivity records
             if line.startswith('CONECT'):
                 it = line.split()
                 for key, item in pdbDict.items():
@@ -146,18 +176,20 @@ class MolData(object):
         # make sure connectivity information is symmetric by simply mirroring connections
         # flag any orphan connectivities for removal
         orphanAtomReference = {}
-        for key in pdbDict: # for each atom in pdb
-            if 'conn' in pdbDict[key]: # if this atom lists connections to others
-                for conn in pdbDict[key]['conn']: # for each connection to others
-                    if conn not in pdbDict: # if it connects to a non-existent atom
+        for key in pdbDict:  # for each atom in pdb
+            if 'conn' in pdbDict[key]:  # if this atom lists connections to others
+                for conn in pdbDict[key]['conn']:  # for each connection to others
+                    if conn not in pdbDict:  # if it connects to a non-existent atom
                         stderr.write("connectivity made from atom %s to non-existent atom %s!" % (key, conn))
-                        if key not in orphanAtomReference: orphanAtomReference[key] = [conn]
-                        else: orphanAtomReference[key].append(conn)
+                        if key not in orphanAtomReference:
+                            orphanAtomReference[key] = [conn]
+                        else:
+                            orphanAtomReference[key].append(conn)
                         continue
-                    if 'conn' in pdbDict[conn]: # if the other atom has a list of connections
-                        pdbDict[conn]['conn'].append(key) # append this atom to the end of the other atom's list
+                    if 'conn' in pdbDict[conn]:  # if the other atom has a list of connections
+                        pdbDict[conn]['conn'].append(key)  # append this atom to the end of the other atom's list
                     else:
-                        pdbDict[conn]['conn'] = [ key ] # create new list containing this atom
+                        pdbDict[conn]['conn'] = [key]  # create new list containing this atom
 
         # remove any orphan connection records
         for (k, connList) in orphanAtomReference.items():
@@ -176,7 +208,7 @@ class MolData(object):
             else:
                 if enforce_single_molecule:
                     raise MolDataFailure(
-                         'Mol_Data Error: Missing connectivities for atoms {0}'.format(
+                        'Mol_Data Error: Missing connectivities for atoms {0}'.format(
                             [atom['index'] for atom in pdbDict.values() if not has_connects(atom)],
                         ),
                     )
@@ -199,6 +231,7 @@ class MolData(object):
             self.bonds,
         )
 
+
 def mol_data_from_mol_data_dict(mol_data_dict: Dict[str, Any]) -> MolData:
     mol_data = MolData(None)
 
@@ -207,8 +240,8 @@ def mol_data_from_mol_data_dict(mol_data_dict: Dict[str, Any]) -> MolData:
 
     return mol_data
 
-def build_rings(data: MolData, log: Optional[Logger] = None) -> Dict[int, Ring]:
 
+def build_rings(data: MolData, log: Optional[Logger] = None) -> Dict[int, Ring]:
     def _is_ring_in_all_rings(ring: Any, all_rings: List[Any]) -> bool:
         for existing_ring in all_rings.values():
             if frozenset(existing_ring["atoms"]) == frozenset(ring):
@@ -219,9 +252,9 @@ def build_rings(data: MolData, log: Optional[Logger] = None) -> Dict[int, Ring]:
     ring_count = 1
     mol_graph = _get_graph_dict(data.atoms)
 
-    #serialized_graph = []
-    #_serialize_weighted_graph(mol_graph,output=serialized_graph)
-    #log.debug("connectivity_graph:\n" + "\n".join(serialized_graph))
+    # serialized_graph = []
+    # _serialize_weighted_graph(mol_graph,output=serialized_graph)
+    # log.debug("connectivity_graph:\n" + "\n".join(serialized_graph))
 
     for bond in data.bonds:
         rings = _get_all_rings_for_bond(deepcopy(mol_graph), bond["atoms"])
@@ -236,16 +269,19 @@ def build_rings(data: MolData, log: Optional[Logger] = None) -> Dict[int, Ring]:
                 ring_count += 1
     return all_rings
 
+
 ACCEPTED_PLANAR_VALENCE_PER_ATOM_TYPE = {
     'C': [3],
-    'N': [2, 3], # For pyridine
+    'N': [2, 3],  # For pyridine
     'O': [2],
     'S': [2],
-    }
+}
 PLANAR_DISTANCE_TOL = 0.025
+
 
 def is_ring_aromatic(data: MolData, ring: Ring, log: Logger) -> bool:
     return has_ring_planar_geometry(data, ring, log) and has_ring_planar_valences(data, ring, log)
+
 
 def has_ring_planar_geometry(data: MolData, ring: Ring, log: Logger) -> bool:
     if len(ring["atoms"]) < 4:
@@ -253,6 +289,7 @@ def has_ring_planar_geometry(data: MolData, ring: Ring, log: Logger) -> bool:
     else:
         # Get dihedral atoms
         return is_ring_planar(data, ring, log)
+
 
 def has_ring_planar_valences(data: MolData, ring: Ring, log: Logger) -> bool:
     ''' Prevents rings with unual valences to be assigned as planar'''
@@ -266,20 +303,25 @@ def has_ring_planar_valences(data: MolData, ring: Ring, log: Logger) -> bool:
                 break
         if not has_aromatic_valences: break
     if has_aromatic_valences:
-        if log: log.debug("{0} has the valences expected for a planar ring and will be treated as such".format([data[x]["symbol"] for x in ring['atoms']]))
+        if log: log.debug("{0} has the valences expected for a planar ring and will be treated as such".format(
+            [data[x]["symbol"] for x in ring['atoms']]))
     else:
-        if log: log.debug("{0} DOES NOT have the valences expected for a planar ring and will not be treated as such".format([data[x]["symbol"] for x in ring['atoms']]))
+        if log: log.debug(
+            "{0} DOES NOT have the valences expected for a planar ring and will not be treated as such".format(
+                [data[x]["symbol"] for x in ring['atoms']]))
     return has_aromatic_valences
+
 
 def _serialize_weighted_graph(G: Any, indent: str = "", output: List[Any] = []) -> None:
     for node, branches in G.items():
         line = indent + str(node)
         if type(branches) is dict:
-            output.append( line + "--" )
-            _serialize_weighted_graph(branches, indent=" "*4, output=output)
+            output.append(line + "--")
+            _serialize_weighted_graph(branches, indent=" " * 4, output=output)
         else:
             line += ": {0}".format(branches)
-            output.append( line )
+            output.append(line)
+
 
 def is_ring_planar(data: MolData, ring: Ring, log: Logger) -> bool:
     atoms = data.atoms
@@ -306,21 +348,24 @@ def is_ring_planar(data: MolData, ring: Ring, log: Logger) -> bool:
         )
     return True
 
+
 def equation_of_plane(a0: Coordinate, a1: Coordinate, a2: Coordinate) -> Tuple[float, float, float, float]:
-    det1 = ( (a1[1]-a0[1])*(a2[2]-a0[2]) ) - ( (a2[1]-a0[1])*(a1[2]-a0[2]) )
-    det2 = ( (a1[2]-a0[2])*(a2[0]-a0[0]) ) - ( (a2[2]-a0[2])*(a1[0]-a0[0]) )
-    det3 = ( (a1[0]-a0[0])*(a2[1]-a0[1]) ) - ( (a2[0]-a0[0])*(a1[1]-a0[1]) )
+    det1 = ((a1[1] - a0[1]) * (a2[2] - a0[2])) - ((a2[1] - a0[1]) * (a1[2] - a0[2]))
+    det2 = ((a1[2] - a0[2]) * (a2[0] - a0[0])) - ((a2[2] - a0[2]) * (a1[0] - a0[0]))
+    det3 = ((a1[0] - a0[0]) * (a2[1] - a0[1])) - ((a2[0] - a0[0]) * (a1[1] - a0[1]))
     D = det1 * a0[0] + det2 * a0[1] + det3 * a0[2]
     D = -D
     return (det1, det2, det3, D)
 
+
 def _distance_from_plane(A: float, B: float, C: float, D: float, pt: Coordinate) -> float:
     x, y, z = pt
-    denom = sqrt(A**2 + B**2 + C**2)
+    denom = sqrt(A ** 2 + B ** 2 + C ** 2)
     if not denom: return 0
     numer = A * x + B * y + C * z + D
     distance = numer / denom
     return distance
+
 
 def _get_all_rings_for_bond(mol_graph: Any, bond_atom_ids: Any) -> List[Any]:
     i0 = str(bond_atom_ids[0])
@@ -338,10 +383,11 @@ def _get_all_rings_for_bond(mol_graph: Any, bond_atom_ids: Any) -> List[Any]:
         if not ring in all_rings:
             all_rings.append(ring)
             found = True
-            for i in range(len(ring)-1):
-                mol_graph[ring[i]][ring[i+1]] = 2
+            for i in range(len(ring) - 1):
+                mol_graph[ring[i]][ring[i + 1]] = 2
     mol_graph[i0][i1] = 1
     return all_rings
+
 
 def _get_graph_dict(atoms: Dict[int, Atom]) -> Dict[str, Atom]:
     G = {}
