@@ -108,9 +108,9 @@ class MolData(object):
 
             bond_info = Molecule.bonds(a)
             # the queried atom is almost first in the tuple when getting bond info
-            connectivity = [Molecule.atoms[a_bonded].get_index('id') for _, a_bonded in bond_info]
-            i = atom_obj.get_index('id')
-            name = index_dict['name']
+            connectivity = [Molecule.atoms[a_bonded].get_index('index') for _, a_bonded in bond_info]
+            i = atom_obj.get_index('index')
+            name = atom_obj.name
             # fdb_info = [a_fdb for a_fdb in fdb_atom_info if a_fdb['elementID']==name]
             # assert len(fdb_info)==1, fdb_info
             # fdb_info = fdb_info[0]
@@ -124,7 +124,7 @@ class MolData(object):
                              }
 
             self.bonds = [
-                {'atoms': [Molecule.atoms[a1].get_index('id'), Molecule.atoms[a2].get_index('id')]}
+                {'atoms': [Molecule.atoms[a1].get_index('index'), Molecule.atoms[a2].get_index('index')]}
                 for a1, a2 in Molecule.bonds]
 
     def _readPDB(self, pdb_str: Optional[str], enforce_single_molecule: bool = True) -> None:

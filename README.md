@@ -14,6 +14,18 @@ The MolData object can then be fed to any of the functions in `atb_outputs.forma
 * `graph()`
 * `lgf()`
 
+## Chemistry Data Structure Update!
+You can now initialise MolData objects from Molecule3D objects (though it needs to be populated with sufficient info)
+
+```
+from chemistry_data_structure.parsing.input_parsers import GAMESS_to_Molecule3D
+from chemical_equivalence.helpers.types_helpers import MolData
+
+qm_log = open('GAMESS_qm_log.log','r').read()
+molecule_obj = GAMESS_to_Molecule3D(qm_log)
+MolData_obj = MolData(molecule_obj)
+```
+
 ## Examples
 
 ```
