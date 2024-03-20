@@ -18,11 +18,12 @@ partial_charge  label   label2  atomType    coordX  coordY  coordZ  initColor'''
         coordinate_key = 'coord'
 
     for atom in atoms:
+        iacm_key = "std_iacm" if "std_iacm" in atom else "iacm"
         print('''{0:4.3f} {1} {2} {3} {4:4.3f} {5:4.3f} {6:4.3f} {7}'''.format(
             atom['charge'] if 'charge' in atom else 0.0,
             atom['id'],
             atom['symbol'],
-            atom['std_iacm'],
+            atom[iacm_key],
             atom[coordinate_key][0],
             atom[coordinate_key][1],
             atom[coordinate_key][2],

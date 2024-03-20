@@ -1,5 +1,4 @@
-from typing import Any, Dict, Callable, Optional, Tuple, List, Union
-from logging import Logger
+from typing import Any, Dict, Callable, Tuple, List, Union
 
 Atom = Dict[str, Any]
 

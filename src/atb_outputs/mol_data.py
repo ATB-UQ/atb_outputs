@@ -1,9 +1,10 @@
+from logging import Logger
 from sys import stderr
 from copy import deepcopy
 from math import sqrt
-from typing import Optional
+from typing import Optional, Dict, Any, List
 
-from atb_outputs.helpers.types_helpers import Logger, Optional, Any, List, Dict, Atom, Tuple, Ring, Coordinate
+from atb_outputs.helpers.types_helpers import Atom, Tuple, Ring, Coordinate
 from atb_outputs.helpers.dijkstra import shortestPath
 
 
