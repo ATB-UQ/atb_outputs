@@ -14,10 +14,11 @@ class MolDataFailure(Exception):
 
 class MolData(object):
     def __init__(self,
-                 pdb_str: Optional[str],
+                 initialiser_object: Optional[str],
                  log: Optional[Logger] = None,
                  build_ring: bool = True,
-                 enforce_single_molecule: bool = True) -> None:
+                 enforce_single_molecule: bool = True,
+                 atom_index_name: Optional[str] = None) -> None:
 
         #### Added method for instanciating from FDBMolecule objects
 
@@ -25,12 +26,12 @@ class MolData(object):
         self.bonds = []
         self.equivalenceGroups = {}
 
-        if type(pdb_str).__name__ == 'FDBMolecule':
-            self._readFDBMolecule(pdb_str)
-        elif type(pdb_str).__name__ == 'Molecule3D':
-            self._readMolecule3D(pdb_str)
+        if type(initialiser_object).__name__ == 'FDBMolecule':
+            self._readFDBMolecule(initialiser_object)
+        elif type(initialiser_object).__name__ == 'Molecule3D':
+            self._readMolecule3D(initialiser_object, atom_index_name=atom_index_name)
         else:
-            self._readPDB(pdb_str, enforce_single_molecule=enforce_single_molecule)
+            self._readPDB(initialiser_object, enforce_single_molecule=enforce_single_molecule)
 
         if build_ring:
             self.rings = build_rings(self, log)
@@ -102,15 +103,15 @@ class MolData(object):
                 {'atoms': [Molecule.atoms[a1]._index['id'], Molecule.atoms[a2]._index['id']]}
                 for a1, a2 in Molecule.bonds]
 
-    def _readMolecule3D(self, Molecule: 'Molecule3D') -> None:
+    def _readMolecule3D(self, Molecule: 'Molecule3D', atom_index_name: str) -> None:
         for a in Molecule.atoms:
             atom_obj = Molecule.atoms[a]
             # index_dict = Molecule.atoms[a]._index
 
             bond_info = Molecule.bonds(a)
             # the queried atom is almost first in the tuple when getting bond info
-            connectivity = [Molecule.atoms[a_bonded].get_index('nid') + 1 for _, a_bonded in bond_info]
-            i = atom_obj.get_index('nid') + 1
+            connectivity = [Molecule.atoms[a_bonded].get_index(atom_index_name) for _, a_bonded in bond_info]
+            i = atom_obj.get_index(atom_index_name)
             name = atom_obj.name
             # fdb_info = [a_fdb for a_fdb in fdb_atom_info if a_fdb['elementID']==name]
             # assert len(fdb_info)==1, fdb_info
@@ -125,7 +126,7 @@ class MolData(object):
                              }
 
             self.bonds = [
-                {'atoms': [Molecule.atoms[a1].get_index('nid') + 1, Molecule.atoms[a2].get_index('nid') + 1]}
+                {'atoms': [Molecule.atoms[a1].get_index(atom_index_name), Molecule.atoms[a2].get_index(atom_index_name)]}
                 for a1, a2 in Molecule.bonds]
 
     def _readPDB(self, pdb_str: Optional[str], enforce_single_molecule: bool = True) -> None:
