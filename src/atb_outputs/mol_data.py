@@ -19,6 +19,15 @@ class MolData(object):
                  build_ring: bool = True,
                  enforce_single_molecule: bool = True,
                  atom_index_name: Optional[str] = None) -> None:
+        """
+        TODO: MolData docs
+        :param initialiser_object: One of a Molecule3D, FDB_Molecule or a pdb_string, each has a different initialiser
+        :param log: ?
+        :param build_ring: ?
+        :param enforce_single_molecule: ?
+        :param atom_index_name: If using a Molecule3D to initialise, which atom ID to use for the mapping. Needs to be
+            and ID of type int
+        """
 
         #### Added method for instanciating from FDBMolecule objects
 
