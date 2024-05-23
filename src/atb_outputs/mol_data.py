@@ -17,8 +17,7 @@ class MolData(object):
                  initialiser_object: Optional[str],
                  log: Optional[Logger] = None,
                  build_ring: bool = True,
-                 enforce_single_molecule: bool = True,
-                 atom_index_name: Optional[str] = None) -> None:
+                 enforce_single_molecule: bool = True) -> None:
         """
         TODO: MolData docs
         :param initialiser_object: One of a Molecule3D, FDB_Molecule or a pdb_string, each has a different initialiser
@@ -35,10 +34,12 @@ class MolData(object):
         self.bonds = []
         self.equivalenceGroups = {}
 
+        self._atom_index_map = {}
+
         if type(initialiser_object).__name__ == 'FDBMolecule':
             self._readFDBMolecule(initialiser_object)
         elif type(initialiser_object).__name__ == 'Molecule3D':
-            self._readMolecule3D(initialiser_object, atom_index_name=atom_index_name)
+            self._readMolecule3D(initialiser_object)
         else:
             self._readPDB(initialiser_object, enforce_single_molecule=enforce_single_molecule)
 
@@ -112,31 +113,53 @@ class MolData(object):
                 {'atoms': [Molecule.atoms[a1]._index['id'], Molecule.atoms[a2]._index['id']]}
                 for a1, a2 in Molecule.bonds]
 
-    def _readMolecule3D(self, Molecule: 'Molecule3D', atom_index_name: str) -> None:
+    def _readMolecule3D(self, Molecule: 'Molecule3D') -> None:
+        if tuple(sorted(Molecule.atoms)) != sorted(range(1,len(Molecule.atoms)+1)):
+            map_id_flag = True
+            # I don't fully understand the indexing approach, but the naughty interface expects objects
+            # Initialised from the ATB to have indexes starting from 1 and offsets them to start at 0, so
+            # I'm mapping the atom names to a 1 index in this instance
+            self._atom_index_map = {
+                a: i+1 for i, a in enumerate(Molecule.atoms)
+            }
+        else:
+            map_id_flag = False
+
         for a in Molecule.atoms:
             atom_obj = Molecule.atoms[a]
             # index_dict = Molecule.atoms[a]._index
-
-            bond_info = Molecule.bonds(a)
-            # the queried atom is almost first in the tuple when getting bond info
-            connectivity = [Molecule.atoms[a_bonded].get_index(atom_index_name) for _, a_bonded in bond_info]
-            i = atom_obj.get_index(atom_index_name)
             name = atom_obj.name
-            # fdb_info = [a_fdb for a_fdb in fdb_atom_info if a_fdb['elementID']==name]
-            # assert len(fdb_info)==1, fdb_info
-            # fdb_info = fdb_info[0]
+            bond_info = Molecule.bonds(a)
 
-            self.atoms[i] = {'id': i,
-                             'index': i,
+            if map_id_flag:
+                # if the ids are getting mapped by iter, then add the original atom id to the dict
+                extra_id = {'Molecule3D_id': atom_obj.get_index()}
+
+                mold_data_index = self._atom_index_map[name]
+
+            else:
+                extra_id = {}
+                mold_data_index = atom_obj.get_index()
+
+            connectivity = [self._atom_index_map[Molecule.atoms[a_bonded].get_index()] if map_id_flag else Molecule.atoms[a_bonded].get_index()
+                            for _, a_bonded in bond_info]
+
+            self.atoms[mold_data_index] = {**{'id': mold_data_index,
+                             'index': mold_data_index,
                              'symbol': name,
                              'type': atom_obj.element,
                              'conn': connectivity,
                              'coord': atom_obj.coordinates
-                             }
+                             }, **extra_id}
 
-            self.bonds = [
-                {'atoms': [Molecule.atoms[a1].get_index(atom_index_name), Molecule.atoms[a2].get_index(atom_index_name)]}
-                for a1, a2 in Molecule.bonds]
+        self.bonds = [
+            {'atoms': [
+                self._atom_index_map[Molecule.atoms[a1].get_index()] if map_id_flag else Molecule.atoms[a1].get_index(),
+                self._atom_index_map[Molecule.atoms[a2].get_index()] if map_id_flag else Molecule.atoms[a2].get_index()]}
+            for a1, a2 in Molecule.bonds]
+        # if map_id_flag:
+        #     for a1, a2 in Molecule.bonds
+        #     assert self._atom_index_map[Molecule.atoms[a1].get_index()] if map_id_flag
 
     def _readPDB(self, pdb_str: Optional[str], enforce_single_molecule: bool = True) -> None:
         '''Read lines of PDB files'''
