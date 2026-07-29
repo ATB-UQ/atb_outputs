@@ -210,7 +210,7 @@ def mol_data_dict(mol_data: MolData) -> Dict[str, Any]:
 
 def yml(mol_data: MolData) -> Output_File:
     mol_data = mol_data_dict(mol_data)
-    return YML.add_yml_comments(yaml.dump(mol_data))
+    return YML.add_yml_comments(yaml.dump(YML.sanitised_for_yaml(mol_data)))
 
 
 def pickle(mol_data: MolData) -> Output_File:
@@ -228,7 +228,7 @@ def template_yml(mol_data: MolData) -> Output_File:
          'rings': YML.clean_rings(mol_data.rings, template=True),
          'var': mol_data.var,
     }
-    return YML.add_yml_comments(yaml.dump(mol_data))
+    return YML.add_yml_comments(yaml.dump(YML.sanitised_for_yaml(mol_data)))
 
 
 STORE_GRAPH_GT = False

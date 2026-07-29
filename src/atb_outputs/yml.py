@@ -1,6 +1,30 @@
 from copy import deepcopy
 import re
 
+import numpy as np
+
+def sanitised_for_yaml(data):
+    '''Recursively replace values yaml.dump() cannot represent as plain YAML.
+
+    Every consumer of these files (the API client, website.helpers.molid,
+    generate_g96, ...) reads them with yaml.safe_load(). yaml.dump() serialises
+    anything it has no representer for -- a numpy scalar/array, a tuple -- as a
+    !!python/... tag, which safe_load() then refuses to construct, so the file is
+    written fine and only blows up on the read. Numpy leaks in easily: numpy.mean()
+    of a list of floats is a numpy.float64, and round() of one is another
+    numpy.float64, so a single numpy call upstream taints the whole output.
+    '''
+    if isinstance(data, np.ndarray):
+        return data.tolist()
+    elif isinstance(data, np.generic):
+        return data.item()
+    elif isinstance(data, dict):
+        return {sanitised_for_yaml(key): sanitised_for_yaml(value) for (key, value) in data.items()}
+    elif isinstance(data, (list, tuple)):
+        return [sanitised_for_yaml(value) for value in data]
+    else:
+        return data
+
 def clean_atoms(atoms, template=False):
     if not template:
         return deepcopy(atoms)
