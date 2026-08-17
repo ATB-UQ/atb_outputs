@@ -173,6 +173,13 @@ def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Outp
     print_to_io('')
     print_to_io('END')
 
+    # Same fallback as PDB.atoms/PQR.atoms: `optimized` says which coordinates are
+    # wanted, `has_ocoord` says whether any exist. A QM optimisation that ran but
+    # never located a stationary point leaves the other keys behind (ESP, bond
+    # orders, cavity volume) without an 'ocoord', so a molecule can reach the
+    # optimised outputs with nothing optimised to write.
+    coord_key = 'ocoord' if (optimized and mol_data.completed('has_ocoord')) else 'coord'
+
     print_to_io('POSITION')
     for atom in atoms:
         # Source: GROMOS96 Manual (ISBN 3 7281 2422 2), page III-41
@@ -183,7 +190,7 @@ def g96(mol_data: MolData, optimized: bool = True, united: bool = False) -> Outp
                 residue_name=mol_data.var['rnme'],
                 atom_name=atom['symbol'],
                 atom_index=atom['uindex' if united else 'index'],
-                **dict(zip(('x', 'y', 'z'), atom['ocoord' if optimized else 'coord'])),
+                **dict(zip(('x', 'y', 'z'), atom[coord_key])),
             ),
         )
 
@@ -208,9 +215,17 @@ def mol_data_dict(mol_data: MolData) -> Dict[str, Any]:
     }
 
 
+# The C emitter, falling back to pure python where libyaml is absent. The mol_data
+# dump is the single most expensive file in a topology cache build (~0.7s of a ~5s
+# generate_mol_data on a mid-sized molecule; 0.17s with libyaml), and the data has
+# already been through sanitised_for_yaml(), so SafeDumper semantics lose nothing --
+# every consumer reads these files with yaml.safe_load() anyway.
+_YAML_DUMPER = getattr(yaml, 'CSafeDumper', yaml.SafeDumper)
+
+
 def yml(mol_data: MolData) -> Output_File:
     mol_data = mol_data_dict(mol_data)
-    return YML.add_yml_comments(yaml.dump(YML.sanitised_for_yaml(mol_data)))
+    return YML.add_yml_comments(yaml.dump(YML.sanitised_for_yaml(mol_data), Dumper=_YAML_DUMPER))
 
 
 def pickle(mol_data: MolData) -> Output_File:
@@ -228,7 +243,7 @@ def template_yml(mol_data: MolData) -> Output_File:
          'rings': YML.clean_rings(mol_data.rings, template=True),
          'var': mol_data.var,
     }
-    return YML.add_yml_comments(yaml.dump(YML.sanitised_for_yaml(mol_data)))
+    return YML.add_yml_comments(yaml.dump(YML.sanitised_for_yaml(mol_data), Dumper=_YAML_DUMPER))
 
 
 STORE_GRAPH_GT = False
