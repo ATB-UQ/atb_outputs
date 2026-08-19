@@ -234,6 +234,12 @@ class MolData(object):
                 stderr.write(error_msg)
                 raise MolDataFailure(error_msg)
 
+        if not pdbDict:
+            # Without this, a string with no ATOM/HETATM records (garbage input, or a
+            # missing form parameter stringified to 'None') builds an atom-less MolData
+            # that only fails much later, as an IndexError inside the nauty interface.
+            raise MolDataFailure('Mol_Data Error: PDB string contains no atoms')
+
         has_connects = lambda atom: 'conn' in atom and atom['conn']
         if not all(has_connects(atom) for atom in pdbDict.values()):
             if len(pdbDict) == 1:
