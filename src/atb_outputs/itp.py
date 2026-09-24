@@ -1,3 +1,4 @@
+import math
 from functools import reduce
 from io import StringIO
 
@@ -216,7 +217,7 @@ def impropers(data, io, united):
                    to_index(i['atoms'][3], data),
                    '2',
                    GROMOS_IMPROPER_DIHEDRALS[ i['code'] ]['value'],
-                   GROMOS_IMPROPER_DIHEDRALS[ i['code'] ]['fc']*3281.5686
+                   GROMOS_IMPROPER_DIHEDRALS[ i['code'] ]['fc']*(180.0 / math.pi) ** 2
                   ), file=io)
 
 
