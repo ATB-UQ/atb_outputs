@@ -1,62 +1,69 @@
-# Molecule Data (MolData) object
+# atb_outputs
 
-## Description
+The ATB molecule data object (`MolData`) and the writers that turn it into output
+files (PDB, G96, YML, pickle, LGF, graph image, CCD CIF, MOL2, GROMACS ITP).
+Pure Python, installable on its own (`pip install -e .`), but note that
+`setup.cfg` declares **no dependencies**: it needs `numpy`, `pyyaml` and, for
+`mol2()`, the `chemistry_helpers` sibling (see Configuration).
 
-The main class is the `MolData` class defined in `atb_outputs.mol_data`.
-It takes a `PDB` string as input and returns a `MolData` object.
+**Status:** live-support. Imported by `core` (the topology generator), `website`,
+`chemical_equivalence`, `NMR_Interface`, `fragment_merger`, `dihedral_fragments`
+and `atb_protein_ff`.
 
-The MolData object can then be fed to any of the functions in `atb_outputs.formats`:
+## Capabilities
 
-* `pdb()`
-* `yml()`
-* `pickle()`
-* `template_yml()`
-* `graph()`
-* `lgf()`
+* `atb_outputs.mol_data.MolData(initialiser)` -- builds atoms, bonds, rings and
+  equivalence-group slots from a PDB string, a `chemistry_data_structure`
+  `Molecule3D` (`_readMolecule3D`) or an `FDBMolecule`. `mol_data_from_mol_data_dict`
+  rebuilds one from a stored dict (e.g. the cached `yml_moldata`).
+  `MolData.unite_atoms()` produces the united-atom view.
+* `atb_outputs.formats` -- one function per output, each taking a `MolData`:
+  `pdb`, `g96`, `yml`, `template_yml`, `pickle`, `mol_data_dict`, `lgf`, `graph`,
+  `ccd_cif`, `mol2` (via babel). The `yml` writer sanitises the data and dumps with
+  libyaml's `CSafeDumper` (`yml.py`).
+* `atb_outputs.itp.itp(mol_data, united=False)` -- GROMACS `.itp` text (not
+  re-exported by `formats`). Improper force constants are converted with `(180/pi)^2`.
+* `atb_outputs.graph` -- molecule graph rendering; needs the optional
+  `graph_tool` package and degrades to an empty result (message on stderr)
+  without it.
 
-## Chemistry Data Structure Update!
-You can now initialise MolData objects from Molecule3D objects (though it needs to be populated with sufficient info)
+## Usage
 
-```
-from chemistry_data_structure.parsing.input_parsers import GAMESS_to_Molecule3D
-from chemical_equivalence.helpers.types_helpers import MolData
+```python
+from yaml import unsafe_load
+from atb_outputs.formats import pdb, g96
+from atb_outputs.itp import itp
+from atb_outputs.mol_data import MolData, mol_data_from_mol_data_dict
 
-qm_log = open('GAMESS_qm_log.log','r').read()
-molecule_obj = GAMESS_to_Molecule3D(qm_log)
-MolData_obj = MolData(molecule_obj)
-```
-
-## Examples
-
-```
-from yaml import load
-
-from atb_outputs.formats import pdb, g96, mol_data_dict, yml, pickle, template_yml, graph, lgf
-from atb_outputs.mol_data import mol_data_from_mol_data_dict, MolData
-
-def finalise_mol_data(m: MolData) -> MolData:
+def finalise(m):                      # writers read these two attributes
     m.var = {'REV_DATE': '', 'rnme': ''}
     m.completed = lambda x: False
     return m
 
-if __name__ == '__main__':
-    with open('data/21.yaml') as fh:
-        mol_data = finalise_mol_data(mol_data_from_mol_data_dict(load(fh)))
+m = finalise(MolData(open('mol.pdb').read()))           # from a PDB string
+md = finalise(mol_data_from_mol_data_dict(unsafe_load(open('testing/data/21.yaml'))))
+print(pdb(md, united=False)); print(g96(md)); print(itp(md))
 
-    for united in [True, False]:
-        print(pdb(mol_data, united=united))
-        print(g96(mol_data, united=united))
-
-    m = finalise_mol_data(MolData('HETATM    1  C0  UNL     1      -3.254   2.034   1.801  1.00  0.00           C'))
-
-    ALL_OUTPUTS = [
-        (pdb, {}),
-        (g96, {'optimized': False}),
-        #(mol_data_dict, {}),
-        #(lgf, {}),
-        #(graph, {}),
-    ]
-
-    for (output_function, output_kwargs) in ALL_OUTPUTS:
-        print(output_function(m, **output_kwargs))
+# from a Molecule3D (needs enough populated fields):
+#   from chemistry_data_structure.parsing.input_parsers import GAMESS_to_Molecule3D
+#   MolData(GAMESS_to_Molecule3D(open('qm.log').read()))
 ```
+
+## How it fits the platform
+
+`core.atb.outputs.Output` wraps these writers for every file the ATB serves;
+`chemical_equivalence` computes the `equivalenceGroup` values on a `MolData`;
+`website` uses it when ingesting submissions. Atom-order permutation for users'
+structures is done in `core` (`Output.with_atom_order`), not here.
+
+## Configuration
+
+No env vars, no binaries. `mol2()` shells out to OpenBabel through
+`chemistry_helpers.babel` (`atb_server_settings.babel_path`).
+`formats.STORE_GRAPH_GT` / `graph.RAISE_IF_MISSING_GRAPH_TOOL` are module flags.
+
+## Tests
+
+`testing/test.py` is a print-only smoke script (run from `testing/`:
+`python test.py`), not a pytest suite -- there are no assertions. The
+`Makefile` is a leftover (Python 3.5 paths, `git submodule` targets) and does not work.
