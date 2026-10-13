@@ -2,7 +2,7 @@
 
 Goldens in tests/golden/ were produced by the writers as they stood at the
 time (tests/make_golden.py) -- they pin current behaviour, they do not claim it
-is right (see the strict xfails and the review findings C-xx).
+is right (see the review findings C-xx).
 """
 import datetime
 import io
@@ -125,19 +125,29 @@ def test_readpdb_orphan_conect_raises():
         MolData(pdb_str, build_ring=False)
 
 
-# ---- strict xfails: known bugs, flip when fixed ------------------------------
+def test_readpdb_unbonded_atom_allowed_without_single_molecule_enforcement():
+    # C-09: enforce_single_molecule=False used to raise KeyError 'conn'.
+    pdb_str = "\n".join([_atom(1, "O", "O", 0, 0, 0), _atom(2, "H1", "H", 1, 0, 0),
+                         _atom(3, "H2", "H", 5, 5, 5), "CONECT    1    2"])
+    md = MolData(pdb_str, build_ring=False, enforce_single_molecule=False)
+    assert md.atoms[3]["conn"] == []
+    assert md.atoms[1]["conn"] == [2] and md.atoms[2]["conn"] == [1]
+    assert len(md.bonds) == 1
 
-@pytest.mark.xfail(strict=True, raises=MolDataFailure,
-                   reason="C-02: mol_data_from_mol_data_dict builds MolData(None), "
-                          "which now always raises 'PDB string contains no atoms'")
+
+# ---- formerly strict xfails (review 2026-10 C-02, C-06), fixed in wave 2 -----
+
 def test_mol_data_from_mol_data_dict_loads(mol_data):
+    # C-02: the dict loader built MolData(None), which the empty-PDB guard rejects.
     md = mol_data_from_mol_data_dict(mol_data_dict(mol_data))
     assert len(md.atoms) == 15
+    md.var = dict(md.var)
+    md.completed = mol_data.completed
+    assert g96(md) == golden("toluene.g96")
 
 
-@pytest.mark.xfail(strict=True,
-                   reason="C-06: pdb.header uses %g (ISO-week year): 2027-01-01 -> '01-Jan-26'")
 def test_pdb_header_year_is_calendar_year(mol_data, monkeypatch):
+    # C-06: the header used %g (ISO-week year): 2027-01-01 came out as '01-Jan-26'.
     class FakeDate(datetime.date):
         @classmethod
         def today(cls):

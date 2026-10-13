@@ -257,7 +257,8 @@ class MolData(object):
 
         # sort and unique connectivities
         for (ID, atom) in pdbDict.items():
-            atom['conn'] = sorted(set(atom['conn']))
+            # an unbonded atom has no 'conn' when enforce_single_molecule=False
+            atom['conn'] = sorted(set(atom.setdefault('conn', [])))
             for neighbour in atom['conn']:
                 self._addBondData(ID, neighbour)
 
@@ -273,7 +274,15 @@ class MolData(object):
 
 
 def mol_data_from_mol_data_dict(mol_data_dict: Dict[str, Any]) -> MolData:
-    mol_data = MolData(None)
+    # Built without parsing: MolData(None) now raises (the empty-PDB guard in _readPDB).
+    # These are the attributes an empty MolData had; the dict then overrides them.
+    mol_data = MolData.__new__(MolData)
+    mol_data.atoms = {}
+    mol_data.bonds = []
+    mol_data.equivalenceGroups = {}
+    mol_data._atom_index_map = {}
+    mol_data.rings = {}
+    mol_data.united_hydrogens = []
 
     for key in mol_data_dict.keys():
         setattr(mol_data, key, mol_data_dict[key])

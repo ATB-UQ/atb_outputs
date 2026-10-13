@@ -5,7 +5,7 @@ def header(data, io, rev_date="", united=False):
         # Write header
         # Refer to http://www.wwpdb.org/documentation/format32/sect2.html 
         print('HEADER'+4*' '+'%-40s' %('UNCLASSIFIED')+\
-                date.strftime(date.today(),'%d-%b-%g'), file=io)
+                date.strftime(date.today(),'%d-%b-%y'), file=io)
         if united:
             strtype = 'UNITED'
         else:

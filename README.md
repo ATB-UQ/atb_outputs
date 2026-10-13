@@ -45,10 +45,6 @@ def finalise(m):                      # writers read these two attributes
 m = finalise(MolData(open('mol.pdb').read()))           # from a PDB string
 md = finalise(mol_data_from_mol_data_dict(unsafe_load(open('testing/data/21.yaml'))))
 print(pdb(md, united=False)); print(g96(md)); print(itp(md))
-# KNOWN BREAKAGE (review 2026-10 C-02): mol_data_from_mol_data_dict always raises
-# MolDataFailure ('PDB string contains no atoms'), so the `md = ...` line above
-# does not work. tests/conftest.py shows a working construction
-# (MolData.__new__ + setattr of each dict key).
 
 # from a Molecule3D (needs enough populated fields):
 #   from chemistry_data_structure.parsing.input_parsers import GAMESS_to_Molecule3D
@@ -72,6 +68,6 @@ No env vars, no binaries. `mol2()` shells out to OpenBabel through
 
 `python -m pytest -p no:cacheprovider -q` from the repo root runs `tests/`
 (golden-file characterisation of pdb/g96/yml/lgf/ccd_cif, `_readPDB` edge cases,
-the exact `mol_data_dict` key set, strict xfails for C-02 and C-06; goldens are
+the exact `mol_data_dict` key set, the dict loader (C-02) and the calendar-year PDB header date (C-06); goldens are
 regenerated with `tests/make_golden.py`). `testing/test.py` is the old print-only
-smoke script and currently fails on its first line (C-02). The `Makefile` is a leftover (Python 3.5 paths, `git submodule` targets) and does not work.
+smoke script. The `Makefile` is a leftover (Python 3.5 paths, `git submodule` targets) and does not work.
