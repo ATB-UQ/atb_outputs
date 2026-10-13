@@ -87,9 +87,7 @@ def clean_dihedrals(dihedrals, template=False):
             _make_dihedral_template(d)
         else:
             if "code" in d:
-                d["code"] = deepcopy(d["code"])  
-            else:
-                print(d)  
+                d["code"] = deepcopy(d["code"])
             d["value"] = float(d["value"])
         dihedrals_.append(d)
     
